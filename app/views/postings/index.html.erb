@@ -24,7 +24,7 @@
       <tr>
         <td><%= posting.title %></td>
         <td><%= posting.description %></td>
-        <td><%= posting.category %></td>
+        <td><%= posting.category != nil ? posting.category.name : "" %></td>
         <td><%= posting.rate %></td>
         <td><%= posting.available_dates %></td>
         <td><%= posting.street %></td>
