@@ -1,4 +1,5 @@
 class PostingsController < ApplicationController
+  before_action :load_categories, only: [:show, :edit, :new ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
 
   # GET /postings
@@ -24,6 +25,9 @@ class PostingsController < ApplicationController
   # POST /postings
   # POST /postings.json
   def create
+    params["posting"]["category_id"] = params["Category"] 
+    logger.debug "========> All params: #{params}"
+    logger.debug "========> posting params: #{posting_params}"
     @posting = Posting.new(posting_params)
 
     respond_to do |format|
@@ -62,6 +66,11 @@ class PostingsController < ApplicationController
   end
 
   private
+
+    def load_categories
+      @categories = Category.all
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_posting
       @posting = Posting.find(params[:id])

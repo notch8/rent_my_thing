@@ -20,8 +20,9 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :category_id %><br>
-    <%= f.text_field :category_id %>
+    <!-- <%= f.label :category_id %><br>
+    <%= f.text_field :category_id %> -->
+    <%= select_tag "Category", options_from_collection_for_select(@categories, "id", "name", f.object.category_id) %>
   </div>
   <div class="field">
     <%= f.label :rate %><br>
@@ -29,8 +30,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :daterange %><br>
-    <%= f.date_select :daterange %>
+    <%= f.label :available_dates %><br>
+    <%= f.date_select :available_dates %>
   </div>
   <div class="field">
     <%= f.label :street %><br>
