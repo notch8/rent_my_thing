@@ -20,32 +20,18 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :category_id %><br>
-    <%= f.text_field :category_id %>
+    <!-- <%= f.label :category_id %><br>
+    <%= f.text_field :category_id %> -->
+    <%= select_tag "Category", options_from_collection_for_select(@categories, "id", "name", f.object.category_id) %>
   </div>
   <div class="field">
     <%= f.label :rate %><br>
     <%= f.text_field :rate %>
   </div>
+
   <div class="field">
-    <%= f.label :{ %><br>
-    <%= f.text_field :{ %>
-  </div>
-  <div class="field">
-    <%= f.label := %><br>
-    <%= f.text_field := %>
-  </div>
-  <div class="field">
-    <%= f.label : %><br>
-    <%= f.text_field : %>
-  </div>
-  <div class="field">
-    <%= f.label := %><br>
-    <%= f.text_field := %>
-  </div>
-  <div class="field">
-    <%= f.label :date_range %><br>
-    <%= f.date_select :date_range %>
+    <%= f.label :available_dates %><br>
+    <%= f.date_select :available_dates %>
   </div>
   <div class="field">
     <%= f.label :street %><br>
@@ -55,10 +41,7 @@
     <%= f.label :state %><br>
     <%= f.text_field :state %>
   </div>
-  <div class="field">
-    <%= f.label :2} %><br>
-    <%= f.text_field :2} %>
-  </div>
+
   <div class="field">
     <%= f.label :zip %><br>
     <%= f.text_field :zip %>

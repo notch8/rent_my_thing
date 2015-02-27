@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :categories
+
+
+  root "postings#index"
+  devise_for :users
+
+  resources :categories do
+    resources :postings
+  end
 
   resources :postings
 
