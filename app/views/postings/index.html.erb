@@ -9,14 +9,9 @@
       <th>Description</th>
       <th>Category</th>
       <th>Rate</th>
-      <th>{</th>
-      <th>=</th>
-      <th></th>
-      <th>=</th>
       <th>Date range</th>
       <th>Street</th>
       <th>State</th>
-      <th>2}</th>
       <th>Zip</th>
       <th>Phone</th>
       <th>Email</th>
@@ -29,16 +24,11 @@
       <tr>
         <td><%= posting.title %></td>
         <td><%= posting.description %></td>
-        <td><%= posting.category %></td>
+        <td><%= posting.category.try :name %></td>
         <td><%= posting.rate %></td>
-        <td><%= posting.{ %></td>
-        <td><%= posting.= %></td>
-        <td><%= posting. %></td>
-        <td><%= posting.= %></td>
-        <td><%= posting.date_range %></td>
+        <td><%= posting.available_dates %></td>
         <td><%= posting.street %></td>
         <td><%= posting.state %></td>
-        <td><%= posting.2} %></td>
         <td><%= posting.zip %></td>
         <td><%= posting.phone %></td>
         <td><%= posting.email %></td>
