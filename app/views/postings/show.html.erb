@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <strong>Title:</strong>
@@ -12,7 +12,7 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @posting.category %>
+  <%= @posting.category.name %>
 </p>
 
 <p>
@@ -20,29 +20,11 @@
   <%= @posting.rate %>
 </p>
 
-<p>
-  <strong>{:</strong>
-  <%= @posting.{ %>
-</p>
 
-<p>
-  <strong>=:</strong>
-  <%= @posting.= %>
-</p>
-
-<p>
-  <strong>:</strong>
-  <%= @posting. %>
-</p>
-
-<p>
-  <strong>=:</strong>
-  <%= @posting.= %>
-</p>
 
 <p>
   <strong>Date range:</strong>
-  <%= @posting.date_range %>
+  <%= @posting.available_dates %>
 </p>
 
 <p>
@@ -55,10 +37,6 @@
   <%= @posting.state %>
 </p>
 
-<p>
-  <strong>2}:</strong>
-  <%= @posting.2} %>
-</p>
 
 <p>
   <strong>Zip:</strong>
