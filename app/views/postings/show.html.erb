@@ -12,7 +12,7 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @posting.category.name %>
+  <%= @posting.category.try :name %>
 </p>
 
 <p>
