@@ -1,6 +1,22 @@
-body {
-  background-color: #fff;
-  color: #333;
+#video-bg {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  overflow: hidden;
+  z-index: -1;
+ width: 100%;
+ height: auto;
+}
+
+#whitelink {
+  color: white;
+}
+
+#whitelink td {
+  color: white;
+}
+
+body, h1 {
+  color: white;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;

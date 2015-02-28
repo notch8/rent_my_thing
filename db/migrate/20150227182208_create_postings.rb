@@ -6,7 +6,7 @@ class CreatePostings < ActiveRecord::Migration
       t.references :category, index: true
       t.decimal :rate, precision: 8, scale: 2
       t.daterange :available_dates
-      t.string :street, limit: 2
+      t.string :street
       t.string :zip, limit: 5
       t.string :phone
       t.string :email
