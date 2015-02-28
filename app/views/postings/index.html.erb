@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<video autoplay id="video-bg">
+  <source src="https://a0.muscache.com/airbnb/static/London-P1-1.mp4" type="video/mp4">
+  <source src="https://a0.muscache.com/airbnb/static/London-P1-0.webm" type="video/webm">
+Your browser does not support the video tag.
+</video>
+
 <h1>Listing Postings</h1>
 
 <table>
@@ -21,7 +27,7 @@
 
   <tbody>
     <% @postings.each do |posting| %>
-      <tr>
+      <tr id="whitelink">
         <td><%= posting.title %></td>
         <td><%= posting.description %></td>
         <td><%= posting.category.try :name %></td>
@@ -32,9 +38,9 @@
         <td><%= posting.zip %></td>
         <td><%= posting.phone %></td>
         <td><%= posting.email %></td>
-        <td><%= link_to 'Show', posting %></td>
-        <td><%= link_to 'Edit', edit_posting_path(posting) %></td>
-        <td><%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', posting, id:"whitelink" %></td>
+        <td><%= link_to 'Edit', edit_posting_path(posting), id:"whitelink" %></td>
+        <td><%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' }, id:"whitelink" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -42,4 +48,6 @@
 
 <br>
 
-<%= link_to 'New Posting', new_posting_path %>
+<div id="whitelink">
+<%= link_to 'New Posting', new_posting_path, id:"whitelink" %>
+</div>

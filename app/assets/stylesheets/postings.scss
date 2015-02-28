@@ -1,3 +1,22 @@
 // Place all the styles related to the Postings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#whitelink {
+  color: white;
+}
+
+#whitelink:visited {
+  color: skyblue;
+}
+
+.field, .actions {
+  color:black;
+}
+
+#blacklink {
+  color:black;
+}
+
+.showpage {
+  padding: 40px;
+}
