@@ -7,6 +7,7 @@ class CreatePostings < ActiveRecord::Migration
       t.decimal :rate, precision: 8, scale: 2
       t.daterange :available_dates
       t.string :street
+      t.string :city
       t.string :zip, limit: 5
       t.string :phone
       t.string :email
