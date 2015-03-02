@@ -59,7 +59,7 @@
 
 <div class="field">
   <%= f.label :state %><br>
-  <%= f.select :state, options_for_select(us_states) %>
+  <%= f.select :state, options_for_select(us_states, @posting.state) %>
 
 
   <%#= f.text_field :state %>
