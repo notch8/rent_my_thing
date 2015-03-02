@@ -67,12 +67,13 @@ th {
   margin-top:20px;
   position: relative;
   z-index: 15;
-
 }
 
 .navbar.navbar-inverse.navbar-static-top {
   background: #004182;
   border-color: #197fe6;
+  border: 1px;
+  border-radius: 10px;
 }
 .navbar.navbar-inverse.navbar-static-top a{
   color:#fff;
