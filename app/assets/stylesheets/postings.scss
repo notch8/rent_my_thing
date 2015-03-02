@@ -58,3 +58,35 @@ th {
 .showpage {
   padding: 40px;
 }
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  margin-top:20px;
+  position: relative;
+  z-index: 15;
+}
+
+.navbar.navbar-inverse.navbar-static-top {
+  background: #004182;
+  border-color: #197fe6;
+  border: 1px;
+  border-radius: 10px;
+}
+.navbar.navbar-inverse.navbar-static-top a{
+  color:#fff;
+}
+.navbar.navbar-inverse.navbar-static-top a:hover{
+  color:#f2c319;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus{
+  background:#197fe6;
+  font-weight:700;
+}
+.navbar-inverse .navbar-nav>.active>a:hover {
+  background:#197fe6;
+  color:#f2c319;
+  font-weight:700;
+}
