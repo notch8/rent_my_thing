@@ -27,8 +27,7 @@ class PostingsController < ApplicationController
   # POST /postings.json
   def create
     params["posting"]["category_id"] = params["Category"]
-    logger.debug "========> All params: #{params}"
-    logger.debug "========> posting params: #{posting_params}"
+    logger.debug "date range: #{params["rentrange"]["from"]} to #{params["rentrange"]["to"]} "
     @posting = Posting.new(posting_params)
 
     respond_to do |format|
