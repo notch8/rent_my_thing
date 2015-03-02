@@ -1,5 +1,5 @@
 class PostingsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]  
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]
   before_action :load_categories, only: [:show, :edit, :new ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
 
