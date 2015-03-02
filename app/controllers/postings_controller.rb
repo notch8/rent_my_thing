@@ -1,4 +1,5 @@
 class PostingsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]
   before_action :load_categories, only: [:show, :edit, :new ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
 
@@ -25,7 +26,7 @@ class PostingsController < ApplicationController
   # POST /postings
   # POST /postings.json
   def create
-    params["posting"]["category_id"] = params["Category"] 
+    params["posting"]["category_id"] = params["Category"]
     logger.debug "========> All params: #{params}"
     logger.debug "========> posting params: #{posting_params}"
     @posting = Posting.new(posting_params)

@@ -1,60 +1,79 @@
 <%= form_for(@posting) do |f| %>
-  <% if @posting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@posting.errors.count, "error") %> prohibited this posting from being saved:</h2>
+<% if @posting.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@posting.errors.count, "error") %> prohibited this posting from being saved:</h2>
 
-      <ul>
-      <% @posting.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @posting.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <!-- <%= f.label :category_id %><br>
-    <%= f.text_field :category_id %> -->
-    <%= select_tag "Category", options_from_collection_for_select(@categories, "id", "name", f.object.category_id) %>
-  </div>
-  <div class="field">
-    <%= f.label :rate %><br>
-    <%= f.text_field :rate %>
-  </div>
+<div class="field">
+  <%= f.label :title %><br>
+  <%= f.text_field :title %>
+</div>
+<div class="field">
+  <%= f.label :description %><br>
+  <%= f.text_area :description %>
+</div>
+<div class="field">
+  <!-- <%= f.label :category_id %><br>
+  <%= f.text_field :category_id %> -->
+  <%= select_tag "Category", options_from_collection_for_select(@categories, "id", "name", f.object.category_id) %>
+</div>
+<div class="field">
+  <%= f.label :rate %><br>
+  <%= f.text_field :rate %>
+</div>
 
-  <div class="field">
-    <%= f.label :available_dates %><br>
-    <%= f.date_select :available_dates %>
-  </div>
-  <div class="field">
-    <%= f.label :street %><br>
-    <%= f.text_field :street %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
+<table class="table table-bordered" style="width: 30%">
+  <thead>
+    <tr>
+      <th class="col-md-1">From</th>
+      <th class="col-md-1">To</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="field">
+          <input type="text" id="from-date">
+        </div>
+      </td>
+      <td>
+        <div class="field">
+          <input type="text" id="to-date">
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- <div class="field"> -->
+<div class="field">
+  <%= f.label :street %><br>
+  <%= f.text_field :street %>
+</div>
+<div class="field">
+  <%= f.label :state %><br>
+  <%= f.text_field :state %>
+</div>
 
-  <div class="field">
-    <%= f.label :zip %><br>
-    <%= f.text_field :zip %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="field">
+  <%= f.label :zip %><br>
+  <%= f.text_field :zip %>
+</div>
+<div class="field">
+  <%= f.label :phone %><br>
+  <%= f.text_field :phone %>
+</div>
+<div class="field">
+  <%= f.label :email %><br>
+  <%= f.text_field :email %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>
