@@ -54,6 +54,7 @@ module PostingsHelper
       ['Wisconsin', 'WI'],
       ['Wyoming', 'WY']
     ]
+  end
 
   def date_range_string_for_js date_range
     if date_range
