@@ -29,6 +29,28 @@
   <%= f.text_field :rate %>
 </div>
 
+<table class="table table-bordered" style="width: 30%">
+  <thead>
+    <tr>
+      <th class="col-md-1">From</th>
+      <th class="col-md-1">To</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="field">
+          <input type="text" id="from-date">
+        </div>
+      </td>
+      <td>
+        <div class="field">
+          <input type="text" id="to-date">
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <!-- <div class="field"> -->
 <div class="field">
   <%= f.label :street %><br>
@@ -55,13 +77,3 @@
   <%= f.submit %>
 </div>
 <% end %>
-
-<div class="control-group">
-  <label class="control-label" for="reservationtime">Choose your check-in and check-out times:</label>
-  <div class="controls">
-    <div class="input-prepend input-group">
-      <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-      <input type="text" style="width: 400px" name="reservationtime" id="reservationtime" class="form-control" value="08/01/2013 1:00 PM - 08/01/2013 1:30 PM"  class="span4"/>
-    </div>
-  </div>
-</div>
