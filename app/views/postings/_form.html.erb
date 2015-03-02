@@ -20,8 +20,8 @@
   <%= f.text_area :description %>
 </div>
 <div class="field">
-  <!-- <%= f.label :category_id %><br>
-  <%= f.text_field :category_id %> -->
+  <%= f.label :category_id %><br>
+ <%#= f.text_field :category_id %>
   <%= select_tag "Category", options_from_collection_for_select(@categories, "id", "name", f.object.category_id) %>
 </div>
 <div class="field">
@@ -56,9 +56,13 @@
   <%= f.label :street %><br>
   <%= f.text_field :street %>
 </div>
+
 <div class="field">
   <%= f.label :state %><br>
-  <%= f.text_field :state %>
+  <%= f.select :state, options_for_select(us_states) %>
+
+
+  <%#= f.text_field :state %>
 </div>
 
 <div class="field">
