@@ -17,6 +17,11 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
     @posting = Posting.find params[:posting_id]
+    #parse params[:reservation] and assign to @reservation
+    res = params[:reservation].split ' - '
+    start = Date.strptime res[0], '%m/%d/%Y'
+    finish = Date.strptime res[1], '%m/%d/%Y'
+    @reservation.when = start...finish
   end
 
   # GET /reservations/1/edit
