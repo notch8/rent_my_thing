@@ -35,6 +35,7 @@ class PostingsController < ApplicationController
         format.html { redirect_to @posting, notice: 'Posting was successfully created.' }
         format.json { render :show, status: :created, location: @posting }
       else
+        load_categories
         format.html { render :new }
         format.json { render json: @posting.errors, status: :unprocessable_entity }
       end
@@ -78,6 +79,6 @@ class PostingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
-      params.require(:posting).permit(:title, :description, :category_id, :rate, :date_range, :street, :state, :zip, :phone, :email)
+      params.require(:posting).permit(:title, :description, :category_id, :rate, :date_range, :street, :state, :zip, :phone, :email, :image)
     end
 end

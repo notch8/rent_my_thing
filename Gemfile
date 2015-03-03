@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+#Allow image uploads to database
+gem "paperclip", "~> 4.2"
 gem 'calendar_date_select', '~> 2.0.0'
 gem 'devise', '~> 3.4.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
