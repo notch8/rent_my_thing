@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150302200844) do
-=======
 ActiveRecord::Schema.define(version: 20150302223331) do
->>>>>>> 996a0326f5ca0e37899ae8e5b4f500a870fc74e5
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,12 +28,7 @@ ActiveRecord::Schema.define(version: 20150302223331) do
     t.integer   "category_id"
     t.decimal   "rate",                       precision: 8, scale: 2
     t.daterange "available_dates"
-<<<<<<< HEAD
     t.string    "street",          limit: 20
-=======
-    t.string    "street",          limit: 2
-    t.string    "city"
->>>>>>> 996a0326f5ca0e37899ae8e5b4f500a870fc74e5
     t.string    "zip",             limit: 5
     t.string    "phone"
     t.string    "email"
