@@ -165,6 +165,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionmailer
   byebug
   calendar_date_select (~> 2.0.0)
   coffee-rails (~> 4.1.0)
