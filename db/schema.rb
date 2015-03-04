@@ -49,20 +49,18 @@ ActiveRecord::Schema.define(version: 20150303205906) do
     t.integer   "category_id"
     t.decimal   "rate",                          precision: 8, scale: 2
     t.daterange "available_dates"
-
     t.string    "street",             limit: 20
+    t.string    "city"
     t.string    "zip",                limit: 5
     t.string    "phone"
     t.string    "email"
     t.datetime  "created_at",                                            null: false
     t.datetime  "updated_at",                                            null: false
     t.string    "state",              limit: 2
-    t.string    "city",               limit: 30
     t.string    "image_file_name"
     t.string    "image_content_type"
     t.integer   "image_file_size"
     t.datetime  "image_updated_at"
-
   end
 
   add_index "postings", ["category_id"], name: "index_postings_on_category_id", using: :btree
