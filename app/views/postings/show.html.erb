@@ -60,3 +60,4 @@ Availability: <div id="datepicker"></div>
 <script>
   $( "#datepicker" ).datepicker(<%= date_range_string_for_js @posting.available_dates %>);
 </script>
+<div id="map" class="map" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>">
