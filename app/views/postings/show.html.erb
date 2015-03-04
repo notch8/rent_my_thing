@@ -32,6 +32,11 @@
 </p>
 
 <p>
+  <strong>City:</strong>
+  <%= @posting.city %>
+</p>
+
+<p>
   <strong>State:</strong>
   <%= @posting.state %>
 </p>
@@ -60,3 +65,5 @@ Availability: <div id="datepicker"></div>
 <script>
   $( "#datepicker" ).datepicker(<%= date_range_string_for_js @posting.available_dates %>);
 </script>
+<%= @posting.inspect %>
+<div id="map" class="map" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"></div>
