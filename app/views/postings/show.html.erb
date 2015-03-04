@@ -9,9 +9,11 @@
   <strong>Description:</strong>
   <%= @posting.description %>
 </p>
-<p>
-<%= image_tag @posting.image.url %>
-</p>
+<% unless @posting.image.blank? %>
+  <p>
+  <%= image_tag @posting.image.url  %>
+  </p>
+<% end %>
 <p>
   <strong>Category:</strong>
   <%= @posting.category.try :name %>
