@@ -1,8 +1,13 @@
+jQuery(function($) {
+  $(document).ready( function() {
+    //enabling stickUp on the '.navbar-wrapper' class
+    $('.navbar-wrapper').stickUp();
+  });
+});
+
 $(document).on ('page:change', function() {
-
-  $( "#from-date" ).datepicker();
-  $( "#to-date" ).datepicker();
-
-  $('.navbar-wrapper').stickUp();
-
-})
+  if ($("#from-date").size() > 0){
+    $( "#from-date" ).datepicker();
+    $( "#to-date" ).datepicker();
+  }
+});

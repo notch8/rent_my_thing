@@ -6,7 +6,7 @@ class PostingsController < ApplicationController
   # GET /postings
   # GET /postings.json
   def index
-    @postings = Posting.all
+    @postings = Posting.all.includes :category
   end
 
   # GET /postings/1
@@ -26,7 +26,6 @@ class PostingsController < ApplicationController
   # POST /postings
   # POST /postings.json
   def create
-    params["posting"]["category_id"] = params["Category"]
     # logger.debug "date range: #{params["rentrange"]["from"]} to #{params["rentrange"]["to"]} "
     @posting = Posting.new(posting_params)
 
@@ -35,6 +34,7 @@ class PostingsController < ApplicationController
         format.html { redirect_to @posting, notice: 'Posting was successfully created.' }
         format.json { render :show, status: :created, location: @posting }
       else
+        load_categories
         format.html { render :new }
         format.json { render json: @posting.errors, status: :unprocessable_entity }
       end
@@ -78,6 +78,7 @@ class PostingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
-      params.require(:posting).permit(:title, :description, :category_id, :rate, :date_range, :street, :state, :zip, :phone, :email)
+      params.require(:posting).permit(:title, :description, :category_id, :rate,
+          :date_range, :street, :state, :zip, :phone, :email, :city)
     end
 end

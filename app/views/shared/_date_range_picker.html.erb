@@ -1,0 +1,57 @@
+
+
+  <div class="form-group">
+    <label for="reservationtime">Reservation Dates:</label>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="reservation" id="reservationtime" class="form-control" value="07/10/2014 1:00 PM - 07/10/2014 1:30 PM" />
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('input#reservationtime').daterangepicker();
+});
+</script>
+
+<!-- // <script type="text/javascript">
+// $('input[name="daterange"]').daterangepicker(
+//   {
+//     format: 'YYYY-MM-DD',
+//     startDate: '2013-01-01',
+//     endDate: '2013-12-31'
+//   },
+//   function(start, end, label) {
+//     alert('A date range was chosen: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+//   }
+// );
+// </script> -->
+
+
+
+
+
+
+
+<!-- <table class="table table-bordered" style="width: 30%">
+  <thead>
+    <tr>
+      <th class="col-md-1">From</th>
+      <th class="col-md-1">To</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="field">
+          <input name="rentrange[from]" type="text" id="from-date">
+        </div>
+      </td>
+      <td>
+        <div class="field">
+          <input name="rentrange[to]" type="text" id="to-date">
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table> -->

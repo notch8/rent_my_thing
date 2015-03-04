@@ -1,4 +1,3 @@
-<%= javascript_include_tag :defaults %>
 
 <div class='showpage' id='blacklink'>
 <p>
@@ -10,7 +9,11 @@
   <strong>Description:</strong>
   <%= @posting.description %>
 </p>
-
+<% unless @posting.image.blank? %>
+  <p>
+  <%= image_tag @posting.image.url  %>
+  </p>
+<% end %>
 <p>
   <strong>Category:</strong>
   <%= @posting.category.try :name %>
@@ -29,6 +32,11 @@
 <p>
   <strong>Street:</strong>
   <%= @posting.street %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @posting.city %>
 </p>
 
 <p>
@@ -51,9 +59,13 @@
   <strong>Email:</strong>
   <%= @posting.email %>
 </p>
-Availability: <div id="datepicker"></div>
-<%= link_to 'Reserve', new_posting_reservation_path(@posting) %>
 
+<%= form_tag new_posting_reservation_path(@posting), method: :get %>
+
+<%= render 'shared/date_range_picker' %>
+
+<input type="submit" value="Reserve">
+</form>
 <%= link_to 'Edit', edit_posting_path(@posting) %> |
 <%= link_to 'Back', postings_path %>
 </div>
