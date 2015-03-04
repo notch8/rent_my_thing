@@ -3,6 +3,9 @@ class PostingsController < ApplicationController
   before_action :load_categories, only: [:show, :edit, :new ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
 
+  def splash
+  end
+
   # GET /postings
   # GET /postings.json
   def index
@@ -95,6 +98,7 @@ class PostingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
-      params.require(:posting).permit(:title, :description, :category_id, :rate, :date_range, :street, :state, :zip, :phone, :email, :image)
+      params.require(:posting).permit(:title, :description, :category_id, :rate,
+          :date_range, :street, :state, :zip, :phone, :email, :city)
     end
 end

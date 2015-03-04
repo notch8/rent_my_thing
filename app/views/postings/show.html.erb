@@ -9,9 +9,11 @@
   <strong>Description:</strong>
   <%= @posting.description %>
 </p>
-<p>
-<%= image_tag @posting.image.url %>
-</p>
+<% unless @posting.image.blank? %>
+  <p>
+  <%= image_tag @posting.image.url  %>
+  </p>
+<% end %>
 <p>
   <strong>Category:</strong>
   <%= @posting.category.try :name %>
@@ -30,6 +32,11 @@
 <p>
   <strong>Street:</strong>
   <%= @posting.street %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @posting.city %>
 </p>
 
 <p>
@@ -62,3 +69,7 @@
 <%= link_to 'Edit', edit_posting_path(@posting) %> |
 <%= link_to 'Back', postings_path %>
 </div>
+
+<script>
+  $( "#datepicker" ).datepicker(<%= date_range_string_for_js @posting.available_dates %>);
+</script>

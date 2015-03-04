@@ -15,4 +15,5 @@
  *= require postings
  *= require categories
  *= require daterangepicker-bs3
+ *= require_self
  */
