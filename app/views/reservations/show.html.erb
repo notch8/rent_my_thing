@@ -1,19 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div id="inlineblock">
+<p id="box">
   <strong>User:</strong>
   <%= @reservation.user.try :email %>
 </p>
 
-<p>
+<p id="box">
   <strong>Posting:</strong>
   <%= @reservation.posting.try :title %>
 </p>
+</div>
 
-<p>
+<div id="inlineblock">
+<p id="box">
   <strong>When:</strong>
   <%= @reservation.when %>
 </p>
+
+<p id="box">
+  <strong>Cost:</strong>
+  <%= @reservation.posting.try :rate %> per day
+</p>
+</div>
+
 
 <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
 <%= link_to 'Back', reservations_path %>

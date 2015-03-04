@@ -21,7 +21,7 @@ class ReservationsController < ApplicationController
     res = params[:reservation].split ' - '
     start = Date.strptime res[0], '%m/%d/%Y'
     finish = Date.strptime res[1], '%m/%d/%Y'
-    @reservation.when = start...finish
+    @reservation.when = start..finish
   end
 
   # GET /reservations/1/edit
@@ -31,13 +31,21 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
+    res_params = reservation_params
+    res_when = res_params.delete :when
+    if res_when
+      res_dates = res_when.split('..')
+      res_start = Date.strptime res_dates[0], '%Y-%m-%d'
+      res_end = Date.strptime res_dates[1], '%Y-%m-%d'
+      res_params[:when] = res_start..res_end
+    end
+    @reservation = Reservation.new(res_params)
     @reservation.posting_id = params[:posting_id]
     @reservation.user = current_user
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
+        format.html { redirect_to @reservation, notice: 'Congratulations on your rental!' }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { render :new }
