@@ -10,16 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
-<<<<<<< HEAD
  *= require application
  *= require scaffolds
  *= require postings
  *= require categories
  *= require daterangepicker-bs3
-=======
  *= require_self
- *= require application
- *= require scaffolds
- *= require postings
->>>>>>> 34bddf48a317de73bb7928046b2b08a5f10110dc
  */
