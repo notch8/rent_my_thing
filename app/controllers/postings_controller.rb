@@ -6,7 +6,7 @@ class PostingsController < ApplicationController
   # GET /postings
   # GET /postings.json
   def index
-    @postings = Posting.all
+    @postings = Posting.all.includes :category
   end
 
   # GET /postings/1
