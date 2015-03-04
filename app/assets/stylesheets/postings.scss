@@ -1,24 +1,31 @@
 // Place all the styles related to the Postings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-table, th, td {
-  border: 3px solid black;
+// table, th, td {
+.list-table {
   margin: 15px;
   padding: 15px;
   font-weight: bold;
 }
 
-td {
+.list-table-body {
+}
+
+.list-table-element {
+  border: 2px solid gray;
   background-color: AntiqueWhite;
 }
 
-th {
+.list-table-head {
+  border: 2px solid gray;
   background-color: #006699;
   align: center;
   font-size: 15px;
 }
 .description-column {
+  color: black;
   width: 30%;
+  background-color: AntiqueWhite;
 }
 
 /* unvisited link */
