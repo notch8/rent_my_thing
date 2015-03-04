@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :admins
   resources :reservations
 
-  root "/postings#splash"
+  root "welcome#welcome"
 
   devise_for :users
 
