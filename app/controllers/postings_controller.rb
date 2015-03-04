@@ -82,8 +82,5 @@ class PostingsController < ApplicationController
 <<<<<<< HEAD
       params.require(:posting).permit(:title, :description, :category_id, :rate,
           :date_range, :street, :state, :zip, :phone, :email, :city)
-=======
-      params.require(:posting).permit(:title, :description, :category_id, :rate, :date_range, :street, :state, :zip, :phone, :email, :image)
->>>>>>> bfac503423d602db54bd41e35ce6ff1773109a73
     end
 end
