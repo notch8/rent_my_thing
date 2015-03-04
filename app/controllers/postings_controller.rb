@@ -6,7 +6,7 @@ class PostingsController < ApplicationController
   # GET /postings
   # GET /postings.json
   def index
-    @postings = Posting.all
+    @postings = Posting.all.includes :category
   end
 
   # GET /postings/1
@@ -26,7 +26,6 @@ class PostingsController < ApplicationController
   # POST /postings
   # POST /postings.json
   def create
-    params["posting"]["category_id"] = params["Category"]
     # logger.debug "date range: #{params["rentrange"]["from"]} to #{params["rentrange"]["to"]} "
     @posting = Posting.new(posting_params)
 
