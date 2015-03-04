@@ -3,6 +3,9 @@ class PostingsController < ApplicationController
   before_action :load_categories, only: [:show, :edit, :new ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
 
+  def splash
+  end
+
   # GET /postings
   # GET /postings.json
   def index
