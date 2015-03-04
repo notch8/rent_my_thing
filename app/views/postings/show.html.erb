@@ -67,6 +67,7 @@
 <%= link_to 'Edit', edit_posting_path(@posting) %> |
 <%= link_to 'Back', postings_path %>
 </div>
+
 <script>
   $( "#datepicker" ).datepicker(<%= date_range_string_for_js @posting.available_dates %>);
 </script>

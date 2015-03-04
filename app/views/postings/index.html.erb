@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>All Postings</h1>
+<video autoplay id="video-bg">
+  <source src="https://a0.muscache.com/airbnb/static/London-P1-1.mp4" type="video/mp4">
+  <source src="https://a0.muscache.com/airbnb/static/London-P1-0.webm" type="video/webm">
+Your browser does not support the video tag.
+</video>
+
+<h1>Listing Postings</h1>
 
 <table class="list-table">
   <thead class="list-table-head">
@@ -16,16 +22,16 @@
 
   <tbody class="list-table-body">
     <% @postings.each do |posting| %>
-      <tr>
+    <tr id="whitelink">
 
         <td class="list-table-element"><%= posting.category.try :name %></td>
 
         <td class="list-table-element">
 
         <%= link_to(posting.title, action: 'show', id: posting.id) %>
-        <!-- <% if posting.image? %>
+        <% if posting.image? %>
         <%= image_tag posting.image.url(:thumb) %>
-        <% end %></td> -->
+        <% end %></td>
         <td class="list-table-element description-column"><%= posting.description %></td>
         <td class="list-table-element"><%= posting.rate %></td>
         <td class="list-table-element"><%= posting.available_dates %></td>
