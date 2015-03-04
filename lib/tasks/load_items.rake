@@ -38,7 +38,7 @@ task :load_items => :environment do
     new_cat.name = cat
     new_cat.save
 
-    40.times do |x|
+    10.times do |x|
       new_item = Posting.new(:category_id => new_cat.id)
       new_item.title = new_cat.name + ' ' + x.to_s
       new_item.description = new_cat.name + ' ' + x.to_s

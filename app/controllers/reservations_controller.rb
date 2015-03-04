@@ -45,6 +45,9 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
+        logger.debug "Reservation: #{@reservation.when.first} to #{@reservation.when.last}"
+        logger.debug "Got reservation: #{@reservation.inspect}"
+        MailerGenerator.send_reservation_email("id" => @reservation.id)
         format.html { redirect_to @reservation, notice: 'Congratulations on your rental!' }
         format.json { render :show, status: :created, location: @reservation }
       else
