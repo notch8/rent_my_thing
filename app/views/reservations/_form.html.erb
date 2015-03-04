@@ -11,10 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :when %><br>
-    <%= f.text_field :when %>
+  <div>
+    <%= @reservation.when.first%>
+    ,
+    <%=@reservation.when.last %>
   </div>
+
+  <%= f.hidden_field :when %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
