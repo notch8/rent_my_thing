@@ -50,14 +50,13 @@ ActiveRecord::Schema.define(version: 20150303205906) do
     t.decimal   "rate",                          precision: 8, scale: 2
     t.daterange "available_dates"
     t.string    "street",             limit: 20
-
+    t.string    "city"
     t.string    "zip",                limit: 5
     t.string    "phone"
     t.string    "email"
     t.datetime  "created_at",                                            null: false
     t.datetime  "updated_at",                                            null: false
     t.string    "state",              limit: 2
-    t.string    "city",               limit: 30
     t.string    "image_file_name"
     t.string    "image_content_type"
     t.integer   "image_file_size"
