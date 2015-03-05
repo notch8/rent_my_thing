@@ -3,6 +3,15 @@ class PostingsController < ApplicationController
   before_action :load_categories, only: [:show, :edit, :new ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
   before_action :get_reviews, only: :show
+  layout :resolve_layout
+
+  def resolve_layout
+    if action_name == "splash"
+      "splash"
+    else
+      "application"
+    end
+  end
 
   def splash
   end
@@ -17,6 +26,8 @@ class PostingsController < ApplicationController
     search_string = params[:search_text]
     start_date = Date.strptime start_date, '%Y-%m-%d' if start_date.present?
     end_date = Date.strptime end_date, '%Y-%m-%d' if end_date.present?
+    city = params[:city]
+
     @postings = Posting.paginate(:page => params[:page])
 
 
@@ -34,6 +45,10 @@ class PostingsController < ApplicationController
 
     if category_id.present?
       @postings = @postings.where category_id: category_id
+    end
+
+    if city.present?
+      @postings = @postings.where "lower(city) = lower(?)", city
     end
   end
 
