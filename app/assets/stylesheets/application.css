@@ -14,12 +14,12 @@
  *= require application
  *= require scaffolds
  *= require postings
- *= require categories
- *= require daterangepicker-bs3
 =======
  *= require_self
  *= require application
  *= require scaffolds
  *= require postings
+ *= require daterangepicker-bs3
+
 >>>>>>> 34bddf48a317de73bb7928046b2b08a5f10110dc
  */
