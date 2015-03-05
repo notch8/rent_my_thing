@@ -77,29 +77,24 @@
   padding: 40px;
 }
 
-.both-columns {
-  background-color: #F5E5B0;
-}
+// .both-columns {
+//   background-image: url('/background.jpg');
+// }
 
 /* CUSTOMIZE THE NAVBAR - all pages except Splash page
 -------------------------------------------------- */
 
 @media (min-width: 768px) {
   .column1 .navbar-header {
-    background-color: #F5E5B0;
-    // border: 1px;
-    // border-radius: 10px;
+    // background-image: url('/background.jpg');
   }
   .column1 .navbar-collapse {
-    background-color: #F5E5B0;
     height: auto;
     border-top: 0;
     box-shadow: none;
     max-height: none;
     padding-left:0;
     padding-right:0;
-    // border: 1px;
-    // border-radius: 10px;
   }
 
   .column1 .navbar-collapse.collapse {
@@ -110,15 +105,15 @@
   }
   .column1 .navbar-collapse.in {
     overflow-x: visible;
-  }
+}
 
   .column1 .navbar
 {
-  background-color: #004182;
+  // background-image: url('/background.jpg');
 	max-width:300px;
 	margin-right: 0;
 	margin-left: 0;
-  // border-color: #197fe6;
+  border: none;
 }
 
 .column1 .navbar-nav,
@@ -127,8 +122,16 @@
 .column1 .navbar-right,
 .column1 .navbar-header {
   float:none !important;
-
 }
+
+.column1 .navbar-default .navbar-link {
+  color: gray;
+}
+
+.column1 .navbar-default .navbar-link a:hover {
+  color: black;
+}
+
 
 .column1 .navbar-right .dropdown-menu {left:0;right:auto;}
 .column1 .navbar-collapse .navbar-nav.navbar-right:last-child {
@@ -141,7 +144,7 @@
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .splash .navbar-wrapper {
-  margin-top:20px;
+  margin-top:0px;
   position: relative;
   z-index: 15;
 }
