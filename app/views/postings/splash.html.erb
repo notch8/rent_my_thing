@@ -6,13 +6,45 @@
       </video>
 
     </div>
-    <div class="splashtext">
-      <h1>Rent. Loan. Discover.</h1>
+
+    <% content_for :afterbody do %>
+    <script>
+    $( document ).ready(function() {
+    $("h2").lettering();
+
+// hack to get animations to run again
+$("h2").click(function() {
+  var el = $(this),
+     newone = el.clone();
+  el.before(newone);
+  el.remove();
+});
+
+
+var text = $("#jquerybuddy");
+numLetters = text.find("span").length;
+
+function randomBlurize() {
+text.find("span:nth-child(" + (Math.floor(Math.random()*numLetters)+1) + ")")
+  .animate({
+    'textShadowBlur': Math.floor(Math.random()*25)+4,
+    'textShadowColor': 'rgba(0,100,0,' + (Math.floor(Math.random()*200)+55) + ')'
+  });
+// Call itself recurssively
+setTimeout(randomBlurize, 100);
+} // Call once
+randomBlurize();
+})
+</script>
+<% end %>
+
+    <div >
+      <h2 class="hovertown">Rent. Loan. Discover.</h2>
     </div>
     <br>
     <div class="splashtext">
       <h2>Choose from thousands of local, instant, affordable rentals.</h2>
-      <h2>Select a category to begin.</h2>
+      <h3>Select a category to begin.</h3>
     </div>
     <br>
     <div class="bottom-search-area hide-sm">

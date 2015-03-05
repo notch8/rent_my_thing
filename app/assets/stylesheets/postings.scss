@@ -4,6 +4,40 @@
 
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
 @import url(http://fonts.googleapis.com/css?family=Montserrat);
+@import url(http://fonts.googleapis.com/css?family=Dosis);
+
+h2.hovertown {
+  color: white;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 62px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+.hovertown span {
+  transition: all 0.9s ease;
+}
+.hovertown span:hover {
+  text-shadow: 0 0 72px black;
+  color: transparent;
+  transition: all 0.2s ease;
+}
+
+.splashtext h3 {
+  color: white;
+  font-size: 18px;
+  text-align:center;
+  font-family: 'Dosis', sans-serif;
+
+}
+
+.splashtext h2 {
+  color: white;
+  font-size: 20px;
+  text-align:center;
+}
 
 .bottom-search-area {
    text-align: center;
@@ -94,19 +128,4 @@
   background:#197fe6;
   color:#f2c319;
   font-weight:700;
-}
-
-.splashtext h1 {
-  color: white;
-  font-size: 50px;
-  text-align:center;
-  font-family: 'Droid Serif', serif;
-
-}
-
-.splashtext h2 {
-  color: white;
-  font-size: 20px;
-  text-align:center;
-  font-family: 'Montserrat', sans-serif;
 }
