@@ -10,6 +10,36 @@ class PostingsController < ApplicationController
   # GET /postings.json
   def index
     @postings = Posting.all.includes :category
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    category_id = params[:category_id]
+    search_string = params[:search_text]
+    start_date = Date.strptime start_date, '%Y-%m-%d' if start_date.present?
+    end_date = Date.strptime end_date, '%Y-%m-%d' if end_date.present?
+    city = params[:city]
+
+    @postings = Posting.paginate(:page => params[:page])
+
+
+    if start_date.present? && end_date.present?
+      @postings = @postings.where "available_dates && [?, ?)", start_date, end_date
+    elsif start_date.present?
+      @postings = @postings.where "?::date <@ available_dates", start_date
+    elsif end_date.present?
+      @postings = @postings.where "?::date <@ available_dates", end_date
+    end
+
+    if search_string.present?
+      @postings = @postings.where "POSITION(:str in title) <> 0 OR POSITION(:str in description) <> 0", {str: search_string}
+    end
+
+    if category_id.present?
+      @postings = @postings.where category_id: category_id
+    end
+
+    if city.present?
+      @postings = @postings.where "lower(city) = lower(?)", city
+    end
   end
 
   # GET /postings/1

@@ -1,7 +1,14 @@
 
+
 @import url(http://fonts.googleapis.com/css?family=Lato);
 
+.menuItem {
+  text-align: right;
+}
 
+.navalign {
+  margin-right: 45px;
+}
 
 #video-bg {
   position: fixed;
@@ -16,12 +23,13 @@
   color: white;
 }
 
-#whitelink td {
-  color: white;
-}
+// #whitelink td {
+//   color: white;
+// }
 
-th {
-  color: white;
+
+th, td {
+  color: black;
 }
 
 body, h1 {

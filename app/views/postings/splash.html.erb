@@ -1,6 +1,6 @@
 <div class="search-area text-center page-container-responsive page-container-no-padding">
-  <video autoplay id="video-bg">
-    <source src="https://a0.muscache.com/airbnb/static/London-P1-1.mp4" type="video/mp4">
+  <video autoplay loop id="video-bg">
+    <source src="http://ryanclifton.com/Learn%20Bootcamp%202.mp4" type="video/mp4">
       <source src="https://a0.muscache.com/airbnb/static/London-P1-0.webm" type="video/webm">
         Your browser does not support the video tag.
       </video>
@@ -44,14 +44,21 @@ randomBlurize();
     <br>
     <div class="splashtext">
       <h2>Choose from thousands of local, instant, affordable rentals.</h2>
-      <h3>Select a category to begin.</h3>
+      <h3>Select a category & city to begin.</h3>
     </div>
     <br>
+
+
+
     <div class="bottom-search-area hide-sm">
-      <form action="/s" id="search_form">
-        <div class="location-wrapper"><input type="text" class="form-inline location input-large input-contrast" autocomplete="off" id="location" name="location" placeholder="City" /><p id="enter_location_error_message" class="bad hide">
-        </p></div><input type="text" id="checkin" class="form-inline checkin search-option input-large input-contrast" name="checkin" placeholder="Check In" /><input type="text" id="checkout" class="form-inline checkout search-option input-large input-contrast" name="checkout" placeholder="Check Out" /><div class="select select-large">
-        </div><input type="hidden" name="source" value="bb"><button type="submit" class="search-button form-inline btn btn-primary btn-large" id="submit_location">
+      <form action="<%= postings_path %>" id="search_form">
+        <div class="location-wrapper">
+      <div class="styled-select black rounded">
+        <%= select_tag :category_id, options_from_collection_for_select(Category.all, "id", "name", params[:category_id]), include_blank: "Select a Category" %>
+      </div><br>
+        <input type="text" class="form-inline location input-large input-contrast" autocomplete="off" id="location" name="city" placeholder="City" /><p id="enter_location_error_message" class="bad hide">
+        </p></div><br>
+        <button type="submit" class="search-button form-inline btn btn-primary btn-large" id="submit_location">
           Search
         </button>
       </form>

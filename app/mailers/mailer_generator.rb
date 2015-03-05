@@ -8,7 +8,6 @@ class MailerGenerator < ActionMailer::Base
   end
 
   def send_reservation_email
-    logger.debug "Mailer. Received ID: #{params["id"]}.  Got reservation: #{@reservation.inspect}"
     layout 'reserve_create'
     subject_text = "Your Rent_My_Thing reservation"
     mail( :to => @reservation.user.email, :subject => subject_text ).deliver
