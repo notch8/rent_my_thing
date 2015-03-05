@@ -11,9 +11,9 @@
  * file per style scope.
  *
  *= require application
- *= require scaffolds
- *= require postings
+  *= require scaffolds
+  *= require postings
  *= require categories
- *= require map
  *= require daterangepicker-bs3
+ *= require map
  */

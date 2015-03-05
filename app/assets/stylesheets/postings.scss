@@ -2,6 +2,110 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+@import url(http://fonts.googleapis.com/css?family=Dosis);
+
+
+#category_id {
+  text-align: center;
+  align: center;
+  margin-left: auto;
+    margin-right: auto;
+}
+
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+   align: center;
+   text-align: center;
+   margin-left: auto;
+    margin-right: auto;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+   align: center;
+   text-align: center;
+   margin-left: auto;
+    margin-right: auto;
+}
+
+.rounded {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+}
+
+.black   { background-color: #197fe6; }
+
+.black select   { color: #fff; }
+
+/* select {
+  background: black;
+  width: 268px;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  height: 34px;
+  -webkit-appearance: none;
+} */
+
+h2.hovertown {
+  color: white;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 62px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  text-align: center;
+  text-shadow: 2px 2px #ff0000;
+}
+
+.hovertown span {
+  transition: all 0.9s ease;
+}
+.hovertown span:hover {
+  text-shadow: 0 0 72px black;
+  color: transparent;
+  transition: all 0.2s ease;
+}
+
+.splashtext h3 {
+  color: white;
+  font-size: 18px;
+  text-align:center;
+  font-family: 'Dosis', sans-serif;
+
+}
+
+.splashtext h2 {
+  color: white;
+  font-size: 20px;
+  text-align:center;
+}
+
+.bottom-search-area {
+   text-align: center;
+   width: 900px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+#splash_center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 .pagination {
   background: #f1f1f1;
@@ -30,6 +134,7 @@
     color: black; }
     .pagination a:hover, .pagination a:focus {
       text-decoration: underline; }
+
 
 .list-table {
   margin: 15px;
@@ -77,12 +182,7 @@
   padding: 40px;
 }
 
-// .both-columns {
-//   background-image: url('/background.jpg');
-// }
-
-/* CUSTOMIZE THE NAVBAR - all pages except Splash page
--------------------------------------------------- */
+/* CUSTOMIZE THE NAVBAR - all pages except Splash page */
 
 @media (min-width: 768px) {
   .column1 .navbar-header {
