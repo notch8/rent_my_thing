@@ -2,6 +2,7 @@ class PostingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]
   before_action :load_categories, only: [:show, :edit, :new ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
+  before_action :get_reviews, only: :show
 
   # GET /postings
   # GET /postings.json
@@ -67,6 +68,10 @@ class PostingsController < ApplicationController
   end
 
   private
+
+    def get_reviews
+      @reviews = Review.all
+    end
 
     def load_categories
       @categories = Category.all

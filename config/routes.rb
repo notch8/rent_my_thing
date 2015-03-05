@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :reviews
+
   resources :reservations
 
   root "postings#index"
@@ -13,6 +15,10 @@ Rails.application.routes.draw do
 
   resources :postings do
     resources :reservations
+  end
+
+  resources :postings do
+    resources :reviews
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

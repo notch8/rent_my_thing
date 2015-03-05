@@ -23,6 +23,17 @@
   <%= @posting.rate %>
 </p>
 
+
+<br><br><br>
+
+<h3>TESTING</h3>
+<%= render "reviews/form", :locals => { :review => @review } %>
+
+<div class="review_class">
+  <%= @reviews %>
+</div>
+
+
 <p>
   <strong>Date range:</strong>
   <%= @posting.available_dates %>
