@@ -12,6 +12,7 @@ class PostingsController < ApplicationController
     @postings = Posting.all.includes :category
     start_date = params[:start_date]
     end_date = params[:end_date]
+    category_id = params[:category_id]
     search_string = params[:search_text]
     start_date = Date.strptime start_date, '%Y-%m-%d' if start_date.present?
     end_date = Date.strptime end_date, '%Y-%m-%d' if end_date.present?
@@ -26,6 +27,10 @@ class PostingsController < ApplicationController
 
     if search_string.present?
       @postings = @postings.where "POSITION(:str in title) <> 0 OR POSITION(:str in description) <> 0", {str: search_string}
+    end
+
+    if category_id.present?
+      @postings = @postings.where category_id: category_id
     end
   end
 
