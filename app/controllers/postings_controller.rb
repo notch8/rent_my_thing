@@ -2,6 +2,15 @@ class PostingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]
   before_action :load_categories, only: [:show, :edit, :new ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
+  layout :resolve_layout
+
+  def resolve_layout
+    if action_name == "splash" || action_name == "index"
+      "splash"
+    else
+      "application"
+    end
+  end
 
   def splash
   end
