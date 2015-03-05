@@ -72,5 +72,9 @@
   <div id="map" class="map col-md-6" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"> </div>
 </div>
 <script>
+  window.RentMyThing = window.RentMyThing || {};
+  window.RentMyThing.addresses = window.RentMyThing.addresses || [];
+  // window.RentMyThing.addresses.push([{street: "<%#= @posting.street %>", city: "<%#= @posting.state %>", zip: "<%#= @posting.zip %>"}]);
+
   $( "#datepicker" ).datepicker(<%= date_range_string_for_js @posting.available_dates %>);
 </script>

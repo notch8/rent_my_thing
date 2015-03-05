@@ -9,15 +9,20 @@ $(document).on ('page:change', function() {
   // Java script to display map http://openlayers.org/en/v3.2.1/doc/quickstart.html
   var map_div = $('#map')
   if (map_div) {
-    addr = map_div.data('address')
+    // addr = map_div.data('address')
+    addr = map_div.data('window.RentMyThing.address.first')
     get_coords(addr, function(lat, lon) {
       var pt = ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')
-      var icon = new ol.Feature({
+      var renter_icon = new ol.Feature({
         geometry: new ol.geom.Point(pt)
+      })
+      var rental_loc_icon = new ol.Feature({
+        // Need to define rental_item_pts
+        // geometry: new ol.geom.Point(rental_item_pts)
       })
 
 
-      icon.setStyle(
+      renter_loc_icon.setStyle(
         new ol.style.Style({
           image: new ol.style.Icon({
             anchor: [0.5, 46],
@@ -29,12 +34,25 @@ $(document).on ('page:change', function() {
         })
       )
 
+      // rental_loc_icon.setStyle(
+      //   new ol.style.Style({
+      //     image: new ol.style.Icon({
+      //       anchor: [0.5, 46],
+      //       anchorXUnits: 'fraction',
+      //       anchorYUnits: 'pixels',
+      //       opacity: 0.75,
+      //       src: '/images/green-pin.png'
+      //     })
+      //   })
+      // )
+
       // var markers = new ol.layer.markers( "Markers")
 
       var map = new ol.Map({
         target: 'map',
         layers: [
           new ol.layer.Tile({
+            title: "Rental Proximity Map",
             source: new ol.source.MapQuest({layer: 'sat'})
           }),
           new ol.layer.Vector({
@@ -48,7 +66,13 @@ $(document).on ('page:change', function() {
         view: new ol.View({
           center: pt,
           zoom: 14
-        })
+        }),
+        controls: ol.control.defaults({
+          attributionOptions: {
+            collapsible: false
+          }}).extend([
+            new ol.control.ScaleLine()
+          ])
       });
 
       Window.map = map;
