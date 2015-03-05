@@ -29,16 +29,6 @@
       <%= @posting.available_dates %>
     </p>
 
-    <br><br><br>
-
-    <h3>TESTING</h3>
-    <%= render "reviews/form", :locals => { :review => @review } %>
-
-    <div class="review_class">
-      <%= @reviews %>
-    </div>
-
-
     <p>
       <strong>Date range:</strong>
       <%= @posting.available_dates %>
@@ -87,3 +77,8 @@
 <script>
   $( "#datepicker" ).datepicker(<%= date_range_string_for_js @posting.available_dates %>);
 </script>
+<h3><strong> REVIEWS </strong></h3>
+<div class="review_class col-md-6">
+  <%= render @reviews %>
+  <%= render "reviews/form", :locals => { :review => @review } %>
+</div>

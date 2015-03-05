@@ -40,6 +40,8 @@ class PostingsController < ApplicationController
   # GET /postings/1
   # GET /postings/1.json
   def show
+    @review = Review.new
+    @reviews = @posting.reviews
   end
 
   # GET /postings/new

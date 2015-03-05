@@ -1,11 +1,4 @@
-<%= form_for (:review) do |f| %>
-
-
-  <div class="field">
-    <%= f.label :posting %><br>
-    <%= f.text_field :posting %>
-  </div>
-
+<%= form_for [@posting, @review] do |f| %>
   <div class="field">
     <%= f.label :review %><br>
     <%= f.text_area :review %>
