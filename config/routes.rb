@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   devise_for :admins
   resources :reservations
 
-  root "postings#index"
-
+  # root "/posting#splash"
+    root "postings#index"
+    
   devise_for :users
 
   resources :categories do
