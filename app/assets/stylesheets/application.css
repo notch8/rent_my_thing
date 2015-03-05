@@ -13,5 +13,7 @@
  *= require application
   *= require scaffolds
   *= require postings
-  *= require daterangepicker-bs3
-  */
+ *= require categories
+ *= require daterangepicker-bs3
+ *= require map
+ */
