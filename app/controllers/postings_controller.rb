@@ -73,6 +73,7 @@ class PostingsController < ApplicationController
   def create
     # logger.debug "date range: #{params["rentrange"]["from"]} to #{params["rentrange"]["to"]} "
     @posting = Posting.new(posting_params)
+    @posting.user = current_user
 
     respond_to do |format|
       if @posting.save

@@ -2,9 +2,13 @@ Rails.application.routes.draw do
   devise_for :admins
   resources :reservations
   resources :reviews
+  resources :users
 
   devise_for :users
 
+  resources :users do
+    resources :postings, :reviews
+  end
 
   root "postings#splash"
 
@@ -17,8 +21,6 @@ Rails.application.routes.draw do
     resources :reservations
     resources :reviews
   end
-
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
