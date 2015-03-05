@@ -15,28 +15,12 @@
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-  <%= yield :head %>
-
 </head>
 <body>
-  <div class="container">
-
-    <div class="container both-columns">
-
-      <div class="column1 col-md-2">
-        <%= render 'shared/navbar2' %>
-      </div>
-
-      <div class="column2 col-md-10">
-        <%= yield %>
-      </div>
-
-    </div>
+  <div class="container splash">
+    <%= render 'layouts/navbar' %>
+    <%= yield %>
   </div>
 
-<%= yield :afterbody %>
-
 </body>
-
-
 </html>
