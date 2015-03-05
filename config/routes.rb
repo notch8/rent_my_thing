@@ -2,8 +2,13 @@ Rails.application.routes.draw do
   devise_for :admins
   resources :reservations
   resources :reviews
+  resources :users
 
   devise_for :users
+
+  resources :users do
+    resources :postings, :reviews
+  end
 
   resources :categories do
     resources :postings
@@ -13,7 +18,6 @@ Rails.application.routes.draw do
     resources :reservations
     resources :reviews
   end
-
 
   root "postings#index"
 

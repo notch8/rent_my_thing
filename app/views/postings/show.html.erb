@@ -59,6 +59,11 @@
     </p>
 
     <p>
+      <strong>Offered by:<strong>
+      <%= link_to "User #{@posting.user_id}", @posting.user %>
+    </p>
+
+    <p>
       <strong>Email:</strong>
       <%= @posting.email %>
     </p>
