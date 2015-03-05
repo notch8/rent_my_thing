@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-
-
   devise_for :admins
   resources :reservations
+  resources :reviews
 
   devise_for :users
 
@@ -16,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :postings do
     resources :reservations
+    resources :reviews
   end
 
 
