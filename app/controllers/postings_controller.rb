@@ -16,9 +16,11 @@ class PostingsController < ApplicationController
     search_string = params[:search_text]
     start_date = Date.strptime start_date, '%Y-%m-%d' if start_date.present?
     end_date = Date.strptime end_date, '%Y-%m-%d' if end_date.present?
+    @postings = Posting.paginate(:page => params[:page])
+
 
     if start_date.present? && end_date.present?
-      @postings = @postings.where "available_dates && ?", start_date..end_date
+      @postings = @postings.where "available_dates && [?, ?)", start_date, end_date
     elsif start_date.present?
       @postings = @postings.where "?::date <@ available_dates", start_date
     elsif end_date.present?
