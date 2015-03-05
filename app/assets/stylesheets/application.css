@@ -14,4 +14,7 @@
  *= require scaffolds
  *= require postings
  *= require categories
+ *= require map
+ *= require daterangepicker-bs3
+ *= require_self
  */

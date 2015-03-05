@@ -4,10 +4,37 @@ class PostingsController < ApplicationController
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
   before_action :get_reviews, only: :show
 
+  def splash
+  end
+
   # GET /postings
   # GET /postings.json
   def index
-    @postings = Posting.all
+    @postings = Posting.all.includes :category
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    category_id = params[:category_id]
+    search_string = params[:search_text]
+    start_date = Date.strptime start_date, '%Y-%m-%d' if start_date.present?
+    end_date = Date.strptime end_date, '%Y-%m-%d' if end_date.present?
+    @postings = Posting.paginate(:page => params[:page])
+
+
+    if start_date.present? && end_date.present?
+      @postings = @postings.where "available_dates && [?, ?)", start_date, end_date
+    elsif start_date.present?
+      @postings = @postings.where "?::date <@ available_dates", start_date
+    elsif end_date.present?
+      @postings = @postings.where "?::date <@ available_dates", end_date
+    end
+
+    if search_string.present?
+      @postings = @postings.where "POSITION(:str in title) <> 0 OR POSITION(:str in description) <> 0", {str: search_string}
+    end
+
+    if category_id.present?
+      @postings = @postings.where category_id: category_id
+    end
   end
 
   # GET /postings/1
@@ -27,7 +54,6 @@ class PostingsController < ApplicationController
   # POST /postings
   # POST /postings.json
   def create
-    params["posting"]["category_id"] = params["Category"]
     # logger.debug "date range: #{params["rentrange"]["from"]} to #{params["rentrange"]["to"]} "
     @posting = Posting.new(posting_params)
 
@@ -84,6 +110,7 @@ class PostingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
-      params.require(:posting).permit(:title, :description, :category_id, :rate, :date_range, :street, :state, :zip, :phone, :email, :image)
+      params.require(:posting).permit(:title, :description, :category_id, :rate,
+          :date_range, :street, :state, :zip, :phone, :email, :city)
     end
 end

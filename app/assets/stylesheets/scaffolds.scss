@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Lato);
+
 #video-bg {
   position: fixed;
   top: 0; right: 0; bottom: 0; left: 0;
@@ -11,12 +13,16 @@
   color: white;
 }
 
-#whitelink td {
-  color: white;
+// #whitelink td {
+//   color: white;
+// }
+
+th, td {
+  color: black;
 }
 
 body, h1 {
-  color: white;
+  color: black;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
@@ -24,7 +30,7 @@ body, h1 {
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 18px;
 }
 
@@ -53,6 +59,23 @@ div {
 
 #notice {
   color: green;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#inlineblock {
+  display: inline-block;
+}
+
+#box {
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    line-height: 22px;
+    background-color: lightgrey;
+    width: 300px;
+    padding: 10px;
+    border: 1px solid navy;
+    margin: 10px;
 }
 
 .field_with_errors {

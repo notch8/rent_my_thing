@@ -1,74 +1,88 @@
-<%= javascript_include_tag :defaults %>
+<div class='row'>
+  <div class="showpage col-md-6" id='blacklink'>
+    <p>
+      <strong>Title:</strong>
+      <%= @posting.title %>
+    </p>
 
-<div class='showpage' id='blacklink'>
-<p>
-  <strong>Title:</strong>
-  <%= @posting.title %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @posting.description %>
+    </p>
+    <% unless @posting.image.blank? %>
+      <p>
+      <%= image_tag @posting.image.url  %>
+      </p>
+    <% end %>
+    <p>
+      <strong>Category:</strong>
+      <%= @posting.category.try :name %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @posting.description %>
-</p>
-<p>
-<%= image_tag @posting.image.url %>
-</p>
-<p>
-  <strong>Category:</strong>
-  <%= @posting.category.try :name %>
-</p>
+    <p>
+      <strong>Rate:</strong>
+      <%= @posting.rate %>
+    </p>
 
-<p>
-  <strong>Rate:</strong>
-  <%= @posting.rate %>
-</p>
+    <p>
+      <strong>Date range:</strong>
+      <%= @posting.available_dates %>
+    </p>
 
+    <br><br><br>
 
-<br><br><br>
+    <h3>TESTING</h3>
+    <%= render "reviews/form", :locals => { :review => @review } %>
 
-<h3>TESTING</h3>
-<%= render "reviews/form", :locals => { :review => @review } %>
-
-<div class="review_class">
-  <%= @reviews %>
-</div>
-
-
-<p>
-  <strong>Date range:</strong>
-  <%= @posting.available_dates %>
-</p>
-
-<p>
-  <strong>Street:</strong>
-  <%= @posting.street %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @posting.state %>
-</p>
+    <div class="review_class">
+      <%= @reviews %>
+    </div>
 
 
-<p>
-  <strong>Zip:</strong>
-  <%= @posting.zip %>
-</p>
+    <p>
+      <strong>Date range:</strong>
+      <%= @posting.available_dates %>
+    </p>
+    <p>
+      <strong>Street:</strong>
+      <%= @posting.street %>
+    </p>
+    <p>
+      <strong>City:</strong>
+      <%= @posting.city %>
+    </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @posting.phone %>
-</p>
+    <p>
+      <strong>State:</strong>
+      <%= @posting.state %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @posting.email %>
-</p>
-Availability: <div id="datepicker"></div>
-<%= link_to 'Reserve', new_posting_reservation_path(@posting) %>
 
-<%= link_to 'Edit', edit_posting_path(@posting) %> |
-<%= link_to 'Back', postings_path %>
+    <p>
+      <strong>Zip:</strong>
+      <%= @posting.zip %>
+    </p>
+
+    <p>
+      <strong>Phone:</strong>
+      <%= @posting.phone %>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <%= @posting.email %>
+    </p>
+
+    <%= form_tag new_posting_reservation_path(@posting), method: :get %>
+
+    <%= render 'shared/date_range_picker' %>
+
+    <input type="submit" value="Reserve">
+    </form>
+    <%= link_to 'Edit', edit_posting_path(@posting) %> |
+    <%= link_to 'Back', postings_path %>
+  </div>
+  <div id="map" class="map col-md-6" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"> </div>
 </div>
 <script>
   $( "#datepicker" ).datepicker(<%= date_range_string_for_js @posting.available_dates %>);

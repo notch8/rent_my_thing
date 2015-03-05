@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
-
-
-  resources :reviews
-
+  devise_for :admins
   resources :reservations
-
-  root "postings#index"
 
   devise_for :users
 
@@ -16,10 +11,7 @@ Rails.application.routes.draw do
   resources :postings do
     resources :reservations
   end
-
-  resources :postings do
-    resources :reviews
-  end
+  root "postings#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
