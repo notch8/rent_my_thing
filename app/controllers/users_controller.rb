@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @postings = @user.postings
-    @reviews = Review.where posting_id: @postings.map(&:id)
+    @reviews = @user.reviews
   end
 
   def postings user
