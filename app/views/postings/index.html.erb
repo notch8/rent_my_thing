@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 <%= render 'postings/search_form' %>
 
-<video autoplay id="video-bg">
-  <source src="https://a0.muscache.com/airbnb/static/London-P1-1.mp4" type="video/mp4">
-  <source src="https://a0.muscache.com/airbnb/static/London-P1-0.webm" type="video/webm">
-Your browser does not support the video tag.
-</video>
 
 <h1>Listing Postings</h1>
 
@@ -45,10 +40,11 @@ Your browser does not support the video tag.
   </tbody>
 </table>
 
+<%= will_paginate @postings %>
+
+
 <br>
 
 <div id="whitelink">
 <%= link_to 'New Posting', new_posting_path, id:"whitelink" %>
-</div>
-<div id="map" class="map">
 </div>
