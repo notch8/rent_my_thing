@@ -1,85 +1,91 @@
 <div class='row'>
   <div class="showpage col-md-6" id='blacklink'>
-    <p>
-      <strong>Title:</strong>
-      <%= @posting.title %>
-    </p>
-
-    <p>
-      <strong>Description:</strong>
-      <%= @posting.description %>
-    </p>
     <% unless @posting.image.blank? %>
-      <p>
+    <p>
       <%= image_tag @posting.image.url  %>
-      </p>
+    </p>
     <% end %>
-    <p>
-      <strong>Category:</strong>
-      <%= @posting.category.try :name %>
-    </p>
-
-    <p>
-      <strong>Rate:</strong>
-      <%= @posting.rate %>
-    </p>
-
-    <p>
-      <strong>Date range:</strong>
-      <%= @posting.available_dates %>
-    </p>
-
-    <p>
-      <strong>Date range:</strong>
-      <%= @posting.available_dates %>
-    </p>
-    <p>
-      <strong>Street:</strong>
-      <%= @posting.street %>
-    </p>
-    <p>
-      <strong>City:</strong>
-      <%= @posting.city %>
-    </p>
-
-    <p>
-      <strong>State:</strong>
-      <%= @posting.state %>
-    </p>
-
-    <p>
-      <strong>Zip:</strong>
-      <%= @posting.zip %>
-    </p>
-
-    <p>
-      <strong>Phone:</strong>
-      <%= @posting.phone %>
-    </p>
-
-    <p>
-      <strong>Offered by:<strong>
-      <%= link_to "User #{@posting.user_id}", @posting.user %>
-    </p>
-
-    <p>
-      <strong>Email:</strong>
-      <%= @posting.email %>
-    </p>
+    <br>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th class="col-md-2">Title:</th>
+          <td class="col-md-10"><%= @posting.title %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Description:</th>
+          <td class="col-md-10"><%= @posting.description %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Category:</th>
+          <td class="col-md-10"><%= @posting.category.try :name %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Rate:</th>
+          <td class="col-md-10"><%= @posting.rate %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Dates Available:</th>
+          <td class="col-md-10"><%= @posting.available_dates.try :first %> to <%= @posting.available_dates.try :last %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Street:</th>
+          <td class="col-md-10"><%= @posting.street %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">City:</th>
+          <td class="col-md-10"><%= @posting.city %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">State:</th>
+          <td class="col-md-10"><%= @posting.state %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Zip:</th>
+          <td class="col-md-10"><%= @posting.zip %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Phone:</th>
+          <td class="col-md-10"><%= @posting.phone %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Offered By:</th>
+          <td class="col-md-10"><%= link_to  "#{@posting.user.email}", users_path(@posting.user_id) %></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          <div >
+            <%= render "reviews/form", :locals => { :review => @review } %>
+          </div>
+        </td>
+        </tr>
+      </tbody>
+    </table>
 
     <%= form_tag new_posting_reservation_path(@posting), method: :get %>
 
-    <%= render 'shared/date_range_picker' %>
+      <%= render 'shared/date_range_picker' %>
 
-    <input type="submit" value="Reserve">
+      <input type="submit" value="Reserve">
     </form>
+
+
     <%= link_to 'Edit', edit_posting_path(@posting) %> |
     <%= link_to 'Back', postings_path %>
   </div>
-  <div id="map" class="map col-md-6" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"> </div>
+
+  <div class="container col-md-6">
+    <div id="map" class="map" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"></div>
+    <h3><strong> REVIEWS </strong></h3>
+    <table class="table table-bordered">
+    <thead>
+      <th>Comments</th>
+      <th>Created</th>
+    </thead>
+      <tbody>
+        <%= render @reviews %>
+      </tbody>
+    </table>
   </div>
-  <h3><strong> REVIEWS </strong></h3>
-  <div class="review_class col-md-6">
-    <%= render @reviews %>
-    <%= render "reviews/form", :locals => { :review => @review } %>
-  </div>
+
+</div>
