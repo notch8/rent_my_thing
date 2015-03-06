@@ -30,10 +30,13 @@
     </p>
 
     <p>
+      <strong>Date range:</strong>
+      <%= @posting.available_dates %>
+    </p>
+    <p>
       <strong>Street:</strong>
       <%= @posting.street %>
     </p>
-
     <p>
       <strong>City:</strong>
       <%= @posting.city %>
@@ -44,7 +47,6 @@
       <%= @posting.state %>
     </p>
 
-
     <p>
       <strong>Zip:</strong>
       <%= @posting.zip %>
@@ -53,6 +55,11 @@
     <p>
       <strong>Phone:</strong>
       <%= @posting.phone %>
+    </p>
+
+    <p>
+      <strong>Offered by:<strong>
+      <%= link_to "User #{@posting.user_id}", @posting.user %>
     </p>
 
     <p>
@@ -70,7 +77,9 @@
     <%= link_to 'Back', postings_path %>
   </div>
   <div id="map" class="map col-md-6" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"> </div>
-</div>
-<!-- // <script>
-//   $( "#datepicker" ).datepicker(<%= date_range_string_for_js @posting.available_dates %>);
-// </script> -->
+  </div>
+  <h3><strong> REVIEWS </strong></h3>
+  <div class="review_class col-md-6">
+    <%= render @reviews %>
+    <%= render "reviews/form", :locals => { :review => @review } %>
+  </div>
