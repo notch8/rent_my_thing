@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   devise_for :admins
   resources :reservations
   resources :reviews
-  resources :users
+
 
   devise_for :users
-
+  resources :users
   resources :users do
     resources :postings, :reviews
   end
