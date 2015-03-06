@@ -1,1 +1,1 @@
-<%= review.review %> |  <%= time_ago_in_words review.created_at %> ago<br>
+<tr><td><%= simple_format(review.review.gsub(/\n/, '<br>')) %></td><td><%= time_ago_in_words review.created_at %> ago</td></tr>
