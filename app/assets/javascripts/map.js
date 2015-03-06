@@ -76,6 +76,12 @@ $(document).on ('page:change', function() {
                 new ol.control.ScaleLine()
               ])
           });
+
+          // Code to make sure map contains all points
+          var view = map.getView()
+          var extent = ol.extent.boundingExtent([pt, pt2])
+          var size = map.getSize()
+          view.fitExtent(extent, size)
           Window.map = map;
       })
     })
