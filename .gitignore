@@ -30,3 +30,5 @@ config/secrets.yml
 *.bowerrc
 bower.json
 config/database.yml
+.idea
+.DS_Store
