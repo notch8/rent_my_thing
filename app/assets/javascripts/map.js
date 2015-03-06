@@ -10,72 +10,70 @@ $(document).on ('page:change', function() {
   var map_div = $('#map')
   if (map_div) {
     // addr = map_div.data('address')
-    addr = map_div.data('window.RentMyThing.address.first')
-    get_coords(addr, function(lat, lon) {
-      var pt = ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')
-      var renter_icon = new ol.Feature({
-        geometry: new ol.geom.Point(pt)
-      })
-      var rental_loc_icon = new ol.Feature({
-        // Need to define rental_item_pts
-        // geometry: new ol.geom.Point(rental_item_pts)
-      })
-
-
-      renter_loc_icon.setStyle(
-        new ol.style.Style({
-          image: new ol.style.Icon({
-            anchor: [0.5, 46],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            opacity: 0.75,
-            src: '/images/red-pin.png'
+      window.RentMyThing.addresses.forEach(function(addr) {
+        get_coords(addr, function(lat, lon) {
+          var pt = ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')
+          var rental_loc_icon = new ol.Feature({
+            geometry: new ol.geom.Point(pt)
           })
-        })
-      )
+          // var renter_loc_icon = new ol.Feature({
+          //   // Need to define renter_item_pts
+          //   // geometry: new ol.geom.Point(rental_item_pts???)
+          // })
+          // renter_loc_icon.setStyle(
+          //   new ol.style.Style({
+          //     image: new ol.style.Icon({
+          //       anchor: [0.5, 46],
+          //       anchorXUnits: 'fraction',
+          //       anchorYUnits: 'pixels',
+          //       opacity: 0.75,
+          //       src: '/images/green-pin.png'
+          //     })
+          //   })
+          // )
 
-      // rental_loc_icon.setStyle(
-      //   new ol.style.Style({
-      //     image: new ol.style.Icon({
-      //       anchor: [0.5, 46],
-      //       anchorXUnits: 'fraction',
-      //       anchorYUnits: 'pixels',
-      //       opacity: 0.75,
-      //       src: '/images/green-pin.png'
-      //     })
-      //   })
-      // )
-
-      // var markers = new ol.layer.markers( "Markers")
-
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            title: "Rental Proximity Map",
-            source: new ol.source.MapQuest({layer: 'sat'})
-          }),
-          new ol.layer.Vector({
-            source: new ol.source.Vector({
-              features: [
-                icon
-              ]
+          rental_loc_icon.setStyle(
+            new ol.style.Style({
+              image: new ol.style.Icon({
+                anchor: [0.5, 46],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'pixels',
+                opacity: 0.75,
+                src: '/images/red-pin.png'
+              })
             })
-          })
-        ],
-        view: new ol.View({
-          center: pt,
-          zoom: 14
-        }),
-        controls: ol.control.defaults({
-          attributionOptions: {
-            collapsible: false
-          }}).extend([
-            new ol.control.ScaleLine()
-          ])
-      });
+          )
 
-      Window.map = map;
-  })
+          // var markers = new ol.layer.markers( "Markers")
+
+          var map = new ol.Map({
+            target: 'map',
+            layers: [
+              new ol.layer.Tile({
+                title: "Rental Proximity Map",
+                source: new ol.source.MapQuest({layer: 'osm'})
+              }),
+              new ol.layer.Vector({
+                source: new ol.source.Vector({
+                  features: [
+                    rental_loc_icon
+                  ]
+                })
+              })
+            ],
+            view: new ol.View({
+              center: pt,
+              zoom: 14
+            }),
+            controls: ol.control.defaults({
+              attributionOptions: {
+                collapsible: false
+              }}).extend([
+                new ol.control.ScaleLine()
+              ])
+          });
+          Window.map = map;
+      })
+    })
   }
 })

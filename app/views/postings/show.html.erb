@@ -74,7 +74,5 @@
 <script>
   window.RentMyThing = window.RentMyThing || {};
   window.RentMyThing.addresses = window.RentMyThing.addresses || [];
-  // window.RentMyThing.addresses.push([{street: "<%#= @posting.street %>", city: "<%#= @posting.state %>", zip: "<%#= @posting.zip %>"}]);
-
-  $( "#datepicker" ).datepicker(<%= date_range_string_for_js @posting.available_dates %>);
+  window.RentMyThing.addresses.push("<%= "#{@posting.street}, #{@posting.city}, #{@posting.state} #{@posting.zip}" %>")
 </script>
