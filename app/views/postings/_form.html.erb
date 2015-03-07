@@ -26,28 +26,9 @@
   <%= f.text_field :rate %>
 </div>
 
-<table class="table table-bordered" style="width: 30%">
-  <thead>
-    <tr>
-      <th class="col-md-1">From</th>
-      <th class="col-md-1">To</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <div class="field">
-          <input name="rentrange[from]" type="text" id="from-date">
-        </div>
-      </td>
-      <td>
-        <div class="field">
-          <input name="rentrange[to]" type="text" id="to-date">
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="field">
+  <%= render 'shared/date_range_picker' %>
+</div>
 <!-- <div class="field"> -->
 <div class="field">
   <%= f.label :street %><br>

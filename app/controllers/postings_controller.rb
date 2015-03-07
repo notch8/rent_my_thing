@@ -1,6 +1,6 @@
 class PostingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]
-  before_action :load_categories, only: [:show, :edit, :new ]
+  before_action :load_categories, only: [:show, :edit, :new, :update ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
   layout :resolve_layout
 
@@ -121,6 +121,6 @@ class PostingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
       params.require(:posting).permit(:title, :description, :category_id, :rate,
-          :date_range, :street, :state, :zip, :phone, :email, :city)
+          :date_range, :street, :state, :zip, :phone, :email, :city, :image)
     end
 end

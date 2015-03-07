@@ -2,32 +2,18 @@
 <%= render 'postings/search_form' %>
 
 
-<h1>Listing Postings</h1>
 
 <table class="list-table">
-  <thead class="list-table-head">
-    <tr>
-      <th>Category</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Rate</th>
-      <th>Date range</th>
-      <th>Other Actions</th>
-    </tr>
-  </thead>
 
   <tbody class="list-table-body">
     <% @postings.each do |posting| %>
     <tr id="whitelink">
-
-        <td class="list-table-element"><%= posting.category.try :name %></td>
-
-        <td class="list-table-element">
-
+        <td class="list-table-element" id="postings">
         <%= link_to(posting.title, action: 'show', id: posting.id) %>
         <% if posting.image? %>
-        <%= image_tag posting.image.url(:thumb) %>
+            <%= image_tag posting.image.url(:medium) %>
         <% end %></td>
+        <td class="list-table-element"><%= posting.category.try :name %></td>
         <td class="list-table-element description-column"><%= posting.description %></td>
         <td class="list-table-element"><%= posting.rate %></td>
         <td class="list-table-element"><%= posting.available_dates %></td>
