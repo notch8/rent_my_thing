@@ -1,6 +1,28 @@
 <div class='row'>
   <div class="showpage col-md-6" id='blacklink'>
-    <% unless @posting.image.blank? %>
+
+
+    <%= image_tag @posting.image.url(:medium) if @posting.image && @posting.image.present? %>
+
+    <p>
+      <strong>Title:</strong>
+      <%= @posting.title %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @posting.description %>
+    </p>
+    <!--<% unless @posting.image.blank? %>-->
+      <!--<p>-->
+      <!--<%= image_tag @posting.image.url  %>-->
+      <!--</p>-->
+    <!--<% end %>-->
+    <p>
+      <strong>Category:</strong>
+      <%= @posting.category.try :name %>
+    </p>
+
     <p>
       <%= image_tag @posting.image.url  %>
     </p>
