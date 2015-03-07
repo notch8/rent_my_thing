@@ -10,7 +10,7 @@
       <th>Category</th>
       <th>Title</th>
       <th>Description</th>
-      <th>Rate</th>
+      <th>Cost</th>
       <th>Date range</th>
       <th>Other Actions</th>
     </tr>
@@ -29,7 +29,7 @@
         <%= image_tag posting.image.url(:thumb) %>
         <% end %></td>
         <td class="list-table-element description-column"><%= posting.description %></td>
-        <td class="list-table-element"><%= posting.rate %></td>
+        <td class="list-table-element"><%= posting.cost %></td>
         <td class="list-table-element"><%= posting.available_dates %></td>
         <td class="list-table-element"><%= link_to 'Show', posting %> |
           <%= link_to 'Edit', edit_posting_path(posting) %> |

@@ -21,8 +21,8 @@
           <td class="col-md-10"><%= @posting.category.try :name %></td>
         </tr>
         <tr>
-          <th class="col-md-2">Rate:</th>
-          <td class="col-md-10"><%= @posting.rate %></td>
+          <th class="col-md-2">Cost:</th>
+          <td class="col-md-10"><%= @posting.cost %></td>
         </tr>
         <tr>
           <th class="col-md-2">Dates Available:</th>
@@ -55,7 +55,7 @@
         <tr>
           <td colspan="2">
           <div >
-            <%= render "reviews/form", :locals => { :review => @review } %>
+            <%= render "reviews/form", :locals => { :review => @review } %> | <%= rating_for @posting, "title", disable_after_rate: false %>
           </div>
         </td>
         </tr>
@@ -63,7 +63,6 @@
     </table>
 
     <%= form_tag new_posting_reservation_path(@posting), method: :get %>
-
       <%= render 'shared/date_range_picker' %>
 
       <input type="submit" value="Reserve">
@@ -81,6 +80,7 @@
     <thead>
       <th>Comments</th>
       <th>Created</th>
+      <th>Rating</th>
     </thead>
       <tbody>
         <%= render @reviews %>

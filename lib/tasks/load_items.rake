@@ -39,6 +39,7 @@ task :load_items => :environment do
     u = User.new
     u.email = "user_#{i}@foo.com"
     u.password = "foobarbaz"
+    u.admin = true
     u.save
     users.push u
   end
@@ -52,8 +53,9 @@ task :load_items => :environment do
       new_item = Posting.new(:category_id => new_cat.id)
       new_item.title = new_cat.name + ' ' + x.to_s
       new_item.description = new_cat.name + ' ' + x.to_s
-      new_item.rate = 100
-      new_item.street = "123 Main St."
+      new_item.street = "3808 Ray St."
+      new_item.city = "San Diego"
+      new_item.zip = "92104"
       new_item.user = users[(rand() * 10).floor]
       new_item.save
     end
