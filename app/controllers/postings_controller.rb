@@ -2,10 +2,11 @@ class PostingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]
   before_action :load_categories, only: [:show, :edit, :new, :update ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
+  before_action :get_reviews, only: :show
   layout :resolve_layout
 
   def resolve_layout
-    if action_name == "splash" 
+    if action_name == "splash"
       "splash"
     else
       "application"
@@ -54,6 +55,8 @@ class PostingsController < ApplicationController
   # GET /postings/1
   # GET /postings/1.json
   def show
+    @review = Review.new
+    @reviews = @posting.reviews
   end
 
   # GET /postings/new
@@ -70,6 +73,7 @@ class PostingsController < ApplicationController
   def create
     # logger.debug "date range: #{params["rentrange"]["from"]} to #{params["rentrange"]["to"]} "
     @posting = Posting.new(posting_params)
+    @posting.user = current_user
 
     respond_to do |format|
       if @posting.save
@@ -108,6 +112,10 @@ class PostingsController < ApplicationController
   end
 
   private
+
+    def get_reviews
+      @reviews = Review.all
+    end
 
     def load_categories
       @categories = Category.all

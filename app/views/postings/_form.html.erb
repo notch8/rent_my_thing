@@ -11,58 +11,52 @@
 </div>
 <% end %>
 
-<div class="field">
-  <%= f.label :title %><br>
-  <%= f.text_field :title %>
-</div>
-<div class="field">
-  <%= f.label :description %><br>
-  <%= f.text_area :description %>
-</div>
-<%= render partial: 'category_picker', locals: {f: f} %>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <td class="col-md-2"><%= f.label :title %></td>
+      <td colspan="5" class="col-md-10"><%= f.text_field :title %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2"><%= f.label :description %></td>
+      <td colspan="5" class="col-md-10"><%= f.text_area :description, { :class => "textarea-styled", :style => "height: 120px; width: 600px" } %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2"><%= f.label :category_id %></td>
+      <td colspan="5" class="col-md-10"><%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name", @posting.category_id), { :include_blank => "Select category"}, { :class => "form-control styled-select col-md-10" } %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2"><%= f.label :rate %></td>
+      <td colspan="5" class="col-md-10"><%= f.text_field :rate %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2"><%= f.label :street %></td>
+      <td colspan="5" class="col-md-10"><%= f.text_field :street %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2"><%= f.label :city %></td>
+      <td class="col-md-3"><%= f.text_field :city %></td>
+      <td class="col-md-2"><%= f.label :state %></td>
+      <td class="col-md-1"><%= f.select :state, options_for_select(us_states, @posting.state), { :include_blank => "Select state"}, { :class => "styled-select col-md-1" }  %></td>
+      <td class="col-md-1"><%= f.label :zip %></td>
+      <td class="col-md-1"><%= f.text_field :zip %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2"><%= f.label :phone %></td>
+      <td colspan="5" class="col-md-10"><%= f.text_field :phone %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2"><%= f.label :email %></td>
+      <td colspan="5" class="col-md-10"><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td class="col-md-2"><%= f.label :image %></td>
+      <td colspan="5" class="col-md-10"><%= f.file_field :image %></td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="field">
-  <%= f.label :rate %><br>
-  <%= f.text_field :rate %>
-</div>
-
-<div class="field">
-  <%= render 'shared/date_range_picker' %>
-</div>
-<!-- <div class="field"> -->
-<div class="field">
-  <%= f.label :street %><br>
-  <%= f.text_field :street %>
-</div>
-<div class="field">
-  <%= f.label :city %><br>
-  <%= f.text_field :city %>
-</div>
-<div class="field">
-  <%= f.label :state %><br>
-  <%= f.select :state, options_for_select(us_states, @posting.state) %>
-
-
-  <%#= f.text_field :state %>
-</div>
-
-<div class="field">
-  <%= f.label :zip %><br>
-  <%= f.text_field :zip %>
-</div>
-<div class="field">
-  <%= f.label :phone %><br>
-  <%= f.text_field :phone %>
-</div>
-<div class="field">
-  <%= f.label :email %><br>
-  <%= f.text_field :email %>
-</div>
-<div class="field">
-  <%= f.label :image %><br>
-  <%= f.file_field :image %>
-</div>
-<div class="actions">
+<div class="actions col-md-1">
   <%= f.submit %>
 </div>
 <% end %>
