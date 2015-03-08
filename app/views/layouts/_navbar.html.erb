@@ -11,7 +11,7 @@
             </button>
           </div>
           <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navalign">
               <li class="menuItem"><a href="#">Rent My Things</a></li>
               <li class="menuItem"><%= link_to 'Search Things', postings_path, :class => 'navbar-link' %></li>
               <% if current_user != nil && current_user.admin? %>
