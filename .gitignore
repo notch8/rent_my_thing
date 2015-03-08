@@ -32,3 +32,4 @@ bower.json
 config/database.yml
 .DS_Store
 .idea
+*~
