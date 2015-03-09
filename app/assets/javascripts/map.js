@@ -69,6 +69,7 @@ $(document).on ('page:change', function() {
             })
           })
         )
+        iconFeature.on('mouseover', function() {alert('hover')})
         vectorSource.addFeature(iconFeature);
       }) // End of inner loop - coords
     }); // End of outer loop - pinType
@@ -116,28 +117,32 @@ $(document).on ('page:change', function() {
       stopEvent: false
     });
     map.addOverlay(popup);
-
+    var showing;
     // display popup on click
-    map.on('click', function(evt) {
+    map.on('pointermove', function(evt) {
       var feature = map.forEachFeatureAtPixel(evt.pixel,
           function(feature, layer) {
             return feature;
           });
       if (feature) {
-        var name = feature.get('name')
-        console.log(" Name = " + name );
-        var geometry = feature.getGeometry();
-        var coord = geometry.getCoordinates();
-        popup.setPosition(coord);
+        if (! showing) {
+          showing = true;
+          var name = feature.get('name')
+          console.log(" Name = " + name );
+          var geometry = feature.getGeometry();
+          var coord = geometry.getCoordinates();
+          popup.setPosition(coord);
 
-        $(element).attr('data-content', name)
-        $(element).popover({
-          'placement': 'top',
-          'html': true,
-          'content': name
-        });
-        $(element).popover('show');
+          $(element).attr('data-content', name)
+          $(element).popover({
+            'placement': 'top',
+            'html': true,
+            'content': name
+          });
+          $(element).popover('show');
+        }
       } else {
+        showing = false;
         $(element).popover('destroy');
       }
     });
