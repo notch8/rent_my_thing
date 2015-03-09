@@ -130,6 +130,7 @@ $(document).on ('page:change', function() {
         var coord = geometry.getCoordinates();
         popup.setPosition(coord);
 
+        $(element).attr('data-content', name)
         $(element).popover({
           'placement': 'top',
           'html': true,
