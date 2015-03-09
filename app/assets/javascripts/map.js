@@ -20,26 +20,31 @@ $(document).on ('page:change', function() {
   drawMap(mapAttributes);
 
   function drawMap (mapAttributes) {
+    var populabel = "";
     var iconLocations = [];
     var vectorSource = new ol.source.Vector({
      //create empty vector -- not sure if this is needed??????
     });
 
-    // Object.keys(mapAttributes).forEach(function(pinType) {console.log(pinType);
-    // mapAttributes[pinType].forEach(function(coords){console.log('show pin at ' + coords[0] + ',' + coords[1])})})
-
     // Outer Loop to retrieve each pin type
     Object.keys(mapAttributes).forEach(function(pinType) {
 
 
-      // Loop to retrieve all coordinates associated with each pin type
+      // Inner Loop to retrieve all coordinates associated with each pin type
       mapAttributes[pinType].forEach(function(coords) {
 
         var iconLocation = ol.proj.transform([coords[0], coords[1]], 'EPSG:4326', 'EPSG:3857')
         iconLocations.push(iconLocation)
-
+        popupLabel=''
+        if (pinType == '/images/red-pin.png') {
+          popupLabel = 'Rental Location'
+        } else {
+          popupLabel = 'Renter Location'
+        }
         var iconFeature = new ol.Feature({
           geometry: new ol.geom.Point(iconLocation),
+          // Added line for popup
+          name: popupLabel
         })
 
         // Create Pin styling
@@ -51,6 +56,16 @@ $(document).on ('page:change', function() {
               anchorYUnits: 'pixels',
               opacity: 0.75,
               src: pinType  // Set pin type
+            })
+          }),
+          // for code below http://stackoverflow.com/questions/26519613/openlayers-3-add-movable-marker-with-icon-and-text
+          new ol.style.Style({
+            text: new ol.style.Text({
+              text: "Wow such a label",
+              offsetY: -25,
+              fill: new ol.style.Fill({
+                color: '#fff'
+              })
             })
           })
         )
@@ -64,7 +79,7 @@ $(document).on ('page:change', function() {
 //      style: iconStyle
     });
 
-    map = new ol.Map({
+    var map = new ol.Map({
       target: 'map',
       layers: [
         new ol.layer.Tile({
@@ -89,5 +104,93 @@ $(document).on ('page:change', function() {
     var size = map.getSize()
     view.fitExtent(extent, size)
     Window.map = map;
+    // ***********************************************
+    //  Popup logic
+    // http://openlayers.org/en/v3.0.0/examples/icon.js
+    // ***********************************************
+    var element = $('.popup').first();
+
+    var popup = new ol.Overlay({
+      element: element,
+      positioning: 'bottom-center',
+      stopEvent: false
+    });
+    map.addOverlay(popup);
+
+    // display popup on click
+    map.on('click', function(evt) {
+      var feature = map.forEachFeatureAtPixel(evt.pixel,
+          function(feature, layer) {
+            return feature;
+          });
+      if (feature) {
+        var name = feature.get('name')
+        console.log(" Name = " + name );
+        var geometry = feature.getGeometry();
+        var coord = geometry.getCoordinates();
+        popup.setPosition(coord);
+
+        $(element).popover({
+          'placement': 'top',
+          'html': true,
+          'content': name
+        });
+        $(element).popover('show');
+      } else {
+        $(element).popover('destroy');
+      }
+    });
+    // change mouse cursor when over marker
+    // $(map.getViewport()).on('mousemove', function(e) {
+    //   var pixel = map.getEventPixel(e.originalEvent);
+    //   var hit = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+    //     return true;
+    //   });
+    //   // With map.getTarget().style.cursor you get an error using the line below corrects this error
+    //   // https://groups.google.com/forum/#!topic/geoadmin-api/BKM3ADBQJ1s
+    //   var target = document.getElementById(map.getTarget());
+    //   target.style.cursor = hit ? 'pointer' : '';
+    //   // if (hit) {
+    //   //   map.getTarget().style.cursor = 'pointer';
+    //   // } else {
+    //   //   map.getTarget().style.cursor = '';
+    //   // }
+    // });
+
+    // change mouse cursor when over marker (option #2)
+    map.on('pointermove', function(e) {
+      if (e.dragging) {
+        $(element).popover('destroy');
+        return;
+      }
+      var pixel = map.getEventPixel(e.originalEvent);
+      var hit = map.hasFeatureAtPixel(pixel);
+      var target = document.getElementById(map.getTarget());
+      target.style.cursor = hit ? 'pointer' : '';
+//      map.getTarget().style.cursor = hit ? 'pointer' : '';
+    });
+  // change mouse cursor when over marker (option #3)
+  // var cursorHoverStyle = "pointer";
+  // var target = map.getTarget();
+  //
+  // //target returned might be the DOM element or the ID of this element dependeing on how the map was initialized
+  // //either way get a jQuery object for it
+  // var jTarget = typeof target === "string" ? $("#"+target) : $(target);
+  //
+  // map.on("pointermove", function (event) {
+  //     var mouseCoordInMapPixels = [event.originalEvent.offsetX, event.originalEvent.offsetY];
+  //
+  //     //detect feature at mouse coords
+  //     var hit = map.forEachFeatureAtPixel(mouseCoordInMapPixels, function (feature, layer) {
+  //         return true;
+  //     });
+  //
+  //     if (hit) {
+  //         jTarget.css("cursor", cursorHoverStyle);
+  //     } else {
+  //         jTarget.css("cursor", "");
+  //     }
+  // });
+
   } // End of drawmap function
 });
