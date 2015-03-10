@@ -1,5 +1,4 @@
 $(document).on ('page:change', function() {
-
   // Addresses:
   // Red pin: Rental item locations
   // -------------------------------------------
@@ -51,7 +50,7 @@ $(document).on ('page:change', function() {
         iconFeature.setStyle(
           new ol.style.Style({
             image: new ol.style.Icon({
-              anchor: [0.5, 46],
+              anchor: [0.5, 12],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
               opacity: 0.75,
@@ -118,7 +117,7 @@ $(document).on ('page:change', function() {
     map.addOverlay(popup);
 
     // display popup on click
-    map.on('click', function(evt) {
+    map.on('pointermove', function(evt) {
       var feature = map.forEachFeatureAtPixel(evt.pixel,
           function(feature, layer) {
             return feature;
@@ -129,9 +128,15 @@ $(document).on ('page:change', function() {
         var geometry = feature.getGeometry();
         var coord = geometry.getCoordinates();
         popup.setPosition(coord);
-
+        // The line below fixed the scenario where clicking on one marker (e.g., 'renter')
+        // and then immediately clicking on another marker (e.g, 'rental')  caused the wrong popup
+        // content to appear on the newly clicked marker (e.g., popup displayed 'renter' rather than
+        // rental). The line below uses jQuery method .attr to put the value of the newly clicked
+        // marker value (i.e., name) into the HTML in the location that bootstrap pull the
+        // the popup value (i.e., 'data-content')
         $(element).attr('data-content', name)
         $(element).popover({
+          'trigger': 'hover click',
           'placement': 'top',
           'html': true,
           'content': name
