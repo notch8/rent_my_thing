@@ -1,7 +1,136 @@
 // Place all the styles related to the Postings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.review_class {
 
+}
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+@import url(http://fonts.googleapis.com/css?family=Dosis);
+@import url(http://fonts.googleapis.com/css?family=PT+Serif);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
+
+p {
+  font-family: 'PT Serif', serif;
+}
+
+strong {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.field {
+  font-family: 'PT Serif', serif;
+}
+
+html, body {
+    height:100%;
+}
+
+#category_id {
+  text-align: center;
+  align: center;
+  margin-left: auto;
+    margin-right: auto;
+}
+
+.textarea-styled {
+  height: 120px;
+  // border: 3px solid #cccccc;
+  padding: 5px;
+}
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+   align: center;
+   text-align: center;
+   margin-left: auto;
+    margin-right: auto;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+   align: center;
+   text-align: center;
+   margin-left: auto;
+    margin-right: auto;
+}
+
+.rounded {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+}
+
+.black   { background-color: #197fe6; }
+
+.black select   { color: #fff; }
+
+/* select {
+  background: black;
+  width: 268px;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  height: 34px;
+  -webkit-appearance: none;
+} */
+
+h2.hovertown {
+  color: white;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 62px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  text-align: center;
+  text-shadow: 3px 3px #1A1A1A;
+}
+
+.hovertown span {
+  transition: all 0.9s ease;
+}
+.hovertown span:hover {
+  text-shadow: 0 0 72px black;
+  color: transparent;
+  transition: all 0.2s ease;
+}
+
+.splashtext h3 {
+  color: white;
+  font-size: 18px;
+  text-align:center;
+  font-family: 'Dosis', sans-serif;
+  text-shadow: 1px 1px #1A1A1A;
+}
+
+.splashtext h2 {
+  color: white;
+  font-size: 20px;
+  text-align:center;
+  text-shadow: 2px 2px #1A1A1A;
+}
+
+.bottom-search-area {
+   text-align: center;
+   width: 900px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+#splash_center {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .pagination {
   background: #f1f1f1;
@@ -31,6 +160,7 @@
     .pagination a:hover, .pagination a:focus {
       text-decoration: underline; }
 
+
 .list-table {
   margin: 15px;
   padding: 15px;
@@ -41,8 +171,9 @@
 }
 
 .list-table-element {
-  border: 2px solid gray;
-  background-color: AntiqueWhite;
+//  border: 2px solid gray;
+  background-color: GhostWhite;
+  background: rgba(54, 54, 54, 0.2);
 }
 
 .list-table-head {
@@ -54,7 +185,6 @@
 .description-column {
   color: black;
   width: 30%;
-  background-color: AntiqueWhite;
 }
 
 #whitelink {
@@ -71,11 +201,13 @@
 
 #blacklink {
   color:black;
+  font-family: 'PT Serif', serif;
 }
 
 .showpage {
   padding: 40px;
 }
+
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */

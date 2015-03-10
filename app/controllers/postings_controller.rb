@@ -1,7 +1,17 @@
 class PostingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]
-  before_action :load_categories, only: [:show, :edit, :new ]
+  before_action :load_categories, only: [:show, :edit, :new, :update ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
+  before_action :get_reviews, only: :show
+  layout :resolve_layout
+
+  def resolve_layout
+    if action_name == "splash"
+      "splash"
+    else
+      "application"
+    end
+  end
 
   def splash
   end
@@ -16,6 +26,8 @@ class PostingsController < ApplicationController
     search_string = params[:search_text]
     start_date = Date.strptime start_date, '%Y-%m-%d' if start_date.present?
     end_date = Date.strptime end_date, '%Y-%m-%d' if end_date.present?
+    city = params[:city]
+
     @postings = Posting.paginate(:page => params[:page])
 
 
@@ -34,11 +46,17 @@ class PostingsController < ApplicationController
     if category_id.present?
       @postings = @postings.where category_id: category_id
     end
+
+    if city.present?
+      @postings = @postings.where "lower(city) = lower(?)", city
+    end
   end
 
   # GET /postings/1
   # GET /postings/1.json
   def show
+    @review = Review.new
+    @reviews = @posting.reviews
   end
 
   # GET /postings/new
@@ -55,6 +73,7 @@ class PostingsController < ApplicationController
   def create
     # logger.debug "date range: #{params["rentrange"]["from"]} to #{params["rentrange"]["to"]} "
     @posting = Posting.new(posting_params)
+    @posting.user = current_user
 
     respond_to do |format|
       if @posting.save
@@ -94,6 +113,10 @@ class PostingsController < ApplicationController
 
   private
 
+    def get_reviews
+      @reviews = Review.all
+    end
+
     def load_categories
       @categories = Category.all
     end
@@ -106,6 +129,6 @@ class PostingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
       params.require(:posting).permit(:title, :description, :category_id, :rate,
-          :date_range, :street, :state, :zip, :phone, :email, :city)
+          :date_range, :street, :state, :zip, :phone, :email, :city, :image)
     end
 end
