@@ -29,7 +29,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'sucker_punch'
 
-gem 'activerecord-postgis-adapter', '3.0.0.beta2'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

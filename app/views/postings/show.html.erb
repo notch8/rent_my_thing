@@ -26,7 +26,6 @@
     <p>
       <%= image_tag @posting.image.url  %>
     </p>
-    <% end %>
     <br>
     <table class="table table-bordered">
       <tbody>
@@ -72,12 +71,12 @@
         </tr>
         <tr>
           <th class="col-md-2">Offered By:</th>
-          <td class="col-md-10"><%= link_to  "#{@posting.user.email}", users_path(@posting.user_id) %></td>
+          <td class="col-md-10"><%= link_to  @posting.user.email, users_path(@posting.user_id) %></td>
         </tr>
         <tr>
           <td colspan="2">
           <div >
-            <%= render "reviews/form", :locals => { :review => @review } %>
+            <%= render "reviews/form", locals: { review: @review } %>
           </div>
         </td>
         </tr>
@@ -100,10 +99,10 @@
     <div id="map" class="map" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"></div>
     <h3><strong> REVIEWS </strong></h3>
     <table class="table table-bordered">
-    <thead>
-      <th>Comments</th>
-      <th>Created</th>
-    </thead>
+      <thead>
+        <th>Comments</th>
+        <th>Created</th>
+      </thead>
       <tbody>
         <%= render @reviews %>
       </tbody>

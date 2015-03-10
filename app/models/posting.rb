@@ -20,7 +20,7 @@ class Posting < ActiveRecord::Base
   def geocode
     if street.present? && city.present? && state.present?
       RentMyThing.geocode address do |lon, lat|
-        self.update_column :coords, "POINT(#{lon} #{lat})"
+        self.update_column :coords, [lon, lat]
         # save validate: false
       end
     end
