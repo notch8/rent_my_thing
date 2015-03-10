@@ -1,12 +1,7 @@
 class AddCoordsToPostings < ActiveRecord::Migration
-  def up
-    Posting.connection.execute """
-      ALTER TABLE postings ADD coords GEOMETRY(point)
-    """
+  def change
+    change_table :postings do |t|
+      t.point :coords
+    end
   end
-
-  def down
-    Posting.connection.execute """
-      ALTER TABLE postings DROP COLUMN coords
-    """
 end
