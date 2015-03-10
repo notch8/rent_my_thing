@@ -12,34 +12,46 @@ $(document).on ('page:change', function() {
   //-------------------------------------------
   // 3803 Ray Street, San Diego, CA. 92104    || coords: -117.129137,32.747502
 
-  mapAttributes = {'/images/red-pin.png': [[-117.138475,32.761480], [-117.116083,32.729552],[-117.131207,32.763225],[-117.159727,32.739113], [-117.159063,32.722439]],
-    '/images/green-pin.png': [[-117.129137,32.747502]]}
+  mapAttributesPlus = {'/images/red-pin.png': [
+   ["4625 Texas St.,<br>San Diego, CA. 92116",
+   [-117.138475,32.761480]],
+   ["2267 Boundary St.,<br>San Diego, CA. 92104",
+   [-117.116083,32.729552]],
+   ["4711 Kansas St.,<br>San Diego, CA. 92116",
+   [-117.131207,32.763225]],
+   ["3200 6th Ave.,<br>San Diego, CA. 92103",
+   [-117.159727,32.739113]],
+   ["1642 7th Ave.,<br>San Diego, CA. 92104",
+   [-117.159063,32.722439]]],
+    '/images/green-pin.png': [
+   ["3803 Ray Street,<br>San Diego, CA. 92104",
+   [-117.129137,32.747502]]] }
+
+    mapAttributes = {'/images/red-pin.png': [[-117.138475,32.761480], [-117.116083,32.729552],[-117.131207,32.763225],[-117.159727,32.739113], [-117.159063,32.722439]],
+      '/images/green-pin.png': [[-117.129137,32.747502]]}
 
   var map_div = $('#map')
-  drawMap(mapAttributes);
+  drawMap(mapAttributesPlus);
 
-  function drawMap (mapAttributes) {
-    var populabel = "";
+  function drawMap (mapAttributesPlus) {
+    var populabel = '';
     var iconLocations = [];
     var vectorSource = new ol.source.Vector({
      //create empty vector -- not sure if this is needed??????
     });
 
     // Outer Loop to retrieve each pin type
-    Object.keys(mapAttributes).forEach(function(pinType) {
+    Object.keys(mapAttributesPlus).forEach(function(pinType) {
 
 
       // Inner Loop to retrieve all coordinates associated with each pin type
-      mapAttributes[pinType].forEach(function(coords) {
+      mapAttributesPlus[pinType].forEach(function(coords) {
 
-        var iconLocation = ol.proj.transform([coords[0], coords[1]], 'EPSG:4326', 'EPSG:3857')
+        var iconLocation = ol.proj.transform([coords[1][0], coords[1][1]], 'EPSG:4326', 'EPSG:3857')
         iconLocations.push(iconLocation)
-        popupLabel=''
-        if (pinType == '/images/red-pin.png') {
-          popupLabel = 'Rental Location'
-        } else {
-          popupLabel = 'Renter Location'
-        }
+        popupLabel = coords[0]
+        console.log("Address: " + coords[0] + "Lon/Lat: " + coords[1][0] + ', ' + coords[1][1]);
+
         var iconFeature = new ol.Feature({
           geometry: new ol.geom.Point(iconLocation),
           // Added line for popup
@@ -124,7 +136,6 @@ $(document).on ('page:change', function() {
           });
       if (feature) {
         var name = feature.get('name')
-        console.log(" Name = " + name );
         var geometry = feature.getGeometry();
         var coord = geometry.getCoordinates();
         popup.setPosition(coord);
@@ -146,22 +157,6 @@ $(document).on ('page:change', function() {
         $(element).popover('destroy');
       }
     });
-    // change mouse cursor when over marker
-    // $(map.getViewport()).on('mousemove', function(e) {
-    //   var pixel = map.getEventPixel(e.originalEvent);
-    //   var hit = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
-    //     return true;
-    //   });
-    //   // With map.getTarget().style.cursor you get an error using the line below corrects this error
-    //   // https://groups.google.com/forum/#!topic/geoadmin-api/BKM3ADBQJ1s
-    //   var target = document.getElementById(map.getTarget());
-    //   target.style.cursor = hit ? 'pointer' : '';
-    //   // if (hit) {
-    //   //   map.getTarget().style.cursor = 'pointer';
-    //   // } else {
-    //   //   map.getTarget().style.cursor = '';
-    //   // }
-    // });
 
     // change mouse cursor when over marker (option #2)
     map.on('pointermove', function(e) {
@@ -175,28 +170,5 @@ $(document).on ('page:change', function() {
       target.style.cursor = hit ? 'pointer' : '';
 //      map.getTarget().style.cursor = hit ? 'pointer' : '';
     });
-  // change mouse cursor when over marker (option #3)
-  // var cursorHoverStyle = "pointer";
-  // var target = map.getTarget();
-  //
-  // //target returned might be the DOM element or the ID of this element dependeing on how the map was initialized
-  // //either way get a jQuery object for it
-  // var jTarget = typeof target === "string" ? $("#"+target) : $(target);
-  //
-  // map.on("pointermove", function (event) {
-  //     var mouseCoordInMapPixels = [event.originalEvent.offsetX, event.originalEvent.offsetY];
-  //
-  //     //detect feature at mouse coords
-  //     var hit = map.forEachFeatureAtPixel(mouseCoordInMapPixels, function (feature, layer) {
-  //         return true;
-  //     });
-  //
-  //     if (hit) {
-  //         jTarget.css("cursor", cursorHoverStyle);
-  //     } else {
-  //         jTarget.css("cursor", "");
-  //     }
-  // });
-
   } // End of drawmap function
 });
