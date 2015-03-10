@@ -80,6 +80,7 @@ $(document).on ('page:change', function() {
             })
           })
         )
+        iconFeature.on('mouseover', function() {alert('hover')})
         vectorSource.addFeature(iconFeature);
       }) // End of inner loop - coords
     }); // End of outer loop - pinType
@@ -128,6 +129,7 @@ $(document).on ('page:change', function() {
     });
     map.addOverlay(popup);
 
+    var showing;
     // display popup on click
     map.on('pointermove', function(evt) {
       var feature = map.forEachFeatureAtPixel(evt.pixel,
@@ -135,25 +137,32 @@ $(document).on ('page:change', function() {
             return feature;
           });
       if (feature) {
-        var name = feature.get('name')
-        var geometry = feature.getGeometry();
-        var coord = geometry.getCoordinates();
-        popup.setPosition(coord);
-        // The line below fixed the scenario where clicking on one marker (e.g., 'renter')
-        // and then immediately clicking on another marker (e.g, 'rental')  caused the wrong popup
-        // content to appear on the newly clicked marker (e.g., popup displayed 'renter' rather than
-        // rental). The line below uses jQuery method .attr to put the value of the newly clicked
-        // marker value (i.e., name) into the HTML in the location that bootstrap pull the
-        // the popup value (i.e., 'data-content')
-        $(element).attr('data-content', name)
-        $(element).popover({
-          'trigger': 'hover click',
-          'placement': 'top',
-          'html': true,
-          'content': name
-        });
-        $(element).popover('show');
+        // Showing flag was added to remove popover from flickering when the mouse is hovered over the icon/marker
+        // and there is incidental/minor movement in the mouse. Setting the show flag ensures that you don't
+        // attempt to redraw the popup over and over (and get flickering) with minor mouse movements
+        if (! showing) {
+          showing = true;
+          var name = feature.get('name')
+          var geometry = feature.getGeometry();
+          var coord = geometry.getCoordinates();
+          popup.setPosition(coord);
+          // The line below fixed the scenario where clicking on one marker (e.g., 'renter')
+          // and then immediately clicking on another marker (e.g, 'rental')  caused the wrong popup
+          // content to appear on the newly clicked marker (e.g., popup displayed 'renter' rather than
+          // rental). The line below uses jQuery method .attr to put the value of the newly clicked
+          // marker value (i.e., name) into the HTML in the location that bootstrap pull the
+          // the popup value (i.e., 'data-content')
+          $(element).attr('data-content', name)
+          $(element).popover({
+            'trigger': 'hover click',
+            'placement': 'top',
+            'html': true,
+            'content': name
+          });
+          $(element).popover('show');
+        }
       } else {
+        showing = false;
         $(element).popover('destroy');
       }
     });
