@@ -1,0 +1,3 @@
+# Logfile created on 2015-03-11 14:30:23 -0700 by logger.rb/47272
+D, [2015-03-11T14:30:23.636441 #3137] DEBUG -- : ***** geocode 9337 Goyette Pl, Santee, CA 92071
+D, [2015-03-11T14:30:24.492746 #3137] DEBUG -- : [{"place_id":"5119062","licence":"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http:\/\/www.openstreetmap.org\/copyright","osm_type":"node","osm_id":"595966771","boundingbox":["32.843252","32.843252","-117.016855","-117.016855"],"lat":"32.843252","lon":"-117.016855","display_name":"9337, Goyette Place, Santee, San Diego County, California, 92071, United States of America","class":"place","type":"house","importance":0.631}]
