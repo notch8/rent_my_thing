@@ -32,7 +32,7 @@
 
 window.RentMyThing = window.RentMyThing || {}
 window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
-    var map_div = $('#map')
+//    var map_div = $('#map')
     var popuplabel = '';
     var iconLocations = [];
     var vectorSource = new ol.source.Vector({
@@ -68,16 +68,6 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
               src: pinType  // Set pin type
             })
           }),
-          // for code below http://stackoverflow.com/questions/26519613/openlayers-3-add-movable-marker-with-icon-and-text
-          new ol.style.Style({
-            text: new ol.style.Text({
-              text: "Wow such a label",
-              offsetY: -25,
-              fill: new ol.style.Fill({
-                color: '#fff'
-              })
-            })
-          })
         )
         iconFeature.on('mouseover', function() {alert('hover')})
         vectorSource.addFeature(iconFeature);
@@ -109,11 +99,19 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
         ])
     });
 
-    // Bound the map
+    // Bound the map if multiple points
+
     var view = map.getView()
     var extent = ol.extent.boundingExtent(iconLocations)
     var size = map.getSize()
     view.fitExtent(extent, size)
+    // If only one coordinate then binding map on that one point will produce
+    // a map that is zoomed in so close it will appear that no map is  displayed
+    // so we want to prevent the map zoom from going to high hence "if statement below"
+    if (view.getZoom() > 16) {
+      view.setZoom(16);
+    }
+
     Window.map = map;
     // ***********************************************
     //  Popup logic
