@@ -95,8 +95,17 @@
     <%= link_to 'Back', postings_path %>
   </div>
 
+  <div id="map" class="map col-md-6" >
+    <!-- <div id="popup" data-original-title="" title=""></div> -->
+  </div>
+  <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""
+  ></div>
+</div>
+
+
+
   <div class="container col-md-6">
-    <div id="map" class="map" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"></div>
+
     <h3><strong> REVIEWS </strong></h3>
     <table class="table table-bordered">
       <thead>
@@ -110,3 +119,17 @@
   </div>
 
 </div>
+<script>
+function drawTheThings(){
+  if (window.RentMyThing && window.RentMyThing.drawMap) {
+    drawMap = window.RentMyThing.drawMap
+    mapAttributes = <%= @mapAttributes_json.html_safe %>
+    drawMap(mapAttributes)
+  } else {
+    console.log("Map.js not loaded before trying to draw map")
+  }
+}
+ $(document).on ('page:change', drawTheThings);
+ $(document).ready(drawTheThings);
+
+</script>
