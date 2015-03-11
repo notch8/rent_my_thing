@@ -19,7 +19,9 @@ class PostingsController < ApplicationController
   # GET /postings
   # GET /postings.json
   def index
-    @postings = Posting.all.includes :category
+    @upload = Upload.new
+
+    @postings = Posting.all.includes :category, :uploads
     start_date = params[:start_date]
     end_date = params[:end_date]
     category_id = params[:category_id]
