@@ -67,7 +67,7 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
               opacity: 0.75,
               src: pinType  // Set pin type
             })
-          }),
+          })
         )
         iconFeature.on('mouseover', function() {alert('hover')})
         vectorSource.addFeature(iconFeature);
