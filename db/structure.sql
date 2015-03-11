@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: admins; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: admins; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE admins (
@@ -73,7 +73,8 @@ ALTER SEQUENCE admins_id_seq OWNED BY admins.id;
 
 
 --
--- Name: average_caches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+
+-- Name: average_caches; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE average_caches (
@@ -107,7 +108,7 @@ ALTER SEQUENCE average_caches_id_seq OWNED BY average_caches.id;
 
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE categories (
@@ -138,7 +139,7 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: overall_averages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: overall_averages; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE overall_averages (
@@ -171,7 +172,7 @@ ALTER SEQUENCE overall_averages_id_seq OWNED BY overall_averages.id;
 
 
 --
--- Name: postings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: postings; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE postings (
@@ -218,7 +219,7 @@ ALTER SEQUENCE postings_id_seq OWNED BY postings.id;
 
 
 --
--- Name: rates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: rates; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE rates (
@@ -253,7 +254,7 @@ ALTER SEQUENCE rates_id_seq OWNED BY rates.id;
 
 
 --
--- Name: rating_caches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: rating_caches; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE rating_caches (
@@ -288,7 +289,7 @@ ALTER SEQUENCE rating_caches_id_seq OWNED BY rating_caches.id;
 
 
 --
--- Name: reservations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: reservations; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE reservations (
@@ -321,7 +322,7 @@ ALTER SEQUENCE reservations_id_seq OWNED BY reservations.id;
 
 
 --
--- Name: reviews; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: reviews; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE reviews (
@@ -354,7 +355,7 @@ ALTER SEQUENCE reviews_id_seq OWNED BY reviews.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE schema_migrations (
@@ -363,7 +364,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE users (
@@ -474,7 +475,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: admins_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: admins_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY admins
@@ -482,7 +483,7 @@ ALTER TABLE ONLY admins
 
 
 --
--- Name: average_caches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: average_caches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY average_caches
@@ -490,7 +491,7 @@ ALTER TABLE ONLY average_caches
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY categories
@@ -498,7 +499,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: overall_averages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: overall_averages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY overall_averages
@@ -506,7 +507,7 @@ ALTER TABLE ONLY overall_averages
 
 
 --
--- Name: postings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: postings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY postings
@@ -514,7 +515,7 @@ ALTER TABLE ONLY postings
 
 
 --
--- Name: rates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: rates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY rates
@@ -522,7 +523,7 @@ ALTER TABLE ONLY rates
 
 
 --
--- Name: rating_caches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: rating_caches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY rating_caches
@@ -530,7 +531,7 @@ ALTER TABLE ONLY rating_caches
 
 
 --
--- Name: reservations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: reservations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY reservations
@@ -538,7 +539,7 @@ ALTER TABLE ONLY reservations
 
 
 --
--- Name: reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY reviews
@@ -546,7 +547,7 @@ ALTER TABLE ONLY reviews
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY users
@@ -554,63 +555,63 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: index_admins_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_admins_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_admins_on_email ON admins USING btree (email);
 
 
 --
--- Name: index_admins_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_admins_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_admins_on_reset_password_token ON admins USING btree (reset_password_token);
 
 
 --
--- Name: index_postings_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_postings_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_postings_on_category_id ON postings USING btree (category_id);
 
 
 --
--- Name: index_rates_on_rateable_id_and_rateable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_rates_on_rateable_id_and_rateable_type; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_rates_on_rateable_id_and_rateable_type ON rates USING btree (rateable_id, rateable_type);
 
 
 --
--- Name: index_rates_on_rater_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_rates_on_rater_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_rates_on_rater_id ON rates USING btree (rater_id);
 
 
 --
--- Name: index_rating_caches_on_cacheable_id_and_cacheable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_rating_caches_on_cacheable_id_and_cacheable_type; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_rating_caches_on_cacheable_id_and_cacheable_type ON rating_caches USING btree (cacheable_id, cacheable_type);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
@@ -667,4 +668,3 @@ INSERT INTO schema_migrations (version) VALUES ('20150307000635');
 INSERT INTO schema_migrations (version) VALUES ('20150307001647');
 
 INSERT INTO schema_migrations (version) VALUES ('20150308230341');
-

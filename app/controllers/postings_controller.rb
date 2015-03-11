@@ -50,6 +50,7 @@ class PostingsController < ApplicationController
     if city.present?
       @postings = @postings.where "lower(city) = lower(?)", city
     end
+    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @postings})
   end
 
   # GET /postings/1
@@ -57,6 +58,8 @@ class PostingsController < ApplicationController
   def show
     @review = Review.new
     @reviews = @posting.reviews
+    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @posting})
+    logger.debug (@posting.inspect)
   end
 
   # GET /postings/new
@@ -131,4 +134,5 @@ class PostingsController < ApplicationController
       params.require(:posting).permit(:title, :description, :category_id, :rate,
           :date_range, :street, :state, :zip, :phone, :email, :city, :image)
     end
+
 end
