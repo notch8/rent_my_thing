@@ -1,4 +1,4 @@
 <div class="field">
-  <%= f.label :category_id %><br>
-  <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name", @posting.category_id) %>
+  <%= f.label :category_id, :class => "col-md-2" %><br>
+  <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name", @posting.category_id), { :include_blank => "Select category"}, { :class => "form-control styled-select col-md-10" } %>
 </div>

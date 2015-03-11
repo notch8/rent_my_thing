@@ -2,3 +2,8 @@ div#map {
   height: 400px;
   width: 512px;
 }
+
+.popover{
+    width:155px;
+    height:70px;
+}

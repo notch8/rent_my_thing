@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
@@ -24,4 +25,7 @@
   <component name="RunManager">
     <list size="0" />
   </component>
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="RVM: ruby-1.9.3-p392 [global]" project-jdk-type="RUBY_SDK" />
+>>>>>>> 2139ae470395a752204e31225a12403f2732d454
 </project>

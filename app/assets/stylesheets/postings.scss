@@ -8,7 +8,24 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
 @import url(http://fonts.googleapis.com/css?family=Montserrat);
 @import url(http://fonts.googleapis.com/css?family=Dosis);
+@import url(http://fonts.googleapis.com/css?family=PT+Serif);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
 
+p {
+  font-family: 'PT Serif', serif;
+}
+
+strong {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.field {
+  font-family: 'PT Serif', serif;
+}
+
+html, body {
+    height:100%;
+}
 
 #category_id {
   text-align: center;
@@ -17,6 +34,11 @@
     margin-right: auto;
 }
 
+.textarea-styled {
+  height: 120px;
+  // border: 3px solid #cccccc;
+  padding: 5px;
+}
 .styled-select {
    background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
    height: 29px;
@@ -71,7 +93,7 @@ h2.hovertown {
   text-transform: uppercase;
   letter-spacing: -1px;
   text-align: center;
-  text-shadow: 2px 2px #ff0000;
+  text-shadow: 3px 3px #1A1A1A;
 }
 
 .hovertown span {
@@ -88,13 +110,14 @@ h2.hovertown {
   font-size: 18px;
   text-align:center;
   font-family: 'Dosis', sans-serif;
-
+  text-shadow: 1px 1px #1A1A1A;
 }
 
 .splashtext h2 {
   color: white;
   font-size: 20px;
   text-align:center;
+  text-shadow: 2px 2px #1A1A1A;
 }
 
 .bottom-search-area {
@@ -148,8 +171,9 @@ h2.hovertown {
 }
 
 .list-table-element {
-  border: 2px solid gray;
-  background-color: AntiqueWhite;
+//  border: 2px solid gray;
+  background-color: GhostWhite;
+  background: rgba(54, 54, 54, 0.2);
 }
 
 .list-table-head {
@@ -161,7 +185,6 @@ h2.hovertown {
 .description-column {
   color: black;
   width: 30%;
-  background-color: AntiqueWhite;
 }
 
 #whitelink {
@@ -178,97 +201,42 @@ h2.hovertown {
 
 #blacklink {
   color:black;
+  font-family: 'PT Serif', serif;
 }
 
 .showpage {
   padding: 40px;
 }
 
-/* CUSTOMIZE THE NAVBAR - all pages except Splash page */
 
-@media (min-width: 768px) {
-  .column1 .navbar-header {
-    // background-image: url('/background.jpg');
-  }
-  .column1 .navbar-collapse {
-    height: auto;
-    border-top: 0;
-    box-shadow: none;
-    max-height: none;
-    padding-left:0;
-    padding-right:0;
-  }
-
-  .column1 .navbar-collapse.collapse {
-    display: block !important;
-    width: auto !important;
-    padding-bottom: 0;
-    overflow: visible !important;
-  }
-  .column1 .navbar-collapse.in {
-    overflow-x: visible;
-}
-
-  .column1 .navbar
-{
-  // background-image: url('/background.jpg');
-	max-width:300px;
-	margin-right: 0;
-	margin-left: 0;
-  border: none;
-}
-
-.column1 .navbar-nav,
-.column1 .navbar-nav > li,
-.column1 .navbar-left,
-.column1 .navbar-right,
-.column1 .navbar-header {
-  float:none !important;
-}
-
-.column1 .navbar-default .navbar-link {
-  color: gray;
-}
-
-.column1 .navbar-default .navbar-link a:hover {
-  color: black;
-}
-
-
-.column1 .navbar-right .dropdown-menu {left:0;right:auto;}
-.column1 .navbar-collapse .navbar-nav.navbar-right:last-child {
-    margin-right: 0;
-  }
-}
-
-/* CUSTOMIZE Navbar for the Splash page */
-
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
-.splash .navbar-wrapper {
-  margin-top:0px;
+.navbar-wrapper {
+  margin-top:20px;
   position: relative;
   z-index: 15;
 }
 
-.splash .navbar.navbar-inverse.navbar-static-top {
+.navbar.navbar-inverse.navbar-static-top {
   background: #004182;
-  border-color: #fff;
+  border-color: #197fe6;
   border: 1px;
   border-radius: 10px;
 }
-.splash .navbar.navbar-inverse.navbar-static-top a{
+.navbar.navbar-inverse.navbar-static-top a{
   color:#fff;
 }
-.splash .navbar.navbar-inverse.navbar-static-top a:hover{
-  color:#0A64A4;
+.navbar.navbar-inverse.navbar-static-top a:hover{
+  color:#f2c319;
 }
-.splash .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus{
-  background:#004182;
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus{
+  background:#197fe6;
   font-weight:700;
 }
-.splash .navbar-inverse .navbar-nav>.active>a:hover {
-  background:#004182;
-  color:#fff;
+.navbar-inverse .navbar-nav>.active>a:hover {
+  background:#197fe6;
+  color:#f2c319;
   font-weight:700;
 }

@@ -1,6 +1,6 @@
 class PostingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]
-  before_action :load_categories, only: [:show, :edit, :new ]
+  before_action :load_categories, only: [:show, :edit, :new, :update ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
   before_action :get_reviews, only: :show
   layout :resolve_layout
@@ -30,27 +30,29 @@ class PostingsController < ApplicationController
 
     #Hack to prevent will_paginate getting confused and giving me a nested route when I don't want one
     params.delete :category_id if params[:category_id].blank?
+    @postings = Posting.paginate(:page => params[:page])
 
-    #
-    # if start_date.present? && end_date.present?
-    #   @postings = @postings.where "available_dates && [?, ?)", start_date, end_date
-    # elsif start_date.present?
-    #   @postings = @postings.where "?::date <@ available_dates", start_date
-    # elsif end_date.present?
-    #   @postings = @postings.where "?::date <@ available_dates", end_date
-    # end
-    #
-    # if search_string.present?
-    #   @postings = @postings.where "POSITION(:str in title) <> 0 OR POSITION(:str in description) <> 0", {str: search_string}
-    # end
-    #
-    # if category_id.present?
-    #   @postings = @postings.where category_id: category_id
-    # end
-    #
-    # if city.present?
-    #   @postings = @postings.where "lower(city) = lower(?)", city
-    # end
+
+    if start_date.present? && end_date.present?
+      @postings = @postings.where "available_dates && [?, ?)", start_date, end_date
+    elsif start_date.present?
+      @postings = @postings.where "?::date <@ available_dates", start_date
+    elsif end_date.present?
+      @postings = @postings.where "?::date <@ available_dates", end_date
+    end
+
+    if search_string.present?
+      @postings = @postings.where "POSITION(:str in title) <> 0 OR POSITION(:str in description) <> 0", {str: search_string}
+    end
+
+    if category_id.present?
+      @postings = @postings.where category_id: category_id
+    end
+
+    if city.present?
+      @postings = @postings.where "lower(city) = lower(?)", city
+    end
+    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @postings})
   end
 
   # GET /postings/1
@@ -58,6 +60,8 @@ class PostingsController < ApplicationController
   def show
     @review = Review.new
     @reviews = @posting.reviews
+    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @posting})
+    logger.debug (@posting.inspect)
   end
 
   # GET /postings/new
@@ -130,6 +134,7 @@ class PostingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
       params.require(:posting).permit(:title, :description, :category_id, :rate,
-          :date_range, :street, :state, :zip, :phone, :email, :city)
+          :date_range, :street, :state, :zip, :phone, :email, :city, :image)
     end
+
 end
