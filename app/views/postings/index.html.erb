@@ -1,44 +1,35 @@
 <p id="notice"><%= notice %></p>
 <%= render 'postings/search_form' %>
 
-<div class='row'>
-  <div class="showpage col-md-6" id='blacklink'>
-    <table class="list-table">
+<table class="list-table">
 
-      <tbody class="list-table-body">
-        <% @postings.each do |posting| %>
-        <tr id="whitelink">
-            <td class="list-table-element" id="postings">
-            <%= link_to(posting.title, action: 'show', id: posting.id) %>
-            <% if posting.image? %>
-                <%= image_tag posting.image.url(:medium) %>
-            <% end %></td>
-            <td class="list-table-element"><%= posting.category.try :name %></td>
-            <td class="list-table-element description-column"><%= posting.description %></td>
-            <td class="list-table-element"><%= posting.rate %></td>
-            <td class="list-table-element"><%= posting.available_dates %></td>
-            <td class="list-table-element"><%= link_to 'Show', posting %> |
-              <%= link_to 'Edit', edit_posting_path(posting) %> |
-              <%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <tbody class="list-table-body">
+    <% @postings.each do |posting| %>
+    <tr id="whitelink">
+        <td class="list-table-element" id="postings">
+        <%= link_to(posting.title, action: 'show', id: posting.id) %>
+        <% if posting.image? %>
+            <%= image_tag posting.image.url(:medium) %>
+        <% end %></td>
+        <td class="list-table-element"><%= posting.category.try :name %></td>
+        <td class="list-table-element description-column"><%= posting.description %></td>
+        <td class="list-table-element"><%= posting.available_dates %></td>
+        <td class="list-table-element"><%= link_to 'Show', posting %> |
+          <%= link_to 'Edit', edit_posting_path(posting) %> |
+          <%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-    <%= will_paginate @postings %>
+<%= will_paginate @postings %>
 
 
-    <br>
+<br>
 
-    <div id="whitelink">
-    <%= link_to 'New Posting', new_posting_path, id:"whitelink" %>
-    </div>
-  </div>
-  <div id="map" class="col-md-6" >
-    <!-- <div id="popup" data-original-title="" title=""></div> -->
-  </div>
-  <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""> </div>
+<div id="whitelink">
+<%= link_to 'New Posting', new_posting_path, id:"whitelink" %>
 </div>
 <script>
 function drawTheThings(){
