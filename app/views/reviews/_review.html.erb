@@ -1,0 +1,2 @@
+<tr><td><%= simple_format(review.review.gsub(/\n/, '<br>')) %></td><td><%= time_ago_in_words review.created_at %> ago</td>
+<td><%= rating_for @posting, "title", disable_after_rate: false %></td></tr>

@@ -31,3 +31,6 @@ config/secrets.yml
 bower.json
 config/database.yml
 geocode.log
+.idea
+.DS_Store
+*~

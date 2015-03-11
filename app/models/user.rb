@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :postings
   has_many :reservations
+  has_many :reviews, through: :postings
+  ratyrate_rater
 end

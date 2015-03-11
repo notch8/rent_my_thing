@@ -1,21 +1,13 @@
 <p id="notice"><%= notice %></p>
 <%= render 'postings/search_form' %>
 
-<video autoplay id="video-bg">
-  <source src="https://a0.muscache.com/airbnb/static/London-P1-1.mp4" type="video/mp4">
-  <source src="https://a0.muscache.com/airbnb/static/London-P1-0.webm" type="video/webm">
-Your browser does not support the video tag.
-</video>
-
-<h1>Listing Postings</h1>
-
 <table class="list-table">
   <thead class="list-table-head">
     <tr>
       <th>Category</th>
       <th>Title</th>
       <th>Description</th>
-      <th>Rate</th>
+      <th>Cost</th>
       <th>Date range</th>
       <th>Other Actions</th>
     </tr>
@@ -24,17 +16,14 @@ Your browser does not support the video tag.
   <tbody class="list-table-body">
     <% @postings.each do |posting| %>
     <tr id="whitelink">
-
-        <td class="list-table-element"><%= posting.category.try :name %></td>
-
-        <td class="list-table-element">
-
+        <td class="list-table-element" id="postings">
         <%= link_to(posting.title, action: 'show', id: posting.id) %>
         <% if posting.image? %>
-        <%= image_tag posting.image.url(:thumb) %>
+            <%= image_tag posting.image.url(:medium) %>
         <% end %></td>
+        <td class="list-table-element"><%= posting.category.try :name %></td>
         <td class="list-table-element description-column"><%= posting.description %></td>
-        <td class="list-table-element"><%= posting.rate %></td>
+        <td class="list-table-element"><%= posting.cost %></td>
         <td class="list-table-element"><%= posting.available_dates %></td>
         <td class="list-table-element"><%= link_to 'Show', posting %> |
           <%= link_to 'Edit', edit_posting_path(posting) %> |
@@ -53,5 +42,16 @@ Your browser does not support the video tag.
 <div id="whitelink">
 <%= link_to 'New Posting', new_posting_path, id:"whitelink" %>
 </div>
-<div id="map" class="map">
-</div>
+<script>
+function drawTheThings(){
+  if (window.RentMyThing && window.RentMyThing.drawMap) {
+    drawMap = window.RentMyThing.drawMap
+    mapAttributes = <%= @mapAttributes_json.html_safe %>
+    drawMap(mapAttributes)
+  } else {
+    console.log("Map.js not loaded before trying to draw map")
+  }
+}
+$(document).on ('page:change', drawTheThings);
+$(document).ready(drawTheThings);
+</script>
