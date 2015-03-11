@@ -33,7 +33,7 @@
 window.RentMyThing = window.RentMyThing || {}
 window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
     var map_div = $('#map')
-    var populabel = '';
+    var popuplabel = '';
     var iconLocations = [];
     var vectorSource = new ol.source.Vector({
      //create empty vector -- not sure if this is needed??????
