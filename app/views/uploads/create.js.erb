@@ -1,0 +1,6 @@
+<% if @upload.new_record? %>
+  alert('Failed');
+<% else %>
+  $('ul.thumbnails').append("<%=j render partial: 'uploads/upload', locals: { upload: @upload } %>");
+  $('.upload').remove()
+<% end %>

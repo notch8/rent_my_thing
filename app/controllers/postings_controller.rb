@@ -19,7 +19,10 @@ class PostingsController < ApplicationController
   # GET /postings
   # GET /postings.json
   def index
-    @postings = Posting.all.includes :category
+    @upload = Upload.new
+
+    @postings = Posting.all.paginate(page: params[:page]).includes :category, :uploads
+
     start_date = params[:start_date]
     end_date = params[:end_date]
     category_id = params[:category_id]
@@ -28,6 +31,8 @@ class PostingsController < ApplicationController
     end_date = Date.strptime end_date, '%Y-%m-%d' if end_date.present?
     city = params[:city]
 
+    #Hack to prevent will_paginate getting confused and giving me a nested route when I don't want one
+    params.delete :category_id if params[:category_id].blank?
     @postings = Posting.paginate(:page => params[:page])
 
 
@@ -50,6 +55,7 @@ class PostingsController < ApplicationController
     if city.present?
       @postings = @postings.where "lower(city) = lower(?)", city
     end
+    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @postings})
   end
 
   # GET /postings/1
@@ -57,6 +63,8 @@ class PostingsController < ApplicationController
   def show
     @review = Review.new
     @reviews = @posting.reviews
+    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @posting})
+    logger.debug (@posting.inspect)
   end
 
   # GET /postings/new
@@ -131,4 +139,5 @@ class PostingsController < ApplicationController
       params.require(:posting).permit(:title, :description, :category_id, :rate,
           :date_range, :street, :state, :zip, :phone, :email, :city, :image)
     end
+
 end

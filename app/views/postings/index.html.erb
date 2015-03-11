@@ -1,8 +1,6 @@
 <p id="notice"><%= notice %></p>
 <%= render 'postings/search_form' %>
 
-
-
 <table class="list-table">
   <thead class="list-table-head">
     <tr>
@@ -44,3 +42,16 @@
 <div id="whitelink">
 <%= link_to 'New Posting', new_posting_path, id:"whitelink" %>
 </div>
+<script>
+function drawTheThings(){
+  if (window.RentMyThing && window.RentMyThing.drawMap) {
+    drawMap = window.RentMyThing.drawMap
+    mapAttributes = <%= @mapAttributes_json.html_safe %>
+    drawMap(mapAttributes)
+  } else {
+    console.log("Map.js not loaded before trying to draw map")
+  }
+}
+$(document).on ('page:change', drawTheThings);
+$(document).ready(drawTheThings);
+</script>
