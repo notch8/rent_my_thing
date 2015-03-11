@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :admins
   resources :reservations
   resources :reviews
+  resources :uploads
 
 
   devise_for :users

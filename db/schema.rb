@@ -245,6 +245,16 @@ ActiveRecord::Schema.define(version: 20150306212346) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "uploads", force: :cascade do |t|
+    t.string   "uploaded_file_file_name"
+    t.string   "uploaded_file_content_type"
+    t.integer  "uploaded_file_file_size"
+    t.datetime "uploaded_file_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "posting_id"
+  end
+
   create_table "secondary_unit_lookup", primary_key: "name", force: :cascade do |t|
     t.string "abbrev", limit: 5
   end

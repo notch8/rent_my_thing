@@ -1,31 +1,29 @@
 <div class='row'>
   <div class="showpage col-md-6" id='blacklink'>
 
+    <div id="thumbnails" class="carousel slide" data-ride="carousel">
 
-    <%= image_tag @posting.image.url(:medium) if @posting.image && @posting.image.present? %>
+      <ol class="carousel-indicators">
+        <% @posting.uploads.each_with_index do |image, i| %>
+          <li data-target="#thumbnails" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>"></li>
+        <% end %>
+      </ol>
 
-    <p>
-      <strong>Title:</strong>
-      <%= @posting.title %>
-    </p>
+      <div class="carousel-inner">
+        <% @posting.uploads.each_with_index do |image, i| %>
+          <div class="item <%= i == 0 ? "active" : "" %>"><%= image_tag image.uploaded_file.url(:medium) %></div>
+        <% end %>
+      </div>
+      <a class="left carousel-control" href="#thumbnails" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#thumbnails" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
 
-    <p>
-      <strong>Description:</strong>
-      <%= @posting.description %>
-    </p>
-    <!--<% unless @posting.image.blank? %>-->
-      <!--<p>-->
-      <!--<%= image_tag @posting.image.url  %>-->
-      <!--</p>-->
-    <!--<% end %>-->
-    <p>
-      <strong>Category:</strong>
-      <%= @posting.category.try :name %>
-    </p>
-
-    <p>
-      <%= image_tag @posting.image.url  %>
-    </p>
     <br>
     <table class="table table-bordered">
       <tbody>
@@ -67,7 +65,11 @@
         </tr>
         <tr>
           <th class="col-md-2">Offered By:</th>
-          <td class="col-md-10"><%= link_to  @posting.user.email, users_path(@posting.user_id) %></td>
+          <% if @posting.user %>
+            <td class="col-md-10"><%= link_to  @posting.user.email, users_path(@posting.user_id) %></td>
+          <% else %>
+            <td class="col-md-10"></div>
+          <% end %>
         </tr>
         <tr>
           <td colspan="2">
@@ -113,8 +115,9 @@
       </tbody>
     </table>
   </div>
-
 </div>
+
+<%= render 'new_show' %>
 <script>
 function drawTheThings(){
   if (window.RentMyThing && window.RentMyThing.drawMap) {
