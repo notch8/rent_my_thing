@@ -15,7 +15,6 @@
         <% end %></td>
         <td class="list-table-element"><%= posting.category.try :name %></td>
         <td class="list-table-element description-column"><%= posting.description %></td>
-        <td class="list-table-element"><%= posting.rate %></td>
         <td class="list-table-element"><%= posting.available_dates %></td>
         <td class="list-table-element"><%= link_to 'Show', posting %> |
           <%= link_to 'Edit', edit_posting_path(posting) %> |
