@@ -1,7 +1,17 @@
 class PostingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy ]
-  before_action :load_categories, only: [:show, :edit, :new ]
+  before_action :load_categories, only: [:show, :edit, :new, :update ]
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
+  before_action :get_reviews, only: :show
+  layout :resolve_layout
+
+  def resolve_layout
+    if action_name == "splash"
+      "splash"
+    else
+      "application"
+    end
+  end
 
   def splash
   end
@@ -9,13 +19,20 @@ class PostingsController < ApplicationController
   # GET /postings
   # GET /postings.json
   def index
-    @postings = Posting.all.includes :category
+    @upload = Upload.new
+
+    @postings = Posting.all.paginate(page: params[:page]).includes :category, :uploads
+
     start_date = params[:start_date]
     end_date = params[:end_date]
     category_id = params[:category_id]
     search_string = params[:search_text]
     start_date = Date.strptime start_date, '%Y-%m-%d' if start_date.present?
     end_date = Date.strptime end_date, '%Y-%m-%d' if end_date.present?
+    city = params[:city]
+
+    #Hack to prevent will_paginate getting confused and giving me a nested route when I don't want one
+    params.delete :category_id if params[:category_id].blank?
     @postings = Posting.paginate(:page => params[:page])
 
 
@@ -34,11 +51,20 @@ class PostingsController < ApplicationController
     if category_id.present?
       @postings = @postings.where category_id: category_id
     end
+
+    if city.present?
+      @postings = @postings.where "lower(city) = lower(?)", city
+    end
+    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @postings})
   end
 
   # GET /postings/1
   # GET /postings/1.json
   def show
+    @review = Review.new
+    @reviews = @posting.reviews
+    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @posting})
+    logger.debug (@posting.inspect)
   end
 
   # GET /postings/new
@@ -55,6 +81,7 @@ class PostingsController < ApplicationController
   def create
     # logger.debug "date range: #{params["rentrange"]["from"]} to #{params["rentrange"]["to"]} "
     @posting = Posting.new(posting_params)
+    @posting.user = current_user
 
     respond_to do |format|
       if @posting.save
@@ -94,6 +121,10 @@ class PostingsController < ApplicationController
 
   private
 
+    def get_reviews
+      @reviews = Review.all
+    end
+
     def load_categories
       @categories = Category.all
     end
@@ -106,6 +137,7 @@ class PostingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
       params.require(:posting).permit(:title, :description, :category_id, :rate,
-          :date_range, :street, :state, :zip, :phone, :email, :city)
+          :date_range, :street, :state, :zip, :phone, :email, :city, :image)
     end
+
 end

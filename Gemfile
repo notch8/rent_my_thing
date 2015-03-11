@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 #Allow image uploads to database
+gem 'jquery-fileupload-rails'
 gem 'will_paginate', '~> 3.0.6'
 gem "paperclip", "~> 4.2"
 gem 'calendar_date_select', '~> 2.0.0'
@@ -26,6 +27,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+gem 'sucker_punch'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
