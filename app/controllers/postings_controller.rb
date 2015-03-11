@@ -50,6 +50,7 @@ class PostingsController < ApplicationController
     if city.present?
       @postings = @postings.where "lower(city) = lower(?)", city
     end
+    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @postings})
   end
 
   # GET /postings/1

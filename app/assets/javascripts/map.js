@@ -38,7 +38,7 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
     var vectorSource = new ol.source.Vector({
      //create empty vector -- not sure if this is needed??????
     });
-
+    $('.map').html('');
     // Outer Loop to retrieve each pin type
     Object.keys(mapAttributesPlus).forEach(function(pinType) {
 
