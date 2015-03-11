@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20150307001647) do
+=======
 ActiveRecord::Schema.define(version: 20150306212346) do
+>>>>>>> 64b738776b0a0385217a81f7f45279aa4925a495
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,8 +67,19 @@ ActiveRecord::Schema.define(version: 20150306212346) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
+<<<<<<< HEAD
+  create_table "average_caches", force: :cascade do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "avg",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+=======
 # Could not dump table "bg" because of following StandardError
 #   Unknown type 'geometry' for column 'the_geom'
+>>>>>>> 64b738776b0a0385217a81f7f45279aa4925a495
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -72,6 +87,16 @@ ActiveRecord::Schema.define(version: 20150306212346) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
+  create_table "overall_averages", force: :cascade do |t|
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "overall_avg",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+=======
 # Could not dump table "county" because of following StandardError
 #   Unknown type 'geometry' for column 'the_geom'
 
@@ -206,11 +231,11 @@ ActiveRecord::Schema.define(version: 20150306212346) do
 
   add_index "place_lookup", ["state"], name: "place_lookup_state_idx", using: :btree
 
+>>>>>>> 64b738776b0a0385217a81f7f45279aa4925a495
   create_table "postings", force: :cascade do |t|
     t.string    "title"
     t.text      "description"
     t.integer   "category_id"
-    t.decimal   "rate",                          precision: 8, scale: 2
     t.daterange "available_dates"
     t.string    "street",             limit: 20
     t.string    "city"
@@ -225,9 +250,35 @@ ActiveRecord::Schema.define(version: 20150306212346) do
     t.integer   "image_file_size"
     t.datetime  "image_updated_at"
     t.integer   "user_id"
+    t.decimal   "cost",                          precision: 8, scale: 2
   end
 
   add_index "postings", ["category_id"], name: "index_postings_on_category_id", using: :btree
+
+  create_table "rates", force: :cascade do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "stars",         null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
+
+  create_table "rating_caches", force: :cascade do |t|
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
   create_table "reservations", force: :cascade do |t|
     t.integer   "user_id"

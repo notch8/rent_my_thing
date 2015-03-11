@@ -2,6 +2,16 @@
 <%= render 'postings/search_form' %>
 
 <table class="list-table">
+  <thead class="list-table-head">
+    <tr>
+      <th>Category</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Cost</th>
+      <th>Date range</th>
+      <th>Other Actions</th>
+    </tr>
+  </thead>
 
   <tbody class="list-table-body">
     <% @postings.each do |posting| %>
@@ -13,6 +23,7 @@
         <% end %></td>
         <td class="list-table-element"><%= posting.category.try :name %></td>
         <td class="list-table-element description-column"><%= posting.description %></td>
+        <td class="list-table-element"><%= posting.cost %></td>
         <td class="list-table-element"><%= posting.available_dates %></td>
         <td class="list-table-element"><%= link_to 'Show', posting %> |
           <%= link_to 'Edit', edit_posting_path(posting) %> |
