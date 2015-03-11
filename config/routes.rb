@@ -4,13 +4,6 @@ Rails.application.routes.draw do
   resources :reviews
   resources :uploads
 
-<<<<<<< HEAD
-  # root "/posting#splash"
-    root "postings#index"
-    
-=======
-
->>>>>>> 64b738776b0a0385217a81f7f45279aa4925a495
   devise_for :users
   resources :users
   resources :users do
