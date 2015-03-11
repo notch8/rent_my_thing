@@ -94,25 +94,18 @@
     <%= link_to 'Edit', edit_posting_path(@posting) %> |
     <%= link_to 'Back', postings_path %>
   </div>
-<<<<<<< HEAD
+
   <div id="map" class="map col-md-6" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>">
     <!-- <div id="popup" data-original-title="" title=""></div> -->
   </div>
-  <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement="" 
+  <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""
   ></div>
 </div>
-<script>
-  // window.RentMyThing = window.RentMyThing || {};
-  // window.RentMyThing.addresses = window.RentMyThing.addresses || [];
-  // window.RentMyThing.addresses.push("<%= "#{@posting.street}, #{@posting.city}, #{@posting.state} #{@posting.zip}" %>")
-  // window.RentMyThing.addresses.push("4365 University Ave, San Diego, CA, 92105")
-  // window.RentMyThing.addresses.push("415 West University Ave, San Diego, CA, 92103")
 
-</script>
-=======
+
 
   <div class="container col-md-6">
-    <div id="map" class="map" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"></div>
+
     <h3><strong> REVIEWS </strong></h3>
     <table class="table table-bordered">
       <thead>
@@ -126,4 +119,15 @@
   </div>
 
 </div>
->>>>>>> 075b38b0995bd27d2bf9700536c5a7d3e53532e1
+<script>
+$(document).on ('page:change', function() {
+   if (window.RentMyThing && window.RentMyThing.drawMap) {
+     drawMap = window.RentMyThing.drawMap
+     mapAttributes = <%= @mapAttributes_json.html_safe %>
+     drawMap(mapAttributes)
+   } else {
+     console.log("Map.js not loaded before trying to draw map")
+   }
+
+ });
+</script>

@@ -1,4 +1,4 @@
-$(document).on ('page:change', function() {
+
   // Addresses:
   // Red pin: Rental item locations
   // -------------------------------------------
@@ -12,28 +12,27 @@ $(document).on ('page:change', function() {
   //-------------------------------------------
   // 3803 Ray Street, San Diego, CA. 92104    || coords: -117.129137,32.747502
 
-  mapAttributesPlus = {'/images/red-pin.png': [
-   ["4625 Texas St.,<br>San Diego, CA. 92116",
-   [-117.138475,32.761480]],
-   ["2267 Boundary St.,<br>San Diego, CA. 92104",
-   [-117.116083,32.729552]],
-   ["4711 Kansas St.,<br>San Diego, CA. 92116",
-   [-117.131207,32.763225]],
-   ["3200 6th Ave.,<br>San Diego, CA. 92103",
-   [-117.159727,32.739113]],
-   ["1642 7th Ave.,<br>San Diego, CA. 92104",
-   [-117.159063,32.722439]]],
-    '/images/green-pin.png': [
-   ["3803 Ray Street,<br>San Diego, CA. 92104",
-   [-117.129137,32.747502]]] }
+  // mapAttributesPlus = {'/images/red-pin.png': [
+  //  ["4625 Texas St.,<br>San Diego, CA. 92116",
+  //  [-117.138475,32.761480]],
+  //  ["2267 Boundary St.,<br>San Diego, CA. 92104",
+  //  [-117.116083,32.729552]],
+  //  ["4711 Kansas St.,<br>San Diego, CA. 92116",
+  //  [-117.131207,32.763225]],
+  //  ["3200 6th Ave.,<br>San Diego, CA. 92103",
+  //  [-117.159727,32.739113]],
+  //  ["1642 7th Ave.,<br>San Diego, CA. 92104",
+  //  [-117.159063,32.722439]]],
+  //   '/images/green-pin.png': [
+  //  ["3803 Ray Street,<br>San Diego, CA. 92104",
+  //  [-117.129137,32.747502]]] }
+  //
+  //   mapAttributes = {'/images/red-pin.png': [[-117.138475,32.761480], [-117.116083,32.729552],[-117.131207,32.763225],[-117.159727,32.739113], [-117.159063,32.722439]],
+  //     '/images/green-pin.png': [[-117.129137,32.747502]]}
 
-    mapAttributes = {'/images/red-pin.png': [[-117.138475,32.761480], [-117.116083,32.729552],[-117.131207,32.763225],[-117.159727,32.739113], [-117.159063,32.722439]],
-      '/images/green-pin.png': [[-117.129137,32.747502]]}
-
-  var map_div = $('#map')
-  drawMap(mapAttributesPlus);
-
-  function drawMap (mapAttributesPlus) {
+window.RentMyThing = window.RentMyThing || {}
+window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
+    var map_div = $('#map')
     var populabel = '';
     var iconLocations = [];
     var vectorSource = new ol.source.Vector({
@@ -137,9 +136,10 @@ $(document).on ('page:change', function() {
             return feature;
           });
       if (feature) {
-        // Showing flag was added to remove popover from flickering when the mouse is hovered over the icon/marker
-        // and there is incidental/minor movement in the mouse. Setting the show flag ensures that you don't
-        // attempt to redraw the popup over and over (and get flickering) with minor mouse movements
+        // Showing flag was added to remove popover from flickering when the mouse is hovered over the
+        // icon/marker and there is incidental/minor movement in the mouse. Setting the show flag ensures
+        // that you don't attempt to redraw the popup over and over (and get flickering) with minor mouse
+        // movements
         if (! showing) {
           showing = true;
           var name = feature.get('name')
@@ -167,7 +167,7 @@ $(document).on ('page:change', function() {
       }
     });
 
-    // change mouse cursor when over marker (option #2)
+    // change mouse cursor when over marker
     map.on('pointermove', function(e) {
       if (e.dragging) {
         $(element).popover('destroy');
@@ -177,7 +177,5 @@ $(document).on ('page:change', function() {
       var hit = map.hasFeatureAtPixel(pixel);
       var target = document.getElementById(map.getTarget());
       target.style.cursor = hit ? 'pointer' : '';
-//      map.getTarget().style.cursor = hit ? 'pointer' : '';
     });
   } // End of drawmap function
-});
