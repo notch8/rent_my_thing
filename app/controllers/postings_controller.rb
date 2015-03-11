@@ -19,7 +19,7 @@ class PostingsController < ApplicationController
   # GET /postings
   # GET /postings.json
   def index
-    @postings = Posting.all.includes :category
+    @postings = Posting.all.paginate(page: params[:page]).includes :category
     start_date = params[:start_date]
     end_date = params[:end_date]
     category_id = params[:category_id]
@@ -28,6 +28,8 @@ class PostingsController < ApplicationController
     end_date = Date.strptime end_date, '%Y-%m-%d' if end_date.present?
     city = params[:city]
 
+    #Hack to prevent will_paginate getting confused and giving me a nested route when I don't want one
+    params.delete :category_id if params[:category_id].blank?
     @postings = Posting.paginate(:page => params[:page])
 
 

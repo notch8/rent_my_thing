@@ -9,6 +9,8 @@
       </configuration>
     </facet>
   </component>
+<<<<<<< HEAD
+=======
   <component name="ModuleRunConfigurationManager">
     <configuration default="false" name="test: rent_my_thing" type="RakeRunConfigurationType" factoryName="Rake">
       <module name="rent_my_thing" />
@@ -115,10 +117,15 @@
       <method />
     </configuration>
   </component>
+>>>>>>> 2139ae470395a752204e31225a12403f2732d454
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
     </content>
+<<<<<<< HEAD
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+=======
     <orderEntry type="jdk" jdkName="RVM: ruby-2.1.5 [global]" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="actionmailer (v4.2.0, RVM: ruby-2.1.5 [global]) [gem]" level="application" />
@@ -192,5 +199,6 @@
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />
     <I18N_FOLDERS number="1" string0="$MODULE_DIR$/config/locales" />
+>>>>>>> 2139ae470395a752204e31225a12403f2732d454
   </component>
 </module>
