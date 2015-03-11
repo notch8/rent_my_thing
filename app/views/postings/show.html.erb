@@ -69,12 +69,16 @@
         </tr>
         <tr>
           <th class="col-md-2">Offered By:</th>
-          <td class="col-md-10"><%= link_to  "#{@posting.user.email if @posting.user}", users_path(@posting.user_id) %></td>
+          <% if @posting.user %>
+            <td class="col-md-10"><%= link_to  @posting.user.email, users_path(@posting.user_id) %></td>
+          <% else %>
+            <td class="col-md-10"></div>
+          <% end %>
         </tr>
         <tr>
           <td colspan="2">
           <div >
-            <%= render "reviews/form", :locals => { :review => @review } %>
+            <%= render "reviews/form", locals: { review: @review } %>
           </div>
         </td>
         </tr>
@@ -93,14 +97,23 @@
     <%= link_to 'Back', postings_path %>
   </div>
 
+  <div id="map" class="map col-md-6" >
+    <!-- <div id="popup" data-original-title="" title=""></div> -->
+  </div>
+  <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""
+  ></div>
+</div>
+
+
+
   <div class="container col-md-6">
-    <div id="map" class="map" data-address="<%= @posting.street %>, <%= @posting.city %> <%= @posting.state %> <%= @posting.zip %>"></div>
+
     <h3><strong> REVIEWS </strong></h3>
     <table class="table table-bordered">
-    <thead>
-      <th>Comments</th>
-      <th>Created</th>
-    </thead>
+      <thead>
+        <th>Comments</th>
+        <th>Created</th>
+      </thead>
       <tbody>
         <%= render @reviews %>
       </tbody>
@@ -109,3 +122,17 @@
 </div>
 
 <%= render 'new_show' %>
+<script>
+function drawTheThings(){
+  if (window.RentMyThing && window.RentMyThing.drawMap) {
+    drawMap = window.RentMyThing.drawMap
+    mapAttributes = <%= @mapAttributes_json.html_safe %>
+    drawMap(mapAttributes)
+  } else {
+    console.log("Map.js not loaded before trying to draw map")
+  }
+}
+ $(document).on ('page:change', drawTheThings);
+ $(document).ready(drawTheThings);
+
+</script>
