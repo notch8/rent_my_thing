@@ -55,7 +55,14 @@ class PostingsController < ApplicationController
     if city.present?
       @postings = @postings.where "lower(city) = lower(?)", city
     end
-    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @postings})
+
+    # Map related.....
+    # Build object to contain pin (map marker) type and coords (from @postings) to display on map
+    # Before rendering the map first check to see if any of the postings have any coords..if not
+    # map will not be rendered
+    if (@postings.any?{|x| x.coords})
+      @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @postings})
+    end
   end
 
   # GET /postings/1

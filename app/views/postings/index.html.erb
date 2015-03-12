@@ -30,6 +30,7 @@
   <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""
   ></div>
 </div>
+<% if @mapAttributes_json %>
 <script>
 function drawTheThings(){
   if (window.RentMyThing && window.RentMyThing.drawMap) {
@@ -43,3 +44,6 @@ function drawTheThings(){
 $(document).on ('page:change', drawTheThings);
 $(document).ready(drawTheThings);
 </script>
+<% else %>
+   <% logger.debug(" !!!!!!!! No coords for postings so map not drawn !!!!!!!!!") %>
+<% end %>
