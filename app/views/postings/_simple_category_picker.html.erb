@@ -1,1 +1,6 @@
+<<<<<<< HEAD
+
+<%= select_tag :category_id, options_from_collection_for_select(Category.all, "id", "name", params[:category_id]), include_blank: true %>
+=======
 <%= select_tag :category_id, options_from_collection_for_select(Category.all, "id", "name", params[:category_id]), include_blank: "Placeholder"  %>
+>>>>>>> 64b738776b0a0385217a81f7f45279aa4925a495
