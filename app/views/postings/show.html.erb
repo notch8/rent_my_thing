@@ -126,7 +126,7 @@
   </div>
 </div>
 
-<%= render 'new_show' %>
+<% if @mapAttributes_json %>
 <script>
 function drawTheThings(){
   if (window.RentMyThing && window.RentMyThing.drawMap) {
@@ -137,7 +137,9 @@ function drawTheThings(){
     console.log("Map.js not loaded before trying to draw map")
   }
 }
- $(document).on ('page:change', drawTheThings);
- $(document).ready(drawTheThings);
-
+$(document).on ('page:change', drawTheThings);
+$(document).ready(drawTheThings);
 </script>
+<% else %>
+   <% logger.debug(" !!!!!!!! No coords for posting(s) so map not drawn !!!!!!!!!") %>
+<% end %>
