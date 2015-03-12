@@ -70,7 +70,7 @@
         <tr>
           <th class="th-text col-md-2">Offered By:</th>
           <% if @posting.user %>
-            <td class="td-text col-md-10"><%= link_to  @posting.user.email, users_path(@posting.user_id) %></td>
+            <td class="td-text col-md-10"><%= link_to  @posting.user.email, @posting.user %></td>
           <% else %>
             <td class="td-text col-md-10"></div>
           <% end %>
