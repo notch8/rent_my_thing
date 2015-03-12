@@ -28,8 +28,12 @@ class Posting < ActiveRecord::Base
     end
   end
 
+  def image?
+    self.uploads.present?
+  end
+
   def image
-    if self.uploads.present?
+    if image?
       self.uploads.first
     else
       self.uploads.build
