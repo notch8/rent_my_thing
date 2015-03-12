@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<component name="dataSourceStorage">
-  <data-source name="Rails rent_my_thing: development" uuid="7d33b645-97cc-4608-a7b1-df29fad714a5">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
-  </data-source>
-  <data-source name="Rails rent_my_thing: test" uuid="4306e6b0-0f79-445d-827b-67cd0e0fc2fa">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
-  </data-source>
-</component>
