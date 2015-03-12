@@ -14,27 +14,19 @@
         </tr>
       </thead>
 
-      <tbody class="list-table-body">
-        <% @postings.each do |posting| %>
-        <tr id="whitelink">
-            <td class="list-table-element" id="postings">
-            <%= link_to(posting.title, action: 'show', id: posting.id) %>
-            <% if posting.image? %>
-                <%= image_tag posting.image.url(:medium) %>
-            <% end %></td>
-            <td class="list-table-element"><%= posting.category.try :name %></td>
-            <td class="list-table-element description-column"><%= posting.description %></td>
-            <td class="list-table-element"><%= posting.cost %></td>
-            <td class="list-table-element"><%= posting.available_dates %></td>
-            <td class="list-table-element"><%= link_to 'Show', posting %> |
-              <%= link_to 'Edit', edit_posting_path(posting) %> |
-              <%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<table class="list-table">
 
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
+  <tbody class="list-table-body">
+    <% @postings.each do |posting| %>
+    <tr id="whitelink">
+        <td class="list-table-element" id="postings">
+        <%= link_to(posting.title, action: 'show', id: posting.id) %>
+        <td class="list-table-element"><%= posting.category.try :name %></td>
+        <td class="list-table-element description-column"><%= posting.description %></td>
+        <td class="list-table-element"><%= posting.available_dates %></td>
+        <td class="list-table-element"><%= link_to 'Show', posting %> |
+          <%= link_to 'Edit', edit_posting_path(posting) %> |
+          <%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <%= will_paginate @postings %>
 
 
