@@ -75,44 +75,55 @@
             <td class="td-text col-md-10"></div>
           <% end %>
         </tr>
-        <tr>
+
+
+
+        <!-- <tr>
           <td colspan="2">
           <div >
             <%= render "reviews/form", :locals => { :review => @review } %> | <%= rating_for @posting, "title", disable_after_rate: false %>
           </div>
         </td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
 
-    <%= form_tag new_posting_reservation_path(@posting), method: :get %>
-      <%= render 'shared/date_range_picker' %>
-
-      <!-- <input type="submit" value="Reserve"> -->
-      <%= submit_tag "Reserve", :class => 'btn btn-primary', :role => "button" %>
-    </form>
-
-    <br><br>
-      <div class="btn-group">
-      <%= link_to 'Show', edit_posting_path(@posting), :class => "btn btn-primary", :role => "button" %>
-      <%= link_to 'Back', postings_path, :class => "btn btn-primary", :role => "button" %>
-    </div>
-
-    <!-- <%= link_to 'Edit', edit_posting_path(@posting) %> |
-    <%= link_to 'Back', postings_path %> -->
   </div>
-
 
   <div id="map" class="map col-md-6" >
     <!-- <div id="popup" data-original-title="" title=""></div> -->
   </div>
   <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""></div>
+</div>
+
+
+<div class="row" style="width: 100%">
+  <table style="width: 100%">
+    <tr>
+      <td class="center" style="text-align: center">
+        <p class="bigger center">Reserve this item</p>
+        <%= form_tag new_posting_reservation_path(@posting), method: :get, class: "center" %>
+        <%= render 'shared/date_range_picker' %>
+
+        <!-- <input type="submit" value="Reserve"> -->
+        <%= submit_tag "Reserve", :class => 'btn btn-primary', :role => "button" %>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<br><br>
+  <div class="btn-group">
+  <%= link_to 'Edit', edit_posting_path(@posting), :class => "btn btn-primary", :role => "button" %>
+  <%= link_to 'Back', postings_path, :class => "btn btn-primary", :role => "button" %>
+</div>
 
 
 
-  <div class="container col-md-6">
+  <!-- <div class="container col-md-6"> -->
 
-    <h3><strong> REVIEWS </strong></h3>
+    <!-- <h3><strong> REVIEWS </strong></h3>
     <table class="table table-bordered">
     <thead>
       <th>Comments</th>
@@ -122,11 +133,9 @@
       <tbody>
         <%= render @reviews %>
       </tbody>
-    </table>
-  </div>
-</div>
+    </table> -->
+  <!-- </div> -->
 
-<%= render 'new_show' %>
 <script>
 function drawTheThings(){
   if (window.RentMyThing && window.RentMyThing.drawMap) {
