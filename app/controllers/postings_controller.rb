@@ -55,7 +55,16 @@ class PostingsController < ApplicationController
     if city.present?
       @postings = @postings.where "lower(city) = lower(?)", city
     end
-    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @postings})
+
+    # Map related.....
+    # Build object to contain pin (map marker) type and coords (from @postings) to display on map
+    # Before rendering the map first check to see if any of the postings have any coords..if not
+    # map @mapAttributes-json object needed for map will not be built..note: corresponding javascript code
+    # on webpage will check to see if @mapAttributes_json to see if object is nil..if nil it will not call
+    # the function to build the map and hence no map will be rendered
+    if (@postings.any?{|x| x.coords})
+      @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @postings})
+    end
   end
 
   # GET /postings/1
@@ -63,8 +72,17 @@ class PostingsController < ApplicationController
   def show
     @review = Review.new
     @reviews = @posting.reviews
-    @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @posting})
-    logger.debug (@posting.inspect)
+
+    # Map related.....
+    # Build object to contain pin (map marker) type and coords (from @posting) to display on map
+    # Before rendering the map first check to see if any of the postings have any coords..if not
+    # map @mapAttributes_json object needed for map will not be built..note: corresponding javascript code
+    # on webpage will check to see if @mapAttributes_json to see if object is nil..if nil it will not call
+    # the function to build the map and hence no map will be rendered
+    if @posting.coords
+      @mapAttributes_json = RentMyThing.gather_map_attributes({"/images/red-pin.png" => @posting})
+
+    end
   end
 
   # GET /postings/new
