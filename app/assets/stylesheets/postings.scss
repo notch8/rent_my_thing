@@ -9,12 +9,28 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Serif);
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
 
+#descriptionHead {
+  font-size: 22px;
+  padding-bottom: 10px;
+  line-height: 120%;
+}
+
+#descriptionBody {
+  font-size: 16px;
+  padding-bottom: 10px;
+  line-height: 120%;
+}
+
 #uploadimage {
   padding-bottom: 60%;
 }
 
 #uploadimage img {
-  position: absolute;
+  height: auto;
+  max-height: 100%;
+
+  width: auto;
+  max-width: 100%;
 }
 
 .imagenavigation {
@@ -31,14 +47,16 @@
 }
 
 .carousel-inner img.resize {
-  width:540px;
   height: auto;
+    max-height: 100%;
+
+    width: auto;
+    max-width: 100%;
 }
 
 
 .year-make-model {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  font-family: 'PT+Serif';
   color: #555555;
   line-height: 1.0em;
   font-size: 32px;
@@ -47,7 +65,7 @@
   display: inline-block;
   padding: 10px 20px;
   position: absolute;
-  top: -10px;
+  top: 10px;
 }
 
 .vehicle-name {
@@ -287,11 +305,58 @@ h2.hovertown {
 
 #blacklink {
   color:black;
-  font-family: 'PT Serif', serif;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: -20px;
+  font-size: 35px;
+}
+
+.category {
+  font-size: 35px;
+  margin-bottom: 30px;
 }
 
 .showpage {
   padding: 40px;
+}
+
+#cost {
+  font-size: 16px;
+  width: 400px;
+  height: 100px;
+  padding: 10px;
+  border: 5x solid navy;
+  background: gray;
+  margin-top: 55px;
+  text-align: center;
+  align: center;
+  color: white;
+}
+
+#reserve {
+  align: center;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#offerContainer {
+  font-size: 16px;
+  width: 400px;
+  height: 100px;
+  border: 5x solid navy;
+  background: gray;
+  align: center;
+  text-align: center;
+}
+
+#offeredBy {
+  align: center;
+  text-align: center;
+  margin-top: 30px;
+  color: white;
+}
+
+#reservation {
+  font-size: 20px;
 }
 
 
@@ -325,4 +390,9 @@ h2.hovertown {
   background:#197fe6;
   color:#f2c319;
   font-weight:700;
+}
+
+.carousel-inner img {
+  width: 500px;
+  height: 300px !important;
 }

@@ -1,18 +1,22 @@
 <div class='row'>
-  <div class="showpage col-md-6" id='blacklink'>
+  <div class="showpage col-md-6" id='blacklink' >
+    <td class="td-text col-md-10"><%= @posting.category.try :name %></td><br><br>
 
     <div id="thumbnails" class="carousel slide" data-ride="carousel">
 
       <ol class="carousel-indicators">
         <% @posting.uploads.each_with_index do |image, i| %>
-          <li data-target="#thumbnails" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>"></li>
+        <li data-target="#thumbnails" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>"></li>
         <% end %>
       </ol>
-
-      <div class="carousel-inner">
-        <% @posting.uploads.each_with_index do |image, i| %>
+      <div class="vehicle-make-model-and-name">
+        <div class="carousel-inner">
+          <% @posting.uploads.each_with_index do |image, i| %>
           <div class="item <%= i == 0 ? "active" : "" %>"><%= image_tag image.uploaded_file.url(:medium) %></div>
-        <% end %>
+          <% end %>
+        </div>
+        <h1 class="year-make-model"><%= @posting.title %>
+        </h1>
       </div>
       <a class="left carousel-control" href="#thumbnails" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -23,102 +27,111 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-
     <br>
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <th class="th-text col-md-2">Title:</th>
-          <td class="td-text col-md-10"><%= @posting.title %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">Description:</th>
-          <td class="td-text col-md-10"><%= @posting.description %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">Category:</th>
-          <td class="td-text col-md-10"><%= @posting.category.try :name %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">Cost:</th>
-          <td class="td-text col-md-10"><%= @posting.cost %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">Dates Available:</th>
-          <td class="td-text col-md-10"><%= @posting.available_dates.try :first %> to <%= @posting.available_dates.try :last %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">Street:</th>
-          <td class="td-text col-md-10"><%= @posting.street %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">City:</th>
-          <td class="td-text col-md-10"><%= @posting.city %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">State:</th>
-          <td class="td-text col-md-10"><%= @posting.state %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">Zip:</th>
-          <td class="td-text col-md-10"><%= @posting.zip %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">Phone:</th>
-          <td class="td-text col-md-10"><%= @posting.phone %></td>
-        </tr>
-        <tr>
-          <th class="th-text col-md-2">Offered By:</th>
-          <% if @posting.user %>
-            <td class="td-text col-md-10"><%= link_to  @posting.user.email, @posting.user %></td>
-          <% else %>
-            <td class="td-text col-md-10"></div>
-          <% end %>
-        </tr>
-        <tr>
-          <td colspan="2">
-          <div >
-            <%= render "reviews/form", :locals => { :review => @review } %> | <%= rating_for @posting, "title", disable_after_rate: false %>
+    <tbody>
+      <tr>
+        <div id='descriptionHead'>
+          About the rental:
+        </div>
+          <div id="descriptionBody">
+            <td class="td-text col-md-12" id="description"><%= @posting.description %></td>
+
           </div>
-        </td>
-        </tr>
-      </tbody>
-    </table>
 
-    <%= form_tag new_posting_reservation_path(@posting), method: :get %>
-      <%= render 'shared/date_range_picker' %>
+      </tr>
+    </tbody>
+    <table class="table table-bordered">
+      <!-- <tr>
+      <th class="th-text col-md-2">Cost:</th>
+      <td class="td-text col-md-10"><%= @posting.cost %></td>
+    </tr> -->
+    <tr>
+      <th class="th-text col-md-2">Dates Available:</th>
+      <td class="td-text col-md-10"><%= @posting.available_dates.try :first %> to <%= @posting.available_dates.try :last %></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div >
+          <%= render "reviews/form", :locals => { :review => @review } %> <%= rating_for @posting, "title", disable_after_rate: false %>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-      <!-- <input type="submit" value="Reserve"> -->
+<%= form_tag new_posting_reservation_path(@posting), method: :get %>
+<%= render 'shared/date_range_picker' %>
+
+<!-- <input type="submit" value="Reserve"> -->
+
+</form>
+
+<!-- <br><br> -->
+<!-- <div class="btn-group">
+<%= link_to 'Show', edit_posting_path(@posting), :class => "btn btn-primary", :role => "button" %>
+<%= link_to 'Back', postings_path, :class => "btn btn-primary", :role => "button" %>
+</div> -->
+
+<!-- <%= link_to 'Edit', edit_posting_path(@posting) %> |
+<%= link_to 'Back', postings_path %> -->
+</div>
+
+<div class="col-md-6">
+  <div id="cost">
+    COST <%= @posting.cost %>
+    <div id='reserve'>
       <%= submit_tag "Reserve", :class => 'btn btn-primary', :role => "button" %>
-    </form>
-
-    <br><br>
-      <div class="btn-group">
-      <%= link_to 'Show', edit_posting_path(@posting), :class => "btn btn-primary", :role => "button" %>
-      <%= link_to 'Back', postings_path, :class => "btn btn-primary", :role => "button" %>
     </div>
-
-    <!-- <%= link_to 'Edit', edit_posting_path(@posting) %> |
-    <%= link_to 'Back', postings_path %> -->
+  </div>
+  <div id="offerContainer">
+    <div id='offeredBy'>
+      OFFERED BY
+      <% if @posting.user %>
+      <div class="col-md-10"><%= link_to  @posting.user.email, users_path(@posting.user_id) %></div>
+      <% else %>
+      <div class="col-md-10"></div>
+      <% end %>
+    </div>
   </div>
 
 
-  <div id="map" class="map col-md-6" >
+  <div id="map" class="map">
+
     <!-- <div id="popup" data-original-title="" title=""></div> -->
   </div>
+</div>
   <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""></div>
-
-
-
   <div class="container col-md-6">
+    <table class="table table-bordered">
+      <thead>
+      </thead>
+      <tr>
+        <th>Street:</th>
+        <td><%= @posting.street %></td>
+      </tr>
+      <tr>
+        <th>City:</th>
+        <td><%= @posting.city %></td>
+      </tr>
+      <tr>
+        <th>State:</th>
+        <td><%= @posting.state %></td>
+      </tr>
+      <tr>
+        <th>Zip:</th>
+        <td><%= @posting.zip %></td>
+      </tr>
+    </table>
+
+
 
     <h3><strong> REVIEWS </strong></h3>
     <table class="table table-bordered">
-    <thead>
-      <th>Comments</th>
-      <th>Created</th>
-      <th>Rating</th>
-    </thead>
+      <thead>
+        <th>Comments</th>
+        <th>Created</th>
+        <th>Rating</th>
+      </thead>
       <tbody>
         <%= render @reviews %>
       </tbody>
