@@ -21,8 +21,6 @@ class PostingsController < ApplicationController
   def index
     @upload = Upload.new
 
-    @postings = Posting.all.paginate(page: params[:page]).includes :category, :uploads
-
     start_date = params[:start_date]
     end_date = params[:end_date]
     category_id = params[:category_id]
@@ -33,7 +31,7 @@ class PostingsController < ApplicationController
 
     #Hack to prevent will_paginate getting confused and giving me a nested route when I don't want one
     params.delete :category_id if params[:category_id].blank?
-    @postings = Posting.paginate(:page => params[:page])
+    @postings = Posting.order("updated_at DESC").paginate(:page => params[:page])
 
 
     if start_date.present? && end_date.present?
@@ -137,7 +135,7 @@ class PostingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
-      params.require(:posting).permit(:title, :description, :category_id, :rate,
+      params.require(:posting).permit(:title, :description, :category_id, :cost,
           :date_range, :street, :state, :zip, :phone, :email, :city, :image)
     end
 
