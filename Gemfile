@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
+
+
+gem 'ratyrate'
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 #Allow image uploads to database
 gem 'jquery-fileupload-rails'
