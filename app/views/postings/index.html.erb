@@ -3,44 +3,32 @@
 <div class='row'>
   <div class="col-md-6">
     <table class="list-table">
-      <thead class="list-table-head">
-        <tr>
-          <th>Category</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Cost</th>
-          <th>Date range</th>
-          <th>Other Actions</th>
-        </tr>
-      </thead>
-
-<table class="list-table">
-
-  <tbody class="list-table-body">
-    <% @postings.each do |posting| %>
-    <tr id="whitelink">
-        <td class="list-table-element" id="postings">
-        <%= link_to(posting.title, action: 'show', id: posting.id) %>
-        <td class="list-table-element"><%= posting.category.try :name %></td>
-        <td class="list-table-element description-column"><%= posting.description %></td>
-        <td class="list-table-element"><%= posting.available_dates %></td>
-        <td class="list-table-element"><%= link_to 'Show', posting %> |
-          <%= link_to 'Edit', edit_posting_path(posting) %> |
-          <%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <tbody class="list-table-body">
+        <% @postings.each do |posting| %>
+        <tr id="whitelink">
+            <td class="list-table-element" id="postings">
+            <%= link_to(posting.title, action: 'show', id: posting.id) %>
+            <td class="list-table-element"><%= posting.category.try :name %></td>
+            <td class="list-table-element description-column"><%= posting.description %></td>
+            <td class="list-table-element"><%= posting.available_dates %></td>
+            <td class="list-table-element"><%= link_to 'Show', posting %> |
+              <%= link_to 'Edit', edit_posting_path(posting) %> |
+              <%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
     <%= will_paginate @postings %>
-
-
     <br>
-
     <div id="whitelink">
-    <%= link_to 'New Posting', new_posting_path, id:"whitelink" %>
+      <%= link_to 'New Posting', new_posting_path, id:"whitelink" %>
     </div>
-    <div id="map" class="map col-md-6" >
-      <!-- <div id="popup" data-original-title="" title=""></div> -->
-    </div>
-    <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""
-    ></div>
   </div>
+  <div id="map" class="map col-md-6" >
+    <!-- <div id="popup" data-original-title="" title=""></div> -->
+  </div>
+  <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""
+  ></div>
 </div>
 <script>
 function drawTheThings(){
