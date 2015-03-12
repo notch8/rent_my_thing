@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :reviews
   resources :uploads
 
-
   devise_for :users
   resources :users
   resources :users do
