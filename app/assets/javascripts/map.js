@@ -118,9 +118,6 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
     // http://openlayers.org/en/v3.0.0/examples/icon.js
     // ***********************************************
 
-//   Line below is suggested way of accessing element
-//    var element = document.getElementById('popup');
-
     // The line below is required to get popup to appear
     var element = $('.popup').first();
 
@@ -160,13 +157,13 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
           // marker value (i.e., name) into the HTML in the location that bootstrap pull the
           // the popup value (i.e., 'data-content')
           $(element).attr('data-content', name)
-          // $(element).attr('data-placement', 'auto top')
 
           $(element).popover({
             'trigger': 'hover click',
             'placement': 'auto top',
             'html': true,
             'content': name,
+            // Had to add container to make "auto" placement work properly
             container: $('.map').first()
           });
           $(element).popover('show');
