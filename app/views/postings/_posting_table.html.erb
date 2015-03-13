@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <td class="td-text col-md-12" id="description">
+          <div class="th-text">About the rental:<br></div>
+          <div class="td-text"><%= @posting.description %></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="td-text col-md-10"><%= @posting.available_dates.try :first %> to <%= @posting.available_dates.try :last %></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div >
+          <%= render "reviews/form", :locals => { :review => @review } %> <%= rating_for @posting, "title", disable_after_rate: false %>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
