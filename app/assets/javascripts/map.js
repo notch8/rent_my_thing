@@ -61,7 +61,7 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
         iconFeature.setStyle(
           new ol.style.Style({
             image: new ol.style.Icon({
-              anchor: [0.5, 12],
+              anchor: [0.2, 1],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
               opacity: 0.75,
@@ -117,11 +117,13 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
     //  Popup logic
     // http://openlayers.org/en/v3.0.0/examples/icon.js
     // ***********************************************
+
+    // The line below is required to get popup to appear
     var element = $('.popup').first();
 
     var popup = new ol.Overlay({
       element: element,
-      positioning: 'bottom-center',
+      positioning: 'auto top',
       stopEvent: false
     });
     map.addOverlay(popup);
@@ -143,7 +145,11 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
           var name = feature.get('name')
           var geometry = feature.getGeometry();
           var coord = geometry.getCoordinates();
+
+          // Next line Added for testing
+          // var element = $('.popup').this
           popup.setPosition(coord);
+
           // The line below fixed the scenario where clicking on one marker (e.g., 'renter')
           // and then immediately clicking on another marker (e.g, 'rental')  caused the wrong popup
           // content to appear on the newly clicked marker (e.g., popup displayed 'renter' rather than
@@ -151,11 +157,14 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
           // marker value (i.e., name) into the HTML in the location that bootstrap pull the
           // the popup value (i.e., 'data-content')
           $(element).attr('data-content', name)
+
           $(element).popover({
             'trigger': 'hover click',
-            'placement': 'top',
+            'placement': 'auto top',
             'html': true,
-            'content': name
+            'content': name,
+            // Had to add container to make "auto" placement work properly
+            container: $('.map').first()
           });
           $(element).popover('show');
         }
