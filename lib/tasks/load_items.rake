@@ -54,7 +54,9 @@ task :load_items => :environment do
       new_item.street = "3808 Ray St."
       new_item.city = "San Diego"
       new_item.zip = "92104"
-      new_item.user = users[(rand() * 10).floor]
+      user_id = rand(9)
+      puts "userId: #{user_id} actual user: #{users[user_id].id}"
+      new_item.user_id = users[user_id].id
       new_item.save
     end
 

@@ -48,17 +48,16 @@
     <tr>
       <td class="th-text col-md-2"><%= f.label :email, :class => "label-text" %></td>
       <td colspan="5" class="td-text col-md-10"><%= f.text_field :email, :class => "input-text" %></td>
+      <% end %>
     </tr>
     <tr>
-      <td class="th-text col-md-2"><%= f.label :image, :class => "label-text" %></td>
-      <td colspan="5" class="td-text col-md-10"><%= f.file_field :image, :class => "input-text" %></td>
+      <td class="td-text" colspan="2"><%= render 'new_show' %></td>
     </tr>
   </tbody>
 </table>
 
 <div class="actions col-md-2">
-  <%= f.submit "Update Posting", :class => 'btn btn-primary', :role => "button" %>
-  <% end %>
+  <%= submit_tag "Update Posting", :class => 'btn btn-primary', :role => "button" %>
   <br><br>
     <div class="btn-group">
     <%= link_to 'Show', @posting, :class => "btn btn-primary", :role => "button" %>

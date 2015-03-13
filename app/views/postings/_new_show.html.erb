@@ -4,33 +4,8 @@
   <%= f.label :uploaded_file, t('.upload_new_file') %>
   <%= f.file_field :uploaded_file, multiple: true, name: 'upload[uploaded_file]' %>
   <%= f.submit 'Save', class: 'btn' %>
+
+  <% # jquery upload template # %>
+  <script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script>
+  <div id="page" onclick="void(0)">
 <% end %>
-
-<% # jquery upload template # %>
-<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script>
-<div id="page" onclick="void(0)">
-
-<!--
-<div id="content">
-  <div id="uploadimage">
-    <% @posting.uploads.each_with_index do |image, i| %>
-      <div class="item <%= i == 0 ? "active" : "" %>"><%= image_tag image.uploaded_file.url(:medium) %></div>
-    <% end %>
-    <div class="image-navigation">
-      <a href="#" class="previous"></a>
-      <a href="#" class="next"></a>
-    </div>
-    <div class="vehicle-make-model-and-name">
-      <h1 class="year-make-model">2011 Porsche
-      </h1>
-      <h2 class="vehicle-name">Boxter
-      </h2>
-    </div>
-  </div>
-  <div id="left-column">
-    <div id="vehicle-details">A few dents in the side.
-    </div>
-  </div>
-  <div id="right-column">
-  </div>
-</div> -->
