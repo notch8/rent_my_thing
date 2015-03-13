@@ -15,8 +15,6 @@ ActiveRecord::Schema.define(version: 20150313170935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "fuzzystrmatch"
-  enable_extension "postgis"
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -68,20 +66,20 @@ ActiveRecord::Schema.define(version: 20150313170935) do
     t.integer   "category_id"
     t.daterange "available_dates"
     t.string    "street"
+    t.string    "city"
     t.string    "zip",                limit: 5
     t.string    "phone"
     t.string    "email"
-    t.datetime  "created_at",                                            null: false
-    t.datetime  "updated_at",                                            null: false
+    t.datetime  "created_at",                                           null: false
+    t.datetime  "updated_at",                                           null: false
     t.string    "state",              limit: 2
-    t.string    "city",               limit: 30
     t.string    "image_file_name"
     t.string    "image_content_type"
     t.integer   "image_file_size"
     t.datetime  "image_updated_at"
     t.integer   "user_id"
     t.point     "coords"
-    t.decimal   "cost",                          precision: 8, scale: 2
+    t.decimal   "cost",                         precision: 8, scale: 2
   end
 
   add_index "postings", ["category_id"], name: "index_postings_on_category_id", using: :btree
@@ -125,13 +123,6 @@ ActiveRecord::Schema.define(version: 20150313170935) do
     t.text     "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "spatial_ref_sys", primary_key: "srid", force: :cascade do |t|
-    t.string  "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string  "srtext",    limit: 2048
-    t.string  "proj4text", limit: 2048
   end
 
   create_table "uploads", force: :cascade do |t|

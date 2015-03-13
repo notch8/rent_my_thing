@@ -1,127 +1,58 @@
 <div class='row'>
   <div class="showpage col-md-6" id='blacklink' >
-    <td class="td-text col-md-10"><%= @posting.category.try :name %></td><br><br>
 
-    <div id="thumbnails" class="carousel slide" data-ride="carousel">
-
-      <ol class="carousel-indicators">
-        <% @posting.uploads.each_with_index do |image, i| %>
-        <li data-target="#thumbnails" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>"></li>
-        <% end %>
-      </ol>
-      <div class="vehicle-make-model-and-name">
-        <div class="carousel-inner">
-          <% @posting.uploads.each_with_index do |image, i| %>
-          <div class="item <%= i == 0 ? "active" : "" %>"><%= image_tag image.uploaded_file.url(:medium) %></div>
-          <% end %>
-        </div>
-        <h1 class="year-make-model"><%= @posting.title %>
-        </h1>
-      </div>
-      <a class="left carousel-control" href="#thumbnails" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#thumbnails" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+    <div class="row">
+      <%= render 'carousel' %>
     </div>
     <br>
-    <tbody>
-      <tr>
-        <div id='descriptionHead'>
-          About the rental:
-        </div>
-          <div id="descriptionBody">
-            <td class="td-text col-md-12" id="description"><%= @posting.description %></td>
-
-          </div>
-
-      </tr>
-    </tbody>
-    <table class="table table-bordered">
-      <!-- <tr>
-      <th class="th-text col-md-2">Cost:</th>
-      <td class="td-text col-md-10"><%= @posting.cost %></td>
-    </tr> -->
-    <tr>
-      <th class="th-text col-md-2">Dates Available:</th>
-      <td class="td-text col-md-10"><%= @posting.available_dates.try :first %> to <%= @posting.available_dates.try :last %></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <div >
-          <%= render "reviews/form", :locals => { :review => @review } %> <%= rating_for @posting, "title", disable_after_rate: false %>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<%= form_tag new_posting_reservation_path(@posting), method: :get %>
-<%= render 'shared/date_range_picker' %>
-
-<!-- <input type="submit" value="Reserve"> -->
-
-</form>
-
-<!-- <br><br> -->
-<!-- <div class="btn-group">
-<%= link_to 'Show', edit_posting_path(@posting), :class => "btn btn-primary", :role => "button" %>
-<%= link_to 'Back', postings_path, :class => "btn btn-primary", :role => "button" %>
-</div> -->
-
-<!-- <%= link_to 'Edit', edit_posting_path(@posting) %> |
-<%= link_to 'Back', postings_path %> -->
-</div>
-
-<div class="col-md-6">
-  <div id="cost">
-    COST <%= @posting.cost %>
-    <div id='reserve'>
-      <%= submit_tag "Reserve", :class => 'btn btn-primary', :role => "button" %>
+    <div class="row">
+      <%= render 'posting_table' %>
     </div>
+
+    <div class="row">
+      <div id='reserve'>
+        <%= form_tag new_posting_reservation_path(@posting), method: :get %>
+          <%= render 'shared/date_range_picker' %>
+          <%= submit_tag "Reserve", :class => 'btn btn-primary', :role => "button" %>
+        </form>
+      </div>
+    </div>
+
   </div>
-  <div id="offerContainer">
-    <div id='offeredBy'>
-      OFFERED BY
-      <% if @posting.user %>
-      <div class="col-md-10"><%= link_to  @posting.user.email, users_path(@posting.user_id) %></div>
-      <% else %>
-      <div class="col-md-10"></div>
-      <% end %>
+
+  <div class="col-md-6">
+    <div id="cost">
+      COST <%= @posting.cost %>
+    </div>
+    <div id="offerContainer">
+      <div id='offeredBy'>
+        OFFERED BY
+        <% if @posting.user %>
+        <div class="col-md-10"><%= link_to  @posting.user.email, users_path(@posting.user_id) %></div>
+        <% else %>
+        <div class="col-md-10"></div>
+        <% end %>
+      </div>
+    </div>
+
+
+
+    <div id="map" class="map">
+      <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""></div>
     </div>
   </div>
 
-
-  <div id="map" class="map">
-
-    <!-- <div id="popup" data-original-title="" title=""></div> -->
-    <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""></div>
-  </div>
   <div class="container col-md-6">
-    <table class="table table-bordered">
-      <thead>
-      </thead>
-      <tr>
-        <th>Street:</th>
-        <td><%= @posting.street %></td>
-      </tr>
-      <tr>
-        <th>City:</th>
-        <td><%= @posting.city %></td>
-      </tr>
-      <tr>
-        <th>State:</th>
-        <td><%= @posting.state %></td>
-      </tr>
-      <tr>
-        <th>Zip:</th>
-        <td><%= @posting.zip %></td>
-      </tr>
-    </table>
 
+  <div class="row">
+    <br><br>
+    <div class="btn-group">
+      <%= link_to 'Edit', edit_posting_path(@posting), :class => "btn btn-primary", :role => "button" %>
+      <%= link_to 'Back', postings_path, :class => "btn btn-primary", :role => "button" %>
+    </div>
+  </div>
+
+  <div class="row">
     <h3><strong> REVIEWS </strong></h3>
     <table class="table table-bordered">
       <thead>
@@ -135,21 +66,17 @@
     </table>
   </div>
 </div>
-<%= render 'new_show' %>
-<% if @mapAttributes_json %>
+
 <script>
-function drawTheThings(){
-  if (window.RentMyThing && window.RentMyThing.drawMap) {
-    drawMap = window.RentMyThing.drawMap
-    mapAttributes = <%= @mapAttributes_json.html_safe %>
-    drawMap(mapAttributes)
-  } else {
-    console.log("Map.js not loaded before trying to draw map")
+  function drawTheThings(){
+    if (window.RentMyThing && window.RentMyThing.drawMap) {
+      drawMap = window.RentMyThing.drawMap
+      mapAttributes = <%= @mapAttributes_json == nil ? nil : @mapAttributes_json.html_safe %>
+      drawMap(mapAttributes)
+    } else {
+      console.log("Map.js not loaded before trying to draw map")
+    }
   }
-}
-$(document).on ('page:change', drawTheThings);
-$(document).ready(drawTheThings);
+  $(document).on ('page:change', drawTheThings);
+  $(document).ready(drawTheThings);
 </script>
-<% else %>
-   <% logger.debug(" !!!!!!!! No coords for posting(s) so map not drawn !!!!!!!!!") %>
-<% end %>
