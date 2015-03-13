@@ -7,8 +7,12 @@
   </ol>
   <div class="vehicle-make-model-and-name">
     <div class="carousel-inner">
-      <% @posting.uploads.each_with_index do |image, i| %>
+      <% if @posting.uploads.count > 0 %>
+        <% @posting.uploads.each_with_index do |image, i| %>
       <div class="item <%= i == 0 ? "active" : "" %>"><%= image_tag image.uploaded_file.url(:medium) %></div>
+      <% end %>
+      <% else %>
+        <img src="http://www.vinsmoselle.lu/media/cache/397_resized_700_700_90_516407cbbe17d_placeholder.jpg">
       <% end %>
     </div>
   </div>

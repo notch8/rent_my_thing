@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 20150313170935) do
     t.integer   "image_file_size"
     t.datetime  "image_updated_at"
     t.integer   "user_id"
-    t.decimal   "cost",                         precision: 8, scale: 2
     t.point     "coords"
+    t.decimal   "cost",                         precision: 8, scale: 2
   end
 
   add_index "postings", ["category_id"], name: "index_postings_on_category_id", using: :btree
