@@ -11,5 +11,7 @@
 <strong>  Dates Requested: </strong>
 <br><br>
 <%= render 'form' %>
-<br><HR>
-  <%= link_to 'Cancel', reservations_path %>
+
+<div class="btn-group">
+  <%= link_to 'Cancel', posting_path(@posting.id), :class => "btn btn-primary", :role => "button" %>
+</div>
