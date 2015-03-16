@@ -1,6 +1,7 @@
 div#map {
+  margin-top: 16px;
   height: 400px;
-  width: 512px;
+  width: 400px;
 }
 
 .popover{
