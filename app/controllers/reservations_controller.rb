@@ -5,7 +5,8 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+    # logger.debug ("Current user: #{current_user[:id]}  User Id: #{params[:id]}")
+    @reservations = Reservation.where("user_id = " + current_user[:id].to_s)
   end
 
   # GET /reservations/1
@@ -85,6 +86,8 @@ class ReservationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
       @reservation = Reservation.find(params[:id])
+      @posting = @reservation.posting
+      @user = @reservation.user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
