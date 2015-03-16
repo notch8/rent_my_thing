@@ -1,10 +1,11 @@
 <div id="thumbnails" class="carousel slide" data-ride="carousel">
-
+  <% if @posting.uploads.count > 0 %>
   <ol class="carousel-indicators">
     <% @posting.uploads.each_with_index do |image, i| %>
     <li data-target="#thumbnails" data-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" %>"></li>
     <% end %>
   </ol>
+  <% end %>
   <div class="vehicle-make-model-and-name">
     <div class="carousel-inner">
       <% if @posting.uploads.count > 0 %>
@@ -12,7 +13,9 @@
       <div class="item <%= i == 0 ? "active" : "" %>"><%= image_tag image.uploaded_file.url(:medium) %></div>
       <% end %>
       <% else %>
+      <div class="item active">
         <img src="http://www.vinsmoselle.lu/media/cache/397_resized_700_700_90_516407cbbe17d_placeholder.jpg">
+      </div>
       <% end %>
     </div>
   </div>
