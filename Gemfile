@@ -54,4 +54,7 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
