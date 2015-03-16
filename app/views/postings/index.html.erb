@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <%= render 'postings/search_form' %>
 <div class='row'>
-  <div class="col-md-6">
+  <div class="col-md-7">
     <table class="list-table">
       <tbody class="list-table-body">
         <% @postings.each do |posting| %>
@@ -24,7 +24,7 @@
       <%= link_to 'New Posting', new_posting_path, id:"whitelink" %>
     </div>
   </div>
-  <div id="map" class="map col-md-6" >
+  <div id="map" class="map col-md-4" >
     <!-- <div id="popup" data-original-title="" title=""></div> -->
   </div>
   <div class="popup" data-trigger="hover" data-toggle="popover" data-original-title="" title="" data-placement=""
