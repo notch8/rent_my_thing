@@ -135,8 +135,10 @@ html, body {
   text-align: center;
   align: center;
   margin-left: auto;
-    margin-right: auto;
+  margin-right: auto;
 }
+
+
 
 .textarea-styled {
   height: 120px;
@@ -285,10 +287,16 @@ h2.hovertown {
 .list-table-body {
 }
 
+
+
 .list-table-element {
 //  border: 2px solid gray;
   background-color: GhostWhite;
   background: rgba(54, 54, 54, 0.2);
+  // Added by Jet
+  text-align: left;
+  vertical-align: top;
+
 }
 
 .list-table-head {
@@ -371,6 +379,7 @@ h2.hovertown {
 }
 
 
+}
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
