@@ -17,7 +17,7 @@
     <%= [ @reservation.when.last ]%>
   </div>
 
-  <%= f.hidden_field :when %>
+  <%= f.hidden_field :when, value: "#{@reservation.when.begin.strftime '%m-%d-%Y'} - #{@reservation.when.end.strftime '%m-%d-%Y'}" %>
   <br>
   <div class="actions">
     <%= f.submit %>

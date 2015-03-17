@@ -68,7 +68,6 @@ class PostingsController < ApplicationController
   # GET /postings/1
   # GET /postings/1.json
   def show
-    logger.debug("**************Posting.cost:  #{@posting.coords}")
     @review = Review.new
     @reviews = @posting.reviews
 
