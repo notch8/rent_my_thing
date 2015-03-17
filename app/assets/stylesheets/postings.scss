@@ -310,11 +310,11 @@ h2.hovertown {
   width: 30%;
 }
 
-#whitelink {
+.whitelink {
   color: white;
 }
 
-#whitelink:visited {
+.whitelink:visited {
   color: skyblue;
 }
 
@@ -376,6 +376,11 @@ h2.hovertown {
 
 #reservation {
   font-size: 20px;
+}
+// Class that is added inorder to highlight posting row corresponding to marker
+// hover over
+tr.highlightRow {
+  background-color: yellow;
 }
 
 /* CUSTOMIZE THE NAVBAR

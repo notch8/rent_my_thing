@@ -5,7 +5,7 @@ module RentMyThing
       [*locations].each do |location|
         if location.coords
           map_attributes[pin_type] ||= []
-          map_attributes[pin_type].push [location.address, [location.coords[0], location.coords[1]]]
+          map_attributes[pin_type].push({address: location.address, coords: [location.coords[0], location.coords[1]], highlight: "posting_#{location.id}"})
         end
       end
     end
