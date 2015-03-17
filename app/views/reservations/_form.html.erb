@@ -12,13 +12,13 @@
   <% end %>
 
   <div>
-    <%= @reservation.when.first%>
-    ,
-    <%=@reservation.when.last %>
+    <%= [ @reservation.when.first ]%>
+     to
+    <%= [ @reservation.when.last ]%>
   </div>
 
   <%= f.hidden_field :when %>
-
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
