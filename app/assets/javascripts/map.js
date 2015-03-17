@@ -31,11 +31,16 @@
   //     '/images/green-pin.png': [[-117.129137,32.747502]]}
 
 window.RentMyThing = window.RentMyThing || {}
+window.RentMyThing.yellow_marker = new ol.style.Style({image: new ol.style.Circle({radius: 10, fill: new ol.style.Fill({color: 'yellow'})})});
+window.RentMyThing.blue_marker = new ol.style.Style({image: new ol.style.Circle({radius: 5, fill: new ol.style.Fill({color: 'blue'})})});
+
 window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
+  var element = $('.popup').first();
+
+  yellow_marker = window.RentMyThing.yellow_marker
+  blue_marker = window.RentMyThing.blue_marker
     var popuplabel = '';
     var iconLocations = [];
-    var yellow_marker = new ol.style.Style({image: new ol.style.Circle({radius: 10, fill: new ol.style.Fill({color: 'yellow'})})});
-    var blue_marker = new ol.style.Style({image: new ol.style.Circle({radius: 5, fill: new ol.style.Fill({color: 'blue'})})});
 
     var vectorSource = new ol.source.Vector({
      //create empty vector -- not sure if this is needed??????
@@ -63,24 +68,26 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
           // Added line for popup
           name: popupLabel
         })
-        //************************************************************
-        // // Create association between marker and posting
-        // // by adding posting_id to marker object
-        // iconFeature.highlight = highlight;
-        //
-        // // Create association between posting and marker
-        // // by adding marker info to posting_id
-        // $('#' + highlight).data('icon', iconFeature);
-        //
-        // // Set up event handler so that when user hovers over
-        // // posting item it will modify "look" of marker
-        // $('#' + highlight).hover(function() {
-        //   highlight_icon(iconFeature);
-        // },
-        //   function() {
-        //     unhighlight_icon(iconFeature)
-        // })
-        //****************************************************************
+        iconFeature.highlight = highlight;
+
+        // Create association between posting and marker
+        // by adding marker info to posting_id
+        $('#' + highlight).data('icon', iconFeature);
+
+        // Set up event handler so that when user hovers over
+        // posting item it will modify "look" of marker
+        var name = iconFeature.get('name')
+        var row = $('#' + highlight)
+        row.hover(function() {
+          highlightIcon(iconFeature);
+          highlightRow(row)
+          showPopup(element, iconFeature, name);
+        },
+          function() {
+            hidePopover(element)
+            unhighlightIcon(iconFeature)
+            unhighlightRows()
+        })
 
         //$(this).data('ci')
 
@@ -156,16 +163,17 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
     // ***********************************************
 
     // The line below is required to get popup to appear
-    var element = $('.popup').first();
 
-    var popup = new ol.Overlay({
+    window.RentMyThing.popup = new ol.Overlay({
       element: element,
       positioning: 'auto top',
       stopEvent: false
     });
+
+    var popup = window.RentMyThing.popup;
     map.addOverlay(popup);
 
-    var showing;
+    var lastFeature;
     // display popup on click
     map.on('pointermove', function(evt) {
       var feature = map.forEachFeatureAtPixel(evt.pixel,
@@ -178,17 +186,14 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
         // icon/marker and there is incidental/minor movement in the mouse. Setting the show flag ensures
         // that you don't attempt to redraw the popup over and over (and get flickering) with minor mouse
         // movements
-        if (! showing) {
-          feature.setStyle(yellow_marker);
-          showing = true;
+        if (! lastFeature) {
+          highlightIcon(feature);
+          lastFeature = feature;
          var highlight = feature.highlight
          // Code to highlight the posting element in the posting table associate
-         $('#' + highlight).addClass("highlightRow")
-          var name = feature.get('name')
-          var geometry = feature.getGeometry();
-          var coord = geometry.getCoordinates();
+         highlightRow($('#' + highlight))
 
-          popup.setPosition(coord);
+          var name = feature.get('name')
 
           // The line below fixed the scenario where clicking on one marker (e.g., 'renter')
           // and then immediately clicking on another marker (e.g, 'rental')  caused the wrong popup
@@ -196,33 +201,27 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
           // rental). The line below uses jQuery method .attr to put the value of the newly clicked
           // marker value (i.e., name) into the HTML in the location that bootstrap pull the
           // the popup value (i.e., 'data-content')
-          $(element).attr('data-content', name)
-
-          $(element).popover({
-            'trigger': 'hover click',
-            'placement': 'auto top',
-            'html': true,
-            'content': name,
+          showPopup(element, feature, name);
             // Had to add container to make "auto" placement work properly
-            container: $('.map').first()
-          });
-          $(element).popover('show');
+          // $(element).popover('show');
         }
       } else {
-        showing = false;
-        feature.setStyle(blue_marker);
-       $("tr.whitelink").removeClass("highlightRow")
-        $(element).popover('destroy');
+        if(lastFeature) {
+          unhighlightIcon(lastFeature)
+          lastFeature = undefined
+          unhighlightRows();
+         hidePopover(element);
+        }
       }
     });
 
     // change mouse cursor when over marker
     // map.on('pointermove', function(e) {
     map.onmousemove = function(e) {
-      if (e.dragging) {
-        $(element).popover('destroy');
-        return;
-      }
+      // if (e.dragging) {
+      //   $(element).popover('destroy');
+      //   return;
+      // }
       var pixel = map.getEventPixel(e.originalEvent);
       var hit = map.hasFeatureAtPixel(pixel);
       var target = document.getElementById(map.getTarget());
@@ -231,7 +230,46 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
   } // End of drawmap function
 
   // // Function to change fill color of marker when row in postings table is hovered over
-  //  function highlight_icon(iconFeature)
+   function highlightIcon(icon) {
+     icon.setStyle(window.RentMyThing.yellow_marker);
+   }
   //
   //  // Function to reset marker color to
-  //  unhighlightedIcon = function highlight_icon(iconFeature)
+   function unhighlightIcon(icon) {
+     icon.setStyle(window.RentMyThing.blue_marker);
+   }
+
+   var lastPopover = null
+   function showPopup(element, feature, name) {
+     elt = $(element)
+     elt.attr('data-content', name)
+     var geometry = feature.getGeometry();
+     var coord = geometry.getCoordinates();
+
+     window.RentMyThing.popup.setPosition(coord);
+
+     elt.popover({
+       'trigger': 'hover click',
+       'placement': 'auto top',
+       'html': true,
+       'content': name,
+       container: $('.map').first()
+     });
+     elt.popover('show');
+     lastPopover = elt
+   }
+
+   function hidePopover(element) {
+     if (lastPopover) {
+       lastPopover.popover('destroy');
+       lastPopover = null;
+     }
+   }
+
+   function highlightRow(row) {
+     row.addClass("highlightRow");
+   }
+
+   function unhighlightRows() {
+     $("tr.whitelink").removeClass("highlightRow")
+   }
