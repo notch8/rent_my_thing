@@ -5,8 +5,8 @@
     <table class="list-table">
       <tbody class="list-table-body">
         <% @postings.each do |posting| %>
-        <tr id="whitelink">
-            <td class="list-table-element" id="postings">
+        <tr  id="posting_<%= posting.id %>" class="whitelink">
+            <td class="list-table-element">
             <%= link_to(posting.title, action: 'show', id: posting.id) %>
             <td class="list-table-element"><%= posting.category.try :name %></td>
             <td class="list-table-element description-column"><%= posting.description %></td>

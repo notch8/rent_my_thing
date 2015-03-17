@@ -43,12 +43,17 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
 
 
       // Inner Loop to retrieve all coordinates associated with each pin type
-      mapAttributesPlus[pinType].forEach(function(coords) {
+        mapAttributesPlus[pinType].forEach(function(attributes) {
 
-        var iconLocation = ol.proj.transform([coords[1][0], coords[1][1]], 'EPSG:4326', 'EPSG:3857')
+          address = attributes["address"]
+          coords = attributes["coords"]
+          highlight = attributes["highlight"]
+
+
+        var iconLocation = ol.proj.transform([coords[0], coords[1]], 'EPSG:4326', 'EPSG:3857')
         iconLocations.push(iconLocation)
-        popupLabel = coords[0]
-        console.log("Address: " + coords[0] + "Lon/Lat: " + coords[1][0] + ', ' + coords[1][1]);
+        popupLabel = address
+        console.log("Address: " + address + "Lon/Lat: " + coords[0] + ', ' + coords[1]);
 
         var iconFeature = new ol.Feature({
           geometry: new ol.geom.Point(iconLocation),
@@ -56,6 +61,17 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
           name: popupLabel
         })
 
+        iconFeature.highlight = highlight;
+
+        // // $('#' + highlight).data('icon', iconFeature);
+        // $('#' + highlight).hover(function(evt) {
+        //   highlight_icon(iconFeature);
+        // },
+        //   function(evt) {
+        //     unhighlight_icon(iconFeature)
+        // })
+        //$(this).data('ci')
+        
         // Create Pin styling
         iconFeature.setStyle(
           new ol.style.Style({
@@ -68,7 +84,6 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
             })
           })
         )
-        iconFeature.on('mouseover', function() {alert('hover')})
         vectorSource.addFeature(iconFeature);
       }) // End of inner loop - coords
     }); // End of outer loop - pinType
@@ -141,6 +156,9 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
         // movements
         if (! showing) {
           showing = true;
+         var highlight = feature.highlight
+         // Code to highlight the posting element in the posting table associate
+         $('#' + highlight).addClass("highlightRow")
           var name = feature.get('name')
           var geometry = feature.getGeometry();
           var coord = geometry.getCoordinates();
@@ -169,12 +187,14 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
         }
       } else {
         showing = false;
+       $("tr.whitelink").removeClass("highlightRow")
         $(element).popover('destroy');
       }
     });
 
     // change mouse cursor when over marker
-    map.on('pointermove', function(e) {
+    // map.on('pointermove', function(e) {
+    map.onmousemove = function(e) {
       if (e.dragging) {
         $(element).popover('destroy');
         return;
@@ -183,5 +203,5 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
       var hit = map.hasFeatureAtPixel(pixel);
       var target = document.getElementById(map.getTarget());
       target.style.cursor = hit ? 'pointer' : '';
-    });
+    };
   } // End of drawmap function
