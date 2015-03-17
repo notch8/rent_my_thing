@@ -60,28 +60,47 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
           // Added line for popup
           name: popupLabel
         })
-
-        iconFeature.highlight = highlight;
-
-        // // $('#' + highlight).data('icon', iconFeature);
-        // $('#' + highlight).hover(function(evt) {
+        //************************************************************
+        // // Create association between marker and posting
+        // // by adding posting_id to marker object
+        // iconFeature.highlight = highlight;
+        //
+        // // Create association between posting and marker
+        // // by adding marker info to posting_id
+        // $('#' + highlight).data('icon', iconFeature);
+        //
+        // // Set up event handler so that when user hovers over
+        // // posting item it will modify "look" of marker
+        // $('#' + highlight).hover(function() {
         //   highlight_icon(iconFeature);
         // },
-        //   function(evt) {
+        //   function() {
         //     unhighlight_icon(iconFeature)
         // })
+        //****************************************************************
+
         //$(this).data('ci')
-        
+
         // Create Pin styling
         iconFeature.setStyle(
           new ol.style.Style({
-            image: new ol.style.Icon({
-              anchor: [0.2, 1],
-              anchorXUnits: 'fraction',
-              anchorYUnits: 'pixels',
-              opacity: 0.75,
-              src: pinType  // Set pin type
+            image: new ol.style.Circle({
+              radius: 5,
+              fill: new ol.style.Fill({
+                color: '#0000FF'
+              }),
+              stroke: new ol.style.Stroke({
+                color: '#000000'
+              })
             })
+            // image: new ol.style.Icon({
+            //   anchor: [0.2, 1],
+            //   anchorXUnits: 'fraction',
+            //   anchorYUnits: 'pixels',
+            //   opacity: 0.75,
+            //   src: pinType  // Set pin type
+            // })
+
           })
         )
         vectorSource.addFeature(iconFeature);
@@ -163,8 +182,6 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
           var geometry = feature.getGeometry();
           var coord = geometry.getCoordinates();
 
-          // Next line Added for testing
-          // var element = $('.popup').this
           popup.setPosition(coord);
 
           // The line below fixed the scenario where clicking on one marker (e.g., 'renter')
@@ -205,3 +222,9 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
       target.style.cursor = hit ? 'pointer' : '';
     };
   } // End of drawmap function
+
+  // // Function to change fill color of marker when row in postings table is hovered over
+  //  function highlight_icon(iconFeature)
+  //
+  //  // Function to reset marker color to
+  //  unhighlightedIcon = function highlight_icon(iconFeature)
