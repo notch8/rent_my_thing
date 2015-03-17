@@ -34,6 +34,9 @@ window.RentMyThing = window.RentMyThing || {}
 window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
     var popuplabel = '';
     var iconLocations = [];
+    var yellow_marker = new ol.style.Style({image: new ol.style.Circle({radius: 10, fill: new ol.style.Fill({color: 'yellow'})})});
+    var blue_marker = new ol.style.Style({image: new ol.style.Circle({radius: 5, fill: new ol.style.Fill({color: 'blue'})})});
+
     var vectorSource = new ol.source.Vector({
      //create empty vector -- not sure if this is needed??????
     });
@@ -83,25 +86,26 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
 
         // Create Pin styling
         iconFeature.setStyle(
-          new ol.style.Style({
-            image: new ol.style.Circle({
-              radius: 5,
-              fill: new ol.style.Fill({
-                color: '#0000FF'
-              }),
-              stroke: new ol.style.Stroke({
-                color: '#000000'
-              })
-            })
-            // image: new ol.style.Icon({
-            //   anchor: [0.2, 1],
-            //   anchorXUnits: 'fraction',
-            //   anchorYUnits: 'pixels',
-            //   opacity: 0.75,
-            //   src: pinType  // Set pin type
-            // })
-
-          })
+          blue_marker
+          // new ol.style.Style({
+          //   image: new ol.style.Circle({
+          //     radius: 5,
+          //     fill: new ol.style.Fill({
+          //       color: '#0000FF'
+          //     }),
+          //     stroke: new ol.style.Stroke({
+          //       color: '#000000'
+          //     })
+          //   })
+          //   // image: new ol.style.Icon({
+          //   //   anchor: [0.2, 1],
+          //   //   anchorXUnits: 'fraction',
+          //   //   anchorYUnits: 'pixels',
+          //   //   opacity: 0.75,
+          //   //   src: pinType  // Set pin type
+          //   // })
+          //
+          // })
         )
         vectorSource.addFeature(iconFeature);
       }) // End of inner loop - coords
@@ -168,12 +172,14 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
           function(feature, layer) {
             return feature;
           });
+
       if (feature) {
         // Showing flag was added to remove popover from flickering when the mouse is hovered over the
         // icon/marker and there is incidental/minor movement in the mouse. Setting the show flag ensures
         // that you don't attempt to redraw the popup over and over (and get flickering) with minor mouse
         // movements
         if (! showing) {
+          feature.setStyle(yellow_marker);
           showing = true;
          var highlight = feature.highlight
          // Code to highlight the posting element in the posting table associate
@@ -204,6 +210,7 @@ window.RentMyThing.drawMap = function drawMap (mapAttributesPlus) {
         }
       } else {
         showing = false;
+        feature.setStyle(blue_marker);
        $("tr.whitelink").removeClass("highlightRow")
         $(element).popover('destroy');
       }
