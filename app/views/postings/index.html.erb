@@ -5,14 +5,14 @@
     <table class="list-table">
       <tbody class="list-table-body">
         <% @postings.each do |posting| %>
-        <tr id="whitelink">
-            <td class="list-table-element" id="postings">
+        <tr  id="posting_<%= posting.id %>" class="whitelink">
+            <td class="list-table-element">
             <%= link_to(posting.title, action: 'show', id: posting.id) %>
             <td class="list-table-element"><%= posting.category.try :name %></td>
             <td class="list-table-element description-column"><%= posting.description %></td>
             <td class="list-table-element"><%= posting.available_dates %></td>
             <td class="list-table-element"><%= link_to 'Show', posting %>
-            <% if current_user[:id] == posting.user_id %>
+            <% if current_user && current_user[:id] == posting.user_id %>
               | <%= link_to 'Edit', edit_posting_path(posting) %> |
               <%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
