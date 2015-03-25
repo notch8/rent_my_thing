@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  include Reservable
+
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
@@ -19,10 +21,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new
     @posting = Posting.find params[:posting_id]
     #parse params[:reservation] and assign to @reservation
-    res = params[:reservation].split ' - '
-    start = Date.strptime res[0], '%m/%d/%Y'
-    finish = Date.strptime res[1], '%m/%d/%Y'
-    @reservation.when = start..finish
+    @reservation.when = date_range_from_param params[:reservation]
   end
 
   # GET /reservations/1/edit
@@ -34,12 +33,7 @@ class ReservationsController < ApplicationController
   def create
     res_params = reservation_params
     res_when = res_params.delete :when
-    if res_when
-      res_dates = res_when.split('..')
-      res_start = Date.strptime res_dates[0], '%Y-%m-%d'
-      res_end = Date.strptime res_dates[1], '%Y-%m-%d'
-      res_params[:when] = res_start..res_end
-    end
+    res_params[:when] = date_range_from_param res_when if res_when
     @reservation = Reservation.new(res_params)
     @reservation.posting_id = params[:posting_id]
     @reservation.user = current_user

@@ -12,7 +12,7 @@
     <div class="row">
       <div id='reserve'>
         <%= form_tag new_posting_reservation_path(@posting), method: :get %>
-          <%= render 'shared/date_range_picker' %>
+          <%= render 'shared/date_range_picker_group' %>
           <%= submit_tag "Reserve", :class => 'btn btn-primary', :role => "button" %>
         </form>
       </div>
@@ -65,6 +65,7 @@
   </div>
 </div>
 
+<% if @mapAttributes_json %>
 <script>
   function drawTheThings(){
     if (window.RentMyThing && window.RentMyThing.drawMap) {
@@ -78,3 +79,4 @@
   $(document).on ('page:change', drawTheThings);
   $(document).ready(drawTheThings);
 </script>
+<% end %>

@@ -1,4 +1,6 @@
+<div class="input-group">
 <%= form_tag postings_path, method: 'get' %>
-<%= render partial: 'simple_category_picker' %><%= date_field_tag :start_date, params[:start_date] %><%= date_field_tag :end_date, params[:end_date] %><%= text_field_tag :search_text, params[:search_text], placeholder: 'search text' %><%= submit_tag 'Search' %>
+<%= render partial: 'simple_category_picker' %><%= render 'shared/date_range_picker' %><%= text_field_tag :search_text, params[:search_text], placeholder: 'search text' %>
 <%= text_field_tag :city, params[:city], placeholder: 'search city' %><%= submit_tag 'Search' %>
 </form>
+</div>
